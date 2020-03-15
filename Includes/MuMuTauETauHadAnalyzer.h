@@ -189,9 +189,9 @@ MuMuTauETauHadAnalyzer::MuMuTauETauHadAnalyzer(TString fileName_, TString output
 
     //--- Create output directory if necessary ---
     if (nMaxEvents > 0) {
-        outputDir.Remove(TString::kTrailing, '/');
-        outputDir += TString::Format("_%ldevts/", nMaxEvents);
-        cout << "Output directory has been changed to " << outputDir << endl;
+      outputDir.Remove(TString::kTrailing, '/');
+      outputDir += TString::Format("_%ldevts/", nMaxEvents);
+      cout << "Output directory has been changed to " << outputDir << endl;
     }
 
     TString command = "mkdir -p " + outputDir;
