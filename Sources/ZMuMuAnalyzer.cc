@@ -1,5 +1,5 @@
-#define FakeMuMuTauMuTauEAnalyzer_cxx
-#include "FakeMuMuTauMuTauEAnalyzer.h"
+#define ZMuMuAnalyzer_cxx
+#include "ZMuMuAnalyzer.h"
 #include <TH1.h>
 #include <TH2.h>
 #include <TStyle.h>
@@ -11,7 +11,7 @@
 #include <math.h>
 using namespace std;
 
-void FakeMuMuTauMuTauEAnalyzer::Loop()
+void ZMuMuAnalyzer::Loop()
 {
    TString outputfileName = createOutputFileName();
    TFile* outputFile = new TFile(outputfileName, "RECREATE");
@@ -34,16 +34,11 @@ void FakeMuMuTauMuTauEAnalyzer::Loop()
       // ---- define varibles that will be used to be filled into histograms ---
       TLorentzVector Mu1;
       TLorentzVector Mu2;
-      TLorentzVector Mu3;
-      TLorentzVector Ele;
 
       float Mu1Iso;
       float Mu2Iso;
-      float Mu3Iso;
-      float EleIso;
 
       unsigned int indexMu1 = -1;
-      unsigned int indexMu2 = -1;
       // ============================================================================
 
       // ---- start loop on muon candidates for mu1 ----
@@ -85,46 +80,7 @@ void FakeMuMuTauMuTauEAnalyzer::Loop()
               findMu2 = true;
           } // end if pair candidates
       } // end loop for mu2
-
-      if (!findMu2) continue;
-      bool findMuElePair = false;
-
-      // ---- search for a muon-electron pair for fake rate study ----
-      for (unsigned int iEle=0; iEle<recoElectronPt->size(); iEle++)
-      {
-          if ((invertedEle1Iso == false && recoElectronIsolation->at(iEle) > Ele1IsoThreshold) || (invertedEle1Iso == true && recoElectronIsolation->at(iEle) < Ele1IsoThreshold)) continue;
-          TLorentzVector EleCand;
-          EleCand.SetPtEtaPhiE(recoElectronPt->at(iEle), recoElectronEta->at(iEle), recoElectronPhi->at(iEle), recoElectronEcalTrkEnergyPostCorr->at(iEle));
-
-          if (EleCand.DeltaR(Mu1) < 0.4 || EleCand.DeltaR(Mu2) < 0.4) continue;
-          Ele.SetPtEtaPhiE(recoElectronPt->at(iEle), recoElectronEta->at(iEle), recoElectronPhi->at(iEle), recoElectronEcalTrkEnergyPostCorr->at(iEle));
-          EleIso = recoElectronIsolation->at(iEle);
-
-          float smallestDR = 4.0; // dR cut between Mu3 and electron
-          bool findMu3 = false;
-
-          for (unsigned int iMuon=0; iMuon<recoMuonPt->size(); iMuon++)
-          {
-              if (iMuon == indexMu1 || iMuon == indexMu2) continue;
-
-              TLorentzVector Mu3Cand; // prepare this variable for dR(Mu3, electron) implementation
-              Mu3Cand.SetPtEtaPhiE(recoMuonPt->at(iMuon), recoMuonEta->at(iMuon), recoMuonPhi->at(iMuon), recoMuonEnergy->at(iMuon));
-              if ((Ele.DeltaR(Mu3Cand) < smallestDR) && (recoElectronPDGId->at(iEle)/fabs(recoElectronPDGId->at(iEle)) == (-1) * recoMuonPDGId->at(iMuon)/fabs(recoMuonPDGId->at(iMuon))) && ((Ele+Mu3Cand).M() < 60.0) && (Mu3Cand.DeltaR(Mu1) > 0.4) && (Mu3Cand.DeltaR(Mu2) > 0.4))
-              {
-                  Mu3.SetPtEtaPhiE(recoMuonPt->at(iMuon), recoMuonEta->at(iMuon), recoMuonPhi->at(iMuon), recoMuonEnergy->at(iMuon));
-                  Mu3Iso = recoMuonIsolation->at(iMuon);
-                  smallestDR = Ele.DeltaR(Mu3);
-                  findMu3 = true;
-              } // end if find mu3 with electron matched
-          } // end loop for mu3
-
-          if (!findMu3) continue;
-          else{
-              findMuElePair = true;
-              break;
-          } // end if findMu3
-      } // end loop for electron
-
+          
       // ---- prepare event weight info ----
       double weight = 1;
       if (isMC == true)
@@ -133,11 +89,11 @@ void FakeMuMuTauMuTauEAnalyzer::Loop()
       } // end if isMC == true
 
       // ---- fill histograms ----
-      if (findMu1 && findMu2 && findMuElePair)
+      if (findMu1 && findMu2)
       {
-          ptMu1Mu2->Fill((Mu1+Mu2).Pt(), weight);
           dRMu1Mu2->Fill(Mu1.DeltaR(Mu2), weight);
           invMassMu1Mu2->Fill((Mu1+Mu2).M(), weight);
+          ptMu1Mu2->Fill((Mu1+Mu2).Pt(), weight);
           dRInvMassMu1Mu2->Fill(Mu1.DeltaR(Mu2), (Mu1+Mu2).M(), weight);
 
           mu1Iso->Fill(Mu1Iso, weight);
@@ -150,31 +106,7 @@ void FakeMuMuTauMuTauEAnalyzer::Loop()
           mu2Pt->Fill(Mu2.Pt(), weight);
           mu2Eta->Fill(Mu2.Eta(), weight);
           mu2Phi->Fill(Mu2.Phi(), weight);
-
-          ptMu3Ele->Fill((Mu3+Ele).Pt(), weight);
-          dRMu3Ele->Fill(Mu3.DeltaR(Ele), weight);
-          invMassMu3Ele->Fill((Mu3+Ele).M(), weight);
-          dRInvMassMu3Ele->Fill(Mu3.DeltaR(Ele), (Mu3+Ele).M(), weight);
-
-          mu3Iso->Fill(Mu3Iso, weight);
-          ele1Iso->Fill(EleIso, weight);
-
-          mu3Pt->Fill(Mu3.Pt(), weight);
-          mu3Eta->Fill(Mu3.Eta(), weight);
-          mu3Phi->Fill(Mu3.Phi(), weight);
-
-          ele1Pt->Fill(Ele.Pt(), weight);
-          ele1Eta->Fill(Ele.Eta(), weight);
-          ele1Phi->Fill(Ele.Phi(), weight);
-
-          dRMu1Mu3->Fill(Mu1.DeltaR(Mu3), weight);
-          dRMu1Ele1->Fill(Mu1.DeltaR(Ele), weight);
-          dRMu2Mu3->Fill(Mu2.DeltaR(Mu3), weight);
-          dRMu2Ele1->Fill(Mu2.DeltaR(Ele), weight);
-
-          ptMuMuTauMuTauEle->Fill((Mu1+Mu2+Mu3+Ele).Pt(), weight);
-          invMassMuMuTauMuTauEle->Fill((Mu1+Mu2+Mu3+Ele).M(), weight);
-      } // end if findMu1 && findMu2 && findMuElePair
+      } // end if findMu1 && findMu2
    }// end loop for events
 
    outputFile->cd();

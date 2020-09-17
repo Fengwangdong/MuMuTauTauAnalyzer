@@ -50,7 +50,13 @@ void MuMuTauMuTauMuAnalyzer::Loop()
       bool findMu1 = false;
       for (unsigned int iMuon=0; iMuon<recoMuonPt->size(); iMuon++)
       {
-          if (recoMuonTriggerFlag->at(iMuon) == 1 && recoMuonIsolation->at(iMuon) < 0.25) 
+          bool isLoose = MuonId == "LOOSE" && recoMuonIdLoose->at(iMuon) > 0;
+          bool isMedium = MuonId == "MEDIUM" && recoMuonIdMedium->at(iMuon) > 0;
+          bool isTight = MuonId == "TIGHT" && recoMuonIdTight->at(iMuon) > 0;
+          bool passMuonID = isLoose || isMedium || isTight;
+          bool passDXYDZ = recoMuonDXY->at(iMuon) < 0.2 && recoMuonDZ->at(iMuon) < 0.5;
+
+          if (recoMuonTriggerFlag->at(iMuon) == 1 && recoMuonIsolation->at(iMuon) < Mu1IsoThreshold && passMuonID && passDXYDZ) 
           {
               Mu1.SetPtEtaPhiE(recoMuonPt->at(iMuon), recoMuonEta->at(iMuon), recoMuonPhi->at(iMuon), recoMuonEnergy->at(iMuon));
               Mu1Iso = recoMuonIsolation->at(iMuon);
@@ -67,8 +73,14 @@ void MuMuTauMuTauMuAnalyzer::Loop()
       // ---- start loop on muon candidates for mu2 ----
       for (unsigned int iMuon=0; iMuon<recoMuonPt->size(); iMuon++)
       {
+          bool isLoose = MuonId == "LOOSE" && recoMuonIdLoose->at(iMuon) > 0;
+          bool isMedium = MuonId == "MEDIUM" && recoMuonIdMedium->at(iMuon) > 0;
+          bool isTight = MuonId == "TIGHT" && recoMuonIdTight->at(iMuon) > 0;
+          bool passMuonID = isLoose || isMedium || isTight;
+          bool passDXYDZ = recoMuonDXY->at(iMuon) < 0.2 && recoMuonDZ->at(iMuon) < 0.5;
+
           if (iMuon == indexMu1) continue;
-          if ((invertedMu2Iso == false && recoMuonIsolation->at(iMuon) > Mu2IsoThreshold) || (invertedMu2Iso == true && recoMuonIsolation->at(iMuon) < Mu2IsoThreshold)) continue;
+          if ((!invertedMu2Iso && recoMuonIsolation->at(iMuon) > Mu2IsoThreshold) || (invertedMu2Iso && recoMuonIsolation->at(iMuon) < Mu2IsoThreshold) || (invertedMu2Iso && recoMuonIsolation->at(iMuon) > MuIsoUpperBound) || !passMuonID || !passDXYDZ) continue;
 
           TLorentzVector Mu2Cand; // prepare this variable for dR(Mu1,Mu2) implementation
           Mu2Cand.SetPtEtaPhiE(recoMuonPt->at(iMuon), recoMuonEta->at(iMuon), recoMuonPhi->at(iMuon), recoMuonEnergy->at(iMuon));
@@ -89,11 +101,19 @@ void MuMuTauMuTauMuAnalyzer::Loop()
       // ------- start loop on the second muon pair candidates -------
       for (unsigned int iMuon=0; iMuon<recoMuonPt->size(); iMuon++)
       {
+          bool isLoose = MuonId == "LOOSE" && recoMuonIdLoose->at(iMuon) > 0;
+          bool isMedium = MuonId == "MEDIUM" && recoMuonIdMedium->at(iMuon) > 0;
+          bool isTight = MuonId == "TIGHT" && recoMuonIdTight->at(iMuon) > 0;
+          bool passMuonID = isLoose || isMedium || isTight;
+          bool passDXYDZ = recoMuonDXY->at(iMuon) < 0.2 && recoMuonDZ->at(iMuon) < 0.5;
+
           if (iMuon == indexMu1 || iMuon == indexMu2) continue;
-          if ((invertedMu4Iso == false && recoMuonIsolation->at(iMuon) > Mu4IsoThreshold) || (invertedMu4Iso == true && recoMuonIsolation->at(iMuon) < Mu4IsoThreshold)) continue;
+          if ((!invertedMu4Iso && recoMuonIsolation->at(iMuon) > Mu4IsoThreshold) || (invertedMu4Iso && recoMuonIsolation->at(iMuon) < Mu4IsoThreshold) || (invertedMu4Iso && recoMuonIsolation->at(iMuon) > MuIsoUpperBound) || !passMuonID || !passDXYDZ) continue;
           
           TLorentzVector Mu4Cand;
           Mu4Cand.SetPtEtaPhiE(recoMuonPt->at(iMuon), recoMuonEta->at(iMuon), recoMuonPhi->at(iMuon), recoMuonEnergy->at(iMuon));
+          bool qcdVeto = (recoMuonPDGId->at(indexMu1) != recoMuonPDGId->at(iMuon) && (Mu1+Mu4Cand).M() > 12.0) || (recoMuonPDGId->at(indexMu2) != recoMuonPDGId->at(iMuon) && (Mu2+Mu4Cand).M() > 12.0);
+          if (!qcdVeto) continue;
 
           if (Mu4Cand.DeltaR(Mu1) < 0.4 || Mu4Cand.DeltaR(Mu2) < 0.4) continue;
           Mu4.SetPtEtaPhiE(recoMuonPt->at(iMuon), recoMuonEta->at(iMuon), recoMuonPhi->at(iMuon), recoMuonEnergy->at(iMuon));
@@ -104,10 +124,20 @@ void MuMuTauMuTauMuAnalyzer::Loop()
 
           for (unsigned int iMuon3=0; iMuon3<recoMuonPt->size(); iMuon3++)
           {
+              bool isLoose = MuonId == "LOOSE" && recoMuonIdLoose->at(iMuon3) > 0;
+              bool isMedium = MuonId == "MEDIUM" && recoMuonIdMedium->at(iMuon3) > 0;
+              bool isTight = MuonId == "TIGHT" && recoMuonIdTight->at(iMuon3) > 0;
+              bool passMuonID = isLoose || isMedium || isTight;
+              bool passDXYDZ = recoMuonDXY->at(iMuon3) < 0.2 && recoMuonDZ->at(iMuon3) < 0.5;
+
               if (iMuon3 == indexMu1 || iMuon3 == indexMu2 || iMuon3 == iMuon) continue;
+              if ((!invertedMu3Iso && recoMuonIsolation->at(iMuon3) > Mu3IsoThreshold) || (invertedMu3Iso && recoMuonIsolation->at(iMuon3) < Mu3IsoThreshold) || (invertedMu3Iso && recoMuonIsolation->at(iMuon3) > MuIsoUpperBound) || !passMuonID || !passDXYDZ) continue;
 
               TLorentzVector Mu3Cand; // prepare this variable for dR(Mu3, Mu4) implementation
               Mu3Cand.SetPtEtaPhiE(recoMuonPt->at(iMuon3), recoMuonEta->at(iMuon3), recoMuonPhi->at(iMuon3), recoMuonEnergy->at(iMuon3));
+              bool qcdVeto = (recoMuonPDGId->at(indexMu1) != recoMuonPDGId->at(iMuon3) && (Mu1+Mu3Cand).M() > 12.0) || (recoMuonPDGId->at(indexMu2) != recoMuonPDGId->at(iMuon3) && (Mu2+Mu3Cand).M() > 12.0);
+              if (!qcdVeto) continue;
+
               if ((Mu4.DeltaR(Mu3Cand) < smallestDR) && (recoMuonPDGId->at(iMuon3) == (-1) * recoMuonPDGId->at(iMuon)) && ((Mu4+Mu3Cand).M() < 60.0) && (Mu3Cand.DeltaR(Mu1) > 0.4) && (Mu3Cand.DeltaR(Mu2) > 0.4))
               {
                   Mu3.SetPtEtaPhiE(recoMuonPt->at(iMuon3), recoMuonEta->at(iMuon3), recoMuonPhi->at(iMuon3), recoMuonEnergy->at(iMuon3));
@@ -178,6 +208,25 @@ void MuMuTauMuTauMuAnalyzer::Loop()
           invMassMuMu = (Mu1+Mu2).M();
           visMassTauTau = (Mu3+Mu4).M();
           visMassMuMuTauTau = (Mu1+Mu2+Mu3+Mu4).M();
+
+          deltaRMuMu = Mu1.DeltaR(Mu2);
+          deltaRTauTau = Mu3.DeltaR(Mu4);
+
+          Mu1Pt = Mu1.Pt();
+          Mu1Eta = Mu1.Eta();
+
+          Mu2Pt = Mu2.Pt();
+          Mu2Eta = Mu2.Eta();
+
+          Tau1Pt = Mu3.Pt();
+          Tau1Eta = Mu3.Eta();
+          Tau1Isolation = Mu3Iso;
+
+          Tau2Pt = Mu4.Pt();
+          Tau2Eta = Mu4.Eta();
+          Tau2Isolation = Mu4Iso;
+
+          eventWeight = weight/summedWeights;
           TreeMuMuTauTau->Fill();
       } // end if findMu1 && findMu2 && findMuMuPair
    }// end loop for events

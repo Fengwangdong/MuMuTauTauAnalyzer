@@ -36,14 +36,24 @@ public :
    vector<float>   *recoMuonDZ;
    vector<int>     *recoMuonNTrackerLayers;
    vector<int>     *recoMuonTriggerFlag;
+   vector<int>     *recoMuonRefToElectron;
+   vector<int>     *recoMuonRefToTau;
+   vector<int>     *recoMuonIdLoose;
+   vector<int>     *recoMuonIdMedium;
+   vector<int>     *recoMuonIdTight;
    vector<float>   *recoElectronPt;
    vector<float>   *recoElectronEta;
    vector<float>   *recoElectronPhi;
    vector<float>   *recoElectronEnergy;
    vector<int>     *recoElectronPDGId;
    vector<float>   *recoElectronIsolation;
+   vector<int>     *recoElectronIdLoose;
+   vector<int>     *recoElectronIdMedium;
+   vector<int>     *recoElectronIdTight;
    vector<float>   *recoElectronEcalTrkEnergyPostCorr;
    vector<float>   *recoElectronEcalTrkEnergyErrPostCorr;
+   vector<int>     *recoElectronRefToMuon;
+   vector<int>     *recoElectronRefToTau;
    vector<float>   *recoJetPt;
    vector<float>   *recoJetEta;
    vector<float>   *recoJetPhi;
@@ -70,14 +80,24 @@ public :
    TBranch        *b_recoMuonDZ;   //!
    TBranch        *b_recoMuonNTrackerLayers;   //!
    TBranch        *b_recoMuonTriggerFlag;   //!
+   TBranch        *b_recoMuonRefToElectron;   //!
+   TBranch        *b_recoMuonRefToTau;   //!
+   TBranch        *b_recoMuonIdLoose;   //!
+   TBranch        *b_recoMuonIdMedium;   //!
+   TBranch        *b_recoMuonIdTight;   //!
    TBranch        *b_recoElectronPt;   //!
    TBranch        *b_recoElectronEta;   //!
    TBranch        *b_recoElectronPhi;   //!
    TBranch        *b_recoElectronEnergy;   //!
    TBranch        *b_recoElectronPDGId;   //!
    TBranch        *b_recoElectronIsolation;   //!
+   TBranch        *b_recoElectronIdLoose;   //!
+   TBranch        *b_recoElectronIdMedium;   //!
+   TBranch        *b_recoElectronIdTight;   //!
    TBranch        *b_recoElectronEcalTrkEnergyPostCorr;   //!
    TBranch        *b_recoElectronEcalTrkEnergyErrPostCorr;   //!
+   TBranch        *b_recoElectronRefToMuon;   //!
+   TBranch        *b_recoElectronRefToTau;   //!
    TBranch        *b_recoJetPt;   //!
    TBranch        *b_recoJetEta;   //!
    TBranch        *b_recoJetPhi;   //!
@@ -100,13 +120,19 @@ public :
    float summedWeights; // these two factors contribute to the MC normalization
    bool isMC;
    bool invertedMu2Iso;
+   bool invertedMu3Iso;
    bool invertedEle1Iso;
+   double Mu1IsoThreshold;
    double Mu2IsoThreshold;
-   double Ele1IsoThreshold;
+   double Mu3IsoThreshold;
+   double MuIsoUpperBound;
+   TString MuonId;
+   TString EleRelId;
+   double EleIsoUpperBound;
    double diMuonMassLowThreshold;
    double diMuonMassHighThreshold;
 
-   MuMuTauMuTauEAnalyzer(TString fileName_, TString outputDir_, float lumiScale_, float summedWeights_ = 1.0, Long_t nMaxEvents_ = 0, bool isMC_ = false, bool invertedMu2Iso_ = false, bool invertedEle1Iso_ = false, double Mu2IsoThreshold_ = 0.25, double Ele1IsoThreshold_ = 0.25, double diMuonMassLowThreshold_ = 0, double diMuonMassHighThreshold_ = 25.0);
+   MuMuTauMuTauEAnalyzer(TString fileName_, TString outputDir_, float lumiScale_, float summedWeights_ = 1.0, Long_t nMaxEvents_ = 0, bool isMC_ = false, bool invertedMu2Iso_ = false, bool invertedMu3Iso_ = false, bool invertedEle1Iso_ = false, double Mu1IsoThreshold_ = 0.25, double Mu2IsoThreshold_ = 0.25, double Mu3IsoThreshold_ = 0.25, double MuIsoUpperBound_ = 0.4, TString MuonId_ = "LOOSE", TString EleRelId_ = "LOOSE", double EleIsoUpperBound_ = 0.6, double diMuonMassLowThreshold_ = 0, double diMuonMassHighThreshold_ = 25.0);
    string createOutputFileName();
    virtual ~MuMuTauMuTauEAnalyzer();
    virtual Int_t    Cut(Long64_t entry);
@@ -121,7 +147,7 @@ public :
 #endif
 
 #ifdef MuMuTauMuTauEAnalyzer_cxx
-MuMuTauMuTauEAnalyzer::MuMuTauMuTauEAnalyzer(TString fileName_, TString outputDir_, float lumiScale_, float summedWeights_, Long_t nMaxEvents_, bool isMC_, bool invertedMu2Iso_, bool invertedEle1Iso_, double Mu2IsoThreshold_, double Ele1IsoThreshold_, double diMuonMassLowThreshold_, double diMuonMassHighThreshold_) : Histomutau() 
+MuMuTauMuTauEAnalyzer::MuMuTauMuTauEAnalyzer(TString fileName_, TString outputDir_, float lumiScale_, float summedWeights_, Long_t nMaxEvents_, bool isMC_, bool invertedMu2Iso_, bool invertedMu3Iso_, bool invertedEle1Iso_, double Mu1IsoThreshold_, double Mu2IsoThreshold_, double Mu3IsoThreshold_, double MuIsoUpperBound_, TString MuonId_, TString EleRelId_, double EleIsoUpperBound_, double diMuonMassLowThreshold_, double diMuonMassHighThreshold_) : Histomutau() 
 {
     fileName = fileName_;
     outputDir = outputDir_;
@@ -130,9 +156,15 @@ MuMuTauMuTauEAnalyzer::MuMuTauMuTauEAnalyzer(TString fileName_, TString outputDi
     nMaxEvents = nMaxEvents_;
     isMC = isMC_;
     invertedMu2Iso = invertedMu2Iso_;
+    invertedMu3Iso = invertedMu3Iso_;
     invertedEle1Iso = invertedEle1Iso_;
+    Mu1IsoThreshold = Mu1IsoThreshold_;
     Mu2IsoThreshold = Mu2IsoThreshold_;
-    Ele1IsoThreshold = Ele1IsoThreshold_;
+    Mu3IsoThreshold = Mu3IsoThreshold_;
+    MuIsoUpperBound = MuIsoUpperBound_; 
+    MuonId = MuonId_;
+    EleRelId = EleRelId_;
+    EleIsoUpperBound = EleIsoUpperBound_;
     diMuonMassLowThreshold = diMuonMassLowThreshold_;
     diMuonMassHighThreshold = diMuonMassHighThreshold_;
     invMassMu1Mu2->SetBins(20, diMuonMassLowThreshold, diMuonMassHighThreshold);
@@ -213,14 +245,24 @@ void MuMuTauMuTauEAnalyzer::Init()
    recoMuonDZ = 0;
    recoMuonNTrackerLayers = 0;
    recoMuonTriggerFlag = 0;
+   recoMuonRefToElectron = 0;
+   recoMuonRefToTau = 0;
+   recoMuonIdLoose = 0;
+   recoMuonIdMedium = 0;
+   recoMuonIdTight = 0;
    recoElectronPt = 0;
    recoElectronEta = 0;
    recoElectronPhi = 0;
    recoElectronEnergy = 0;
    recoElectronPDGId = 0;
    recoElectronIsolation = 0;
+   recoElectronIdLoose = 0;
+   recoElectronIdMedium = 0;
+   recoElectronIdTight = 0;
    recoElectronEcalTrkEnergyPostCorr = 0;
    recoElectronEcalTrkEnergyErrPostCorr = 0;
+   recoElectronRefToMuon = 0;
+   recoElectronRefToTau = 0;
    recoJetPt = 0;
    recoJetEta = 0;
    recoJetPhi = 0;
@@ -244,14 +286,24 @@ void MuMuTauMuTauEAnalyzer::Init()
    fChain->SetBranchAddress("recoMuonDZ", &recoMuonDZ, &b_recoMuonDZ);
    fChain->SetBranchAddress("recoMuonNTrackerLayers", &recoMuonNTrackerLayers, &b_recoMuonNTrackerLayers);
    fChain->SetBranchAddress("recoMuonTriggerFlag", &recoMuonTriggerFlag, &b_recoMuonTriggerFlag);
+   fChain->SetBranchAddress("recoMuonRefToElectron", &recoMuonRefToElectron, &b_recoMuonRefToElectron);
+   fChain->SetBranchAddress("recoMuonRefToTau", &recoMuonRefToTau, &b_recoMuonRefToTau);
+   fChain->SetBranchAddress("recoMuonIdLoose", &recoMuonIdLoose, &b_recoMuonIdLoose);
+   fChain->SetBranchAddress("recoMuonIdMedium", &recoMuonIdMedium, &b_recoMuonIdMedium);
+   fChain->SetBranchAddress("recoMuonIdTight", &recoMuonIdTight, &b_recoMuonIdTight);
    fChain->SetBranchAddress("recoElectronPt", &recoElectronPt, &b_recoElectronPt);
    fChain->SetBranchAddress("recoElectronEta", &recoElectronEta, &b_recoElectronEta);
    fChain->SetBranchAddress("recoElectronPhi", &recoElectronPhi, &b_recoElectronPhi);
    fChain->SetBranchAddress("recoElectronEnergy", &recoElectronEnergy, &b_recoElectronEnergy);
    fChain->SetBranchAddress("recoElectronPDGId", &recoElectronPDGId, &b_recoElectronPDGId);
    fChain->SetBranchAddress("recoElectronIsolation", &recoElectronIsolation, &b_recoElectronIsolation);
+   fChain->SetBranchAddress("recoElectronIdLoose", &recoElectronIdLoose, &b_recoElectronIdLoose);
+   fChain->SetBranchAddress("recoElectronIdMedium", &recoElectronIdMedium, &b_recoElectronIdMedium);
+   fChain->SetBranchAddress("recoElectronIdTight", &recoElectronIdTight, &b_recoElectronIdTight);
    fChain->SetBranchAddress("recoElectronEcalTrkEnergyPostCorr", &recoElectronEcalTrkEnergyPostCorr, &b_recoElectronEcalTrkEnergyPostCorr);
    fChain->SetBranchAddress("recoElectronEcalTrkEnergyErrPostCorr", &recoElectronEcalTrkEnergyErrPostCorr, &b_recoElectronEcalTrkEnergyErrPostCorr);
+   fChain->SetBranchAddress("recoElectronRefToMuon", &recoElectronRefToMuon, &b_recoElectronRefToMuon);
+   fChain->SetBranchAddress("recoElectronRefToTau", &recoElectronRefToTau, &b_recoElectronRefToTau);
    fChain->SetBranchAddress("recoJetPt", &recoJetPt, &b_recoJetPt);
    fChain->SetBranchAddress("recoJetEta", &recoJetEta, &b_recoJetEta);
    fChain->SetBranchAddress("recoJetPhi", &recoJetPhi, &b_recoJetPhi);

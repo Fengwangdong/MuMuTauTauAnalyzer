@@ -1,24 +1,24 @@
 //////////////////////////////////////////////////////////
 // This class has been automatically generated on
-// Tue Jun 18 14:19:21 2019 by ROOT version 6.10/08
+// Tue Aug  6 17:46:43 2019 by ROOT version 6.10/08
 // from TTree objectTree/objectTree
-// found on file: MuMuTauTauTreelization.root
+// found on file: MuMuTreelization.root
 //////////////////////////////////////////////////////////
 
-#ifndef FakeMuMuTauMuTauEAnalyzer_h
-#define FakeMuMuTauMuTauEAnalyzer_h
+#ifndef ZMuMuAnalyzer_h
+#define ZMuMuAnalyzer_h
 
 #include <TROOT.h>
 #include <TChain.h>
 #include <TFile.h>
+#include "HistoZmumu.h"
 #include <TString.h>
 #include <iostream>
 #include <string>
 #include <sstream>
 #include <vector>
-#include "HistoZmumu.h"
 
-class FakeMuMuTauMuTauEAnalyzer : public HistoZmumu {
+class ZMuMuAnalyzer : public HistoZmumu {
 public :
    TTree          *fChain;   //!pointer to the analyzed TTree or TChain
    Int_t           fCurrent; //!current Tree number in a TChain
@@ -36,14 +36,6 @@ public :
    vector<float>   *recoMuonDZ;
    vector<int>     *recoMuonNTrackerLayers;
    vector<int>     *recoMuonTriggerFlag;
-   vector<float>   *recoElectronPt;
-   vector<float>   *recoElectronEta;
-   vector<float>   *recoElectronPhi;
-   vector<float>   *recoElectronEnergy;
-   vector<int>     *recoElectronPDGId;
-   vector<float>   *recoElectronIsolation;
-   vector<float>   *recoElectronEcalTrkEnergyPostCorr;
-   vector<float>   *recoElectronEcalTrkEnergyErrPostCorr;
    vector<float>   *recoJetPt;
    vector<float>   *recoJetEta;
    vector<float>   *recoJetPhi;
@@ -70,14 +62,6 @@ public :
    TBranch        *b_recoMuonDZ;   //!
    TBranch        *b_recoMuonNTrackerLayers;   //!
    TBranch        *b_recoMuonTriggerFlag;   //!
-   TBranch        *b_recoElectronPt;   //!
-   TBranch        *b_recoElectronEta;   //!
-   TBranch        *b_recoElectronPhi;   //!
-   TBranch        *b_recoElectronEnergy;   //!
-   TBranch        *b_recoElectronPDGId;   //!
-   TBranch        *b_recoElectronIsolation;   //!
-   TBranch        *b_recoElectronEcalTrkEnergyPostCorr;   //!
-   TBranch        *b_recoElectronEcalTrkEnergyErrPostCorr;   //!
    TBranch        *b_recoJetPt;   //!
    TBranch        *b_recoJetEta;   //!
    TBranch        *b_recoJetPhi;   //!
@@ -99,12 +83,10 @@ public :
    float lumiScale;
    float summedWeights; // these two factors contribute to the MC normalization
    bool isMC;
-   bool invertedEle1Iso;
-   double Ele1IsoThreshold;
 
-   FakeMuMuTauMuTauEAnalyzer(TString fileName_, TString outputDir_, float lumiScale_, float summedWeights_ = 1.0, Long_t nMaxEvents_ = 0, bool isMC_ = false, bool invertedEle1Iso_ = false, double Ele1IsoThreshold_ = 0.25);
+   ZMuMuAnalyzer(TString fileName_, TString outputDir_, float lumiScale_, float summedWeights_ = 1.0, Long_t nMaxEvents_ = 0, bool isMC_ = false);
    string createOutputFileName();
-   virtual ~FakeMuMuTauMuTauEAnalyzer();
+   virtual ~ZMuMuAnalyzer();
    virtual Int_t    Cut(Long64_t entry);
    virtual Int_t    GetEntry(Long64_t entry);
    virtual Long64_t LoadTree(Long64_t entry);
@@ -116,8 +98,8 @@ public :
 
 #endif
 
-#ifdef FakeMuMuTauMuTauEAnalyzer_cxx
-FakeMuMuTauMuTauEAnalyzer::FakeMuMuTauMuTauEAnalyzer(TString fileName_, TString outputDir_, float lumiScale_, float summedWeights_, Long_t nMaxEvents_, bool isMC_, bool invertedEle1Iso_, double Ele1IsoThreshold_) : HistoZmumu() 
+#ifdef ZMuMuAnalyzer_cxx
+ZMuMuAnalyzer::ZMuMuAnalyzer(TString fileName_, TString outputDir_, float lumiScale_, float summedWeights_, Long_t nMaxEvents_, bool isMC_) : HistoZmumu() 
 {
     fileName = fileName_;
     outputDir = outputDir_;
@@ -125,8 +107,6 @@ FakeMuMuTauMuTauEAnalyzer::FakeMuMuTauMuTauEAnalyzer(TString fileName_, TString 
     summedWeights = summedWeights_;
     nMaxEvents = nMaxEvents_;
     isMC = isMC_;
-    invertedEle1Iso = invertedEle1Iso_;
-    Ele1IsoThreshold = Ele1IsoThreshold_;
 
     //--- Create output directory if necessary ---
     if (nMaxEvents > 0) {
@@ -145,7 +125,7 @@ FakeMuMuTauMuTauEAnalyzer::FakeMuMuTauMuTauEAnalyzer(TString fileName_, TString 
     Init();
 }
 
-string FakeMuMuTauMuTauEAnalyzer::createOutputFileName()
+string ZMuMuAnalyzer::createOutputFileName()
 {
     ostringstream outputName;
     fileName.Replace(0, fileName.Last('/'), "");
@@ -158,19 +138,19 @@ string FakeMuMuTauMuTauEAnalyzer::createOutputFileName()
     return outputName.str();
 }
 
-FakeMuMuTauMuTauEAnalyzer::~FakeMuMuTauMuTauEAnalyzer()
+ZMuMuAnalyzer::~ZMuMuAnalyzer()
 {
    if (!fChain) return;
    delete fChain->GetCurrentFile();
 }
 
-Int_t FakeMuMuTauMuTauEAnalyzer::GetEntry(Long64_t entry)
+Int_t ZMuMuAnalyzer::GetEntry(Long64_t entry)
 {
 // Read contents of entry.
    if (!fChain) return 0;
    return fChain->GetEntry(entry);
 }
-Long64_t FakeMuMuTauMuTauEAnalyzer::LoadTree(Long64_t entry)
+Long64_t ZMuMuAnalyzer::LoadTree(Long64_t entry)
 {
 // Set the environment to read one entry
    if (!fChain) return -5;
@@ -183,7 +163,7 @@ Long64_t FakeMuMuTauMuTauEAnalyzer::LoadTree(Long64_t entry)
    return centry;
 }
 
-void FakeMuMuTauMuTauEAnalyzer::Init()
+void ZMuMuAnalyzer::Init()
 {
    // The Init() function is called when the selector needs to initialize
    // a new tree or chain. Typically here the branch addresses and branch
@@ -204,14 +184,6 @@ void FakeMuMuTauMuTauEAnalyzer::Init()
    recoMuonDZ = 0;
    recoMuonNTrackerLayers = 0;
    recoMuonTriggerFlag = 0;
-   recoElectronPt = 0;
-   recoElectronEta = 0;
-   recoElectronPhi = 0;
-   recoElectronEnergy = 0;
-   recoElectronPDGId = 0;
-   recoElectronIsolation = 0;
-   recoElectronEcalTrkEnergyPostCorr = 0;
-   recoElectronEcalTrkEnergyErrPostCorr = 0;
    recoJetPt = 0;
    recoJetEta = 0;
    recoJetPhi = 0;
@@ -235,14 +207,6 @@ void FakeMuMuTauMuTauEAnalyzer::Init()
    fChain->SetBranchAddress("recoMuonDZ", &recoMuonDZ, &b_recoMuonDZ);
    fChain->SetBranchAddress("recoMuonNTrackerLayers", &recoMuonNTrackerLayers, &b_recoMuonNTrackerLayers);
    fChain->SetBranchAddress("recoMuonTriggerFlag", &recoMuonTriggerFlag, &b_recoMuonTriggerFlag);
-   fChain->SetBranchAddress("recoElectronPt", &recoElectronPt, &b_recoElectronPt);
-   fChain->SetBranchAddress("recoElectronEta", &recoElectronEta, &b_recoElectronEta);
-   fChain->SetBranchAddress("recoElectronPhi", &recoElectronPhi, &b_recoElectronPhi);
-   fChain->SetBranchAddress("recoElectronEnergy", &recoElectronEnergy, &b_recoElectronEnergy);
-   fChain->SetBranchAddress("recoElectronPDGId", &recoElectronPDGId, &b_recoElectronPDGId);
-   fChain->SetBranchAddress("recoElectronIsolation", &recoElectronIsolation, &b_recoElectronIsolation);
-   fChain->SetBranchAddress("recoElectronEcalTrkEnergyPostCorr", &recoElectronEcalTrkEnergyPostCorr, &b_recoElectronEcalTrkEnergyPostCorr);
-   fChain->SetBranchAddress("recoElectronEcalTrkEnergyErrPostCorr", &recoElectronEcalTrkEnergyErrPostCorr, &b_recoElectronEcalTrkEnergyErrPostCorr);
    fChain->SetBranchAddress("recoJetPt", &recoJetPt, &b_recoJetPt);
    fChain->SetBranchAddress("recoJetEta", &recoJetEta, &b_recoJetEta);
    fChain->SetBranchAddress("recoJetPhi", &recoJetPhi, &b_recoJetPhi);
@@ -263,7 +227,7 @@ void FakeMuMuTauMuTauEAnalyzer::Init()
    Notify();
 }
 
-Bool_t FakeMuMuTauMuTauEAnalyzer::Notify()
+Bool_t ZMuMuAnalyzer::Notify()
 {
    // The Notify() function is called when a new file is opened. This
    // can be either for a new TTree in a TChain or when when a new TTree
@@ -274,18 +238,18 @@ Bool_t FakeMuMuTauMuTauEAnalyzer::Notify()
    return kTRUE;
 }
 
-void FakeMuMuTauMuTauEAnalyzer::Show(Long64_t entry)
+void ZMuMuAnalyzer::Show(Long64_t entry)
 {
 // Print contents of entry.
 // If entry is not specified, print current entry
    if (!fChain) return;
    fChain->Show(entry);
 }
-Int_t FakeMuMuTauMuTauEAnalyzer::Cut(Long64_t entry)
+Int_t ZMuMuAnalyzer::Cut(Long64_t entry)
 {
 // This function may be called from Loop.
 // returns  1 if entry is accepted.
 // returns -1 otherwise.
    return 1;
 }
-#endif // #ifdef FakeMuMuTauMuTauEAnalyzer_cxx
+#endif // #ifdef ZMuMuAnalyzer_cxx

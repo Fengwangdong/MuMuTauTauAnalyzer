@@ -72,36 +72,81 @@ void ZTauMuTauHadAnalyzer::Loop()
 
       for (unsigned int iTau=0; iTau<recoTauPt->size(); iTau++)
       {
-          bool condTauMVARaw = tauMVAIsoRawORWP == true && recoTauIsoMVArawValue->at(iTau) > tauMVAIsoRawThreshold;
-          bool condTauMVAWPVVLoose = tauMVAIsoRawORWP == false && tauMVAIsoWP == "VVLOOSE" && recoTauIsoMVAVVLoose->at(iTau)>0;
-          bool condTauMVAWPVLoose = tauMVAIsoRawORWP == false && tauMVAIsoWP == "VLOOSE" && recoTauIsoMVAVLoose->at(iTau)>0;
-          bool condTauMVAWPLoose = tauMVAIsoRawORWP == false && tauMVAIsoWP == "LOOSE" && recoTauIsoMVALoose->at(iTau)>0;
-          bool condTauMVAWPMedium = tauMVAIsoRawORWP == false && tauMVAIsoWP == "MEDIUM" && recoTauIsoMVAMedium->at(iTau)>0;
-          bool condTauMVAWPTight = tauMVAIsoRawORWP == false && tauMVAIsoWP == "TIGHT" && recoTauIsoMVATight->at(iTau)>0;
-          bool condTauMVAWPVTight = tauMVAIsoRawORWP == false && tauMVAIsoWP == "VTIGHT" && recoTauIsoMVAVTight->at(iTau)>0;
-          bool condTauMVAWPVVTight = tauMVAIsoRawORWP == false && tauMVAIsoWP == "VVTIGHT" && recoTauIsoMVAVVTight->at(iTau)>0;
-          bool condTauAntiMuMVALoose = tauAntiMuDisc == "LOOSE" && recoTauAntiMuMVALoose->at(iTau)>0;
-          bool condTauAntiMuMVATight = tauAntiMuDisc == "TIGHT" && recoTauAntiMuMVATight->at(iTau)>0;
-          bool condTauAntiMuMVANull = tauAntiMuDisc != "LOOSE" && tauAntiMuDisc != "TIGHT";
-          bool condTauAntiEleMVALoose = tauAntiEleDisc == "LOOSE" && recoTauAntiEleMVALoose->at(iTau)>0;
-          bool condTauAntiEleMVAMedium = tauAntiEleDisc == "MEDIUM" && recoTauAntiEleMVAMedium->at(iTau)>0;
-          bool condTauAntiEleMVATight = tauAntiEleDisc == "TIGHT" && recoTauAntiEleMVATight->at(iTau)>0;
-          bool condTauAntiEleMVANull = tauAntiEleDisc != "LOOSE" && tauAntiEleDisc != "MEDIUM" && tauAntiEleDisc != "TIGHT";
-
-          if ((condTauMVARaw || condTauMVAWPVVLoose || condTauMVAWPVLoose || condTauMVAWPLoose || condTauMVAWPMedium || condTauMVAWPTight || condTauMVAWPVTight || condTauMVAWPVVTight) && (condTauAntiMuMVALoose || condTauAntiMuMVATight || condTauAntiMuMVANull) && (condTauAntiEleMVALoose || condTauAntiEleMVAMedium || condTauAntiEleMVATight || condTauAntiEleMVANull))
+          if (deepTauID && recoTauDeepVSjetraw->size() > 0)
           {
-              TLorentzVector TauCand;
-              TauCand.SetPtEtaPhiE(recoTauPt->at(iTau), recoTauEta->at(iTau), recoTauPhi->at(iTau), recoTauEnergy->at(iTau));
-              if (Mu.DeltaR(TauCand) > 0.5 && TauCand.Pt() > highestPt)
-              {
-                  Tau.SetPtEtaPhiE(recoTauPt->at(iTau), recoTauEta->at(iTau), recoTauPhi->at(iTau), recoTauEnergy->at(iTau));
-                  TauIso = recoTauIsoMVArawValue->at(iTau);
-                  TauDM = recoTauDecayMode->at(iTau);
-                  highestPt = TauCand.Pt();
-                  indexTau = iTau;
-                  findTau = true;
-              } // end if dR (mu, tau) and highest pt
-          } // end if tau candidates satisfying MVA discriminators
+              // -------------------------------------------------------------------------------
+              bool condTauDeepVSeLoose = deepTauVSele == "LOOSE" && recoTauDeepVSeLoose->at(iTau)>0;
+              bool condTauDeepVSjetLoose = deepTauVSjet == "LOOSE" && recoTauDeepVSjetLoose->at(iTau)>0;
+              bool condTauDeepVSmuLoose = deepTauVSmu == "LOOSE" && recoTauDeepVSmuLoose->at(iTau)>0;
+
+              bool condTauDeepVSeMedium = deepTauVSele == "MEDIUM" && recoTauDeepVSeMedium->at(iTau)>0;
+              bool condTauDeepVSjetMedium = deepTauVSjet == "MEDIUM" && recoTauDeepVSjetMedium->at(iTau)>0;
+              bool condTauDeepVSmuMedium = deepTauVSmu == "MEDIUM" && recoTauDeepVSmuMedium->at(iTau)>0;
+
+              bool condTauDeepVSeTight = deepTauVSele == "TIGHT" && recoTauDeepVSeTight->at(iTau)>0;
+              bool condTauDeepVSjetTight = deepTauVSjet == "TIGHT" && recoTauDeepVSjetTight->at(iTau)>0;
+              bool condTauDeepVSmuTight = deepTauVSmu == "TIGHT" && recoTauDeepVSmuTight->at(iTau)>0;
+
+              bool condTauDeepVSeVLoose = deepTauVSele == "VLOOSE" && recoTauDeepVSeVLoose->at(iTau)>0;
+              bool condTauDeepVSjetVLoose = deepTauVSjet == "VLOOSE" && recoTauDeepVSjetVLoose->at(iTau)>0;
+              bool condTauDeepVSmuVLoose = deepTauVSmu == "VLOOSE" && recoTauDeepVSmuVLoose->at(iTau)>0;
+
+              bool condTauDeepVSeVTight = deepTauVSele == "VTIGHT" && recoTauDeepVSeVTight->at(iTau)>0;
+              bool condTauDeepVSjetVTight = deepTauVSjet == "VTIGHT" && recoTauDeepVSjetVTight->at(iTau)>0;
+
+              bool condTauDeepVSeVVLoose = deepTauVSele == "VVLOOSE" && recoTauDeepVSeVVLoose->at(iTau)>0;
+              bool condTauDeepVSjetVVLoose = deepTauVSjet == "VVLOOSE" && recoTauDeepVSjetVVLoose->at(iTau)>0;
+              
+              bool condTauDeepVSeVVTight = deepTauVSele == "VVTIGHT" && recoTauDeepVSeVVTight->at(iTau)>0;
+              bool condTauDeepVSjetVVTight = deepTauVSjet == "VVTIGHT" && recoTauDeepVSjetVVTight->at(iTau)>0;
+
+              bool condTauDeepVSeVVVLoose = deepTauVSele == "VVVLOOSE" && recoTauDeepVSeVVVLoose->at(iTau)>0;
+              bool condTauDeepVSjetVVVLoose = deepTauVSjet == "VVVLOOSE" && recoTauDeepVSjetVVVLoose->at(iTau)>0;
+
+              bool condTauDeepVSeNull = deepTauVSele != "LOOSE" && deepTauVSele != "MEDIUM" && deepTauVSele != "TIGHT" && deepTauVSele != "VLOOSE" && deepTauVSele != "VTIGHT" && deepTauVSele != "VVLOOSE" && deepTauVSele != "VVTIGHT" && deepTauVSele != "VVVLOOSE";
+              bool condTauDeepVSmuNull = deepTauVSmu != "LOOSE" && deepTauVSmu != "MEDIUM" && deepTauVSmu != "TIGHT" && deepTauVSmu != "VLOOSE";
+              // -------------------------------------------------------------------------------
+
+              bool passCondTauDeepVSele = (condTauDeepVSeLoose || condTauDeepVSeMedium || condTauDeepVSeTight || condTauDeepVSeVLoose || condTauDeepVSeVTight || condTauDeepVSeVVLoose || condTauDeepVSeVVTight || condTauDeepVSeVVVLoose || condTauDeepVSeNull);
+              bool passCondTauDeepVSjet = (condTauDeepVSjetLoose || condTauDeepVSjetMedium || condTauDeepVSjetTight || condTauDeepVSjetVLoose || condTauDeepVSjetVTight || condTauDeepVSjetVVLoose || condTauDeepVSjetVVTight || condTauDeepVSjetVVVLoose);
+              bool passCondTauDeepVSmu = (condTauDeepVSmuLoose || condTauDeepVSmuMedium || condTauDeepVSmuTight || condTauDeepVSmuVLoose || condTauDeepVSmuNull);
+
+              bool passCondTauDeep = passCondTauDeepVSele && passCondTauDeepVSjet && passCondTauDeepVSmu;
+              if (!passCondTauDeep) continue;
+          } // end if deepTauID && recoTauDeepVSjetraw->size() > 0
+
+          else{
+              bool condTauMVARaw = tauMVAIsoRawORWP == true && recoTauIsoMVArawValue->at(iTau) > tauMVAIsoRawThreshold;
+              bool condTauMVAWPVVLoose = tauMVAIsoRawORWP == false && tauMVAIsoWP == "VVLOOSE" && recoTauIsoMVAVVLoose->at(iTau)>0;
+              bool condTauMVAWPVLoose = tauMVAIsoRawORWP == false && tauMVAIsoWP == "VLOOSE" && recoTauIsoMVAVLoose->at(iTau)>0;
+              bool condTauMVAWPLoose = tauMVAIsoRawORWP == false && tauMVAIsoWP == "LOOSE" && recoTauIsoMVALoose->at(iTau)>0;
+              bool condTauMVAWPMedium = tauMVAIsoRawORWP == false && tauMVAIsoWP == "MEDIUM" && recoTauIsoMVAMedium->at(iTau)>0;
+              bool condTauMVAWPTight = tauMVAIsoRawORWP == false && tauMVAIsoWP == "TIGHT" && recoTauIsoMVATight->at(iTau)>0;
+              bool condTauMVAWPVTight = tauMVAIsoRawORWP == false && tauMVAIsoWP == "VTIGHT" && recoTauIsoMVAVTight->at(iTau)>0;
+              bool condTauMVAWPVVTight = tauMVAIsoRawORWP == false && tauMVAIsoWP == "VVTIGHT" && recoTauIsoMVAVVTight->at(iTau)>0;
+              bool condTauAntiMuMVALoose = tauAntiMuDisc == "LOOSE" && recoTauAntiMuMVALoose->at(iTau)>0;
+              bool condTauAntiMuMVATight = tauAntiMuDisc == "TIGHT" && recoTauAntiMuMVATight->at(iTau)>0;
+              bool condTauAntiMuMVANull = tauAntiMuDisc != "LOOSE" && tauAntiMuDisc != "TIGHT";
+              bool condTauAntiEleMVALoose = tauAntiEleDisc == "LOOSE" && recoTauAntiEleMVALoose->at(iTau)>0;
+              bool condTauAntiEleMVAMedium = tauAntiEleDisc == "MEDIUM" && recoTauAntiEleMVAMedium->at(iTau)>0;
+              bool condTauAntiEleMVATight = tauAntiEleDisc == "TIGHT" && recoTauAntiEleMVATight->at(iTau)>0;
+              bool condTauAntiEleMVANull = tauAntiEleDisc != "LOOSE" && tauAntiEleDisc != "MEDIUM" && tauAntiEleDisc != "TIGHT";
+
+              bool passCondTauMVA = (condTauMVARaw || condTauMVAWPVVLoose || condTauMVAWPVLoose || condTauMVAWPLoose || condTauMVAWPMedium || condTauMVAWPTight || condTauMVAWPVTight || condTauMVAWPVVTight) && (condTauAntiMuMVALoose || condTauAntiMuMVATight || condTauAntiMuMVANull) && (condTauAntiEleMVALoose || condTauAntiEleMVAMedium || condTauAntiEleMVATight || condTauAntiEleMVANull);
+              if (!passCondTauMVA) continue;
+          } // end if !deepTauID (tauMVAID)
+
+          TLorentzVector TauCand;
+          TauCand.SetPtEtaPhiE(recoTauPt->at(iTau), recoTauEta->at(iTau), recoTauPhi->at(iTau), recoTauEnergy->at(iTau));
+          if (Mu.DeltaR(TauCand) > 0.5 && TauCand.Pt() > highestPt)
+          {
+              Tau.SetPtEtaPhiE(recoTauPt->at(iTau), recoTauEta->at(iTau), recoTauPhi->at(iTau), recoTauEnergy->at(iTau));
+              TauIso = deepTauID ? recoTauDeepVSjetraw->at(iTau) : recoTauIsoMVArawValue->at(iTau);
+              TauDM = recoTauDecayMode->at(iTau);
+              highestPt = TauCand.Pt();
+              indexTau = iTau;
+              findTau = true;
+          } // end if dR (mu, tau) and highest pt
       } // end for loop on taus
 
       // ---- prepare event weight info ----
@@ -143,7 +188,7 @@ void ZTauMuTauHadAnalyzer::Loop()
           // ----------------------------------------------------------------------------------------
 
           // --------------- rec-gen matching for separating ZTT, DYB, DYJ, and other backgrounds and data -------------------
-          if (isMC && doWhatSample == "ZTT" && genMuonPt->size()>0 && genTauMuPt->size()>0 && genTauHadPt->size()>0)
+          if (isMC && doWhatSample == "ZTT")
           {
               TLorentzVector GenMu;
               TLorentzVector GenTauMu;
@@ -250,12 +295,12 @@ void ZTauMuTauHadAnalyzer::Loop()
               } // end if findMatchedRecGenMu && findMatchedRecGenTauMu && findMatchedRecGenTauHad && pzetaCut && mutauMtCut && tauPtCut
           } // end if isMC && doWhatSample == "ZTT" && genMuonPt->size()>0 && genTauMuPt->size()>0 && genTauHadPt->size()>0
 
-          if (isMC && doWhatSample == "DYB" && genMuonPt->size()>0 && genTauHadPt->size()>0)
+          if (isMC && doWhatSample == "DYB")
           {
               TLorentzVector GenMu;
-              TLorentzVector GenTauHad;
 
               bool findMatchedRecGenMu = false;
+              bool findGenMuFakeRecTauHad = false;
               bool findMatchedRecGenTauHad = false;
 
               // --------- search for matched genMu for recMu --------------
@@ -264,51 +309,56 @@ void ZTauMuTauHadAnalyzer::Loop()
               {
                   TLorentzVector GenMuCand;
                   GenMuCand.SetPtEtaPhiM(genMuonPt->at(iGenMu), genMuonEta->at(iGenMu), genMuonPhi->at(iGenMu), genMuonMass->at(iGenMu));
-                  if (Mu.DeltaR(GenMuCand) <= smallestDR && fabs(genMuonMotherPDGId->at(iGenMu)) == 23)
+                  if (Mu.DeltaR(GenMuCand) <= smallestDR)
                   {
                       smallestDR = Mu.DeltaR(GenMuCand);
                       findMatchedRecGenMu = true;
                       GenMu = GenMuCand;
-                  } // end if Mu.DeltaR(GenMuCand) <= smallestDR && fabs(genMuonMotherPDGId->at(iGenMu)) == 23
+                  } // end if Mu.DeltaR(GenMuCand) <= smallestDR
               } // end for loop on GenMu
 
               // --------- search for matched genTauHad for Tau --------------
               smallestDR = 0.15;
-              double GenTauHadVisiblePt = 0;
-
               for (unsigned int iGenTauHad=0; iGenTauHad<genTauHadPt->size(); iGenTauHad++)
               {
                   TLorentzVector GenTauHadCand;
                   GenTauHadCand.SetPtEtaPhiM(genTauHadPt->at(iGenTauHad), genTauHadEta->at(iGenTauHad), genTauHadPhi->at(iGenTauHad), genTauHadMass->at(iGenTauHad));
-                  if (Tau.DeltaR(GenTauHadCand) <= smallestDR && fabs(genTauHadMotherPDGId->at(iGenTauHad)) != 23)
+                  if (Tau.DeltaR(GenTauHadCand) <= smallestDR)
                   {
                       smallestDR = Tau.DeltaR(GenTauHadCand);
                       findMatchedRecGenTauHad = true;
-                      GenTauHad = GenTauHadCand;
-                      GenTauHadVisiblePt = genTauHadVisPt->at(iGenTauHad);
                   } // end if Tau.DeltaR(GenTauHad) <= smallestDR
               } // end for loop on GenTauHad
 
-              if (findMatchedRecGenMu && findMatchedRecGenTauHad && pzetaCut && mutauMtCut)
+              // --------- search for matched genMu for Tau --------------
+              smallestDR = 0.15;
+              for (unsigned int iGenMu=0; iGenMu<genMuonPt->size(); iGenMu++)
+              {
+                  TLorentzVector GenMuCand;
+                  GenMuCand.SetPtEtaPhiM(genMuonPt->at(iGenMu), genMuonEta->at(iGenMu), genMuonPhi->at(iGenMu), genMuonMass->at(iGenMu));
+                  if (Tau.DeltaR(GenMuCand) <= smallestDR)
+                  {
+                      smallestDR = Tau.DeltaR(GenMuCand);
+                      findGenMuFakeRecTauHad = true;
+                  } // end if Tau.DeltaR(GenMuCand) <= smallestDR
+              } // end for loop on GenMu
+
+              if (findMatchedRecGenMu && !findMatchedRecGenTauHad && findGenMuFakeRecTauHad && pzetaCut && mutauMtCut)
               {
                   tauPt->Fill(Tau.Pt(), weight);
-                  tauPtVSGenTauHadPt->Fill(Tau.Pt(), GenTauHad.Pt(), weight);
-                  tauPtVSGenTauHadVisPt->Fill(Tau.Pt(), GenTauHadVisiblePt, weight);
-                  tauPtResponse->Fill(Tau.Pt()/GenTauHadVisiblePt, weight);
-                  tauPtVSTauPtResponse->Fill(Tau.Pt(), Tau.Pt()/GenTauHadVisiblePt, weight);
-              } // end if findMatchedRecGenMu && findMatchedRecGenTauHad && pzetaCut && mutauMtCut
+              } // end if findMatchedRecGenMu && !findMatchedRecGenTauHad && findGenMuFakeRecTauHad && pzetaCut && mutauMtCut
 
-              if (findMatchedRecGenMu && findMatchedRecGenTauHad && pzetaCut && tauPtCut)
+              if (findMatchedRecGenMu && !findMatchedRecGenTauHad && findGenMuFakeRecTauHad && pzetaCut && tauPtCut)
               {
                   mtMuMet->Fill(MuTauMt, weight);
-              } // end if findMatchedRecGenMu && findMatchedRecGenTauHad && pzetaCut && tauPtCut
+              } // end if findMatchedRecGenMu && !findMatchedRecGenTauHad && findGenMuFakeRecTauHad && pzetaCut && tauPtCut
 
-              if (findMatchedRecGenMu && findMatchedRecGenTauHad && mutauMtCut && tauPtCut)
+              if (findMatchedRecGenMu && !findMatchedRecGenTauHad && findGenMuFakeRecTauHad && mutauMtCut && tauPtCut)
               {
                   pzeta->Fill(zeta, weight);
-              } // end if findMatchedRecGenMu && findMatchedRecGenTauHad && mutauMtCut && tauPtCut
+              } // end if findMatchedRecGenMu && !findMatchedRecGenTauHad && findGenMuFakeRecTauHad && mutauMtCut && tauPtCut
 
-              if (findMatchedRecGenMu && findMatchedRecGenTauHad && pzetaCut && mutauMtCut && tauPtCut)
+              if (findMatchedRecGenMu && !findMatchedRecGenTauHad && findGenMuFakeRecTauHad && pzetaCut && mutauMtCut && tauPtCut)
               {
                   muPt->Fill(Mu.Pt(), weight);
                   muEta->Fill(Mu.Eta(), weight);
@@ -331,11 +381,8 @@ void ZTauMuTauHadAnalyzer::Loop()
                   muPtVSGenMuPt->Fill(Mu.Pt(), GenMu.Pt(), weight);
                   muEtaVSGenMuEta->Fill(Mu.Eta(), GenMu.Eta(), weight);
                   muPhiVSGenMuPhi->Fill(Mu.Phi(), GenMu.Phi(), weight);
-
-                  dRMuTauVSGenMuGenTauHad->Fill(Mu.DeltaR(Tau), GenMu.DeltaR(GenTauHad), weight);
-                  invMassMuTauVSGenMuGenTauHad->Fill(MuTau.M(), (GenMu + GenTauHad).M(), weight);
-              } // end if findMatchedRecGenMu && findMatchedRecGenTauHad && pzetaCut && mutauMtCut && tauPtCut
-          } // end if isMC && doWhatSample == "DYB" && genMuonPt->size()>0 && genTauHadPt->size()>0
+              } // end if findMatchedRecGenMu && !findMatchedRecGenTauHad && findGenMuFakeRecTauHad && pzetaCut && mutauMtCut && tauPtCut
+          } // end if isMC && doWhatSample == "DYB"
 
           if (isMC && doWhatSample == "DYJ")
           {
@@ -344,6 +391,8 @@ void ZTauMuTauHadAnalyzer::Loop()
 
               bool findMatchedRecGenMu = false;
               bool findMatchedRecGenTauHad = false;
+              bool findMatchedRecGenTauHadFromJets = false;
+              bool findGenMuFakeRecTauHad = false;
 
               // --------- search for matched genMu for recMu --------------
               double smallestDR = 0.15;
@@ -370,32 +419,52 @@ void ZTauMuTauHadAnalyzer::Loop()
                   if (Tau.DeltaR(GenTauHadCand) <= smallestDR)
                   {
                       smallestDR = Tau.DeltaR(GenTauHadCand);
+                      if (fabs(genTauHadMotherPDGId->at(iGenTauHad)) != 23)
+                      {
+                          findMatchedRecGenTauHadFromJets = true;
+                          GenTauHad = GenTauHadCand;
+                          GenTauHadVisiblePt = genTauHadVisPt->at(iGenTauHad);
+                      } // end if fabs(genTauHadMotherPDGId->at(iGenTauHad)) != 23
                       findMatchedRecGenTauHad = true;
-                      GenTauHad = GenTauHadCand;
-                      GenTauHadVisiblePt = genTauHadVisPt->at(iGenTauHad);
                   } // end if Tau.DeltaR(GenTauHad) <= smallestDR
               } // end for loop on GenTauHad
 
-              if (findMatchedRecGenMu && !findMatchedRecGenTauHad && pzetaCut && mutauMtCut)
+              // --------- search for matched genMu for Tau --------------
+              smallestDR = 0.15;
+              for (unsigned int iGenMu=0; iGenMu<genMuonPt->size(); iGenMu++)
+              {
+                  TLorentzVector GenMuCand;
+                  GenMuCand.SetPtEtaPhiM(genMuonPt->at(iGenMu), genMuonEta->at(iGenMu), genMuonPhi->at(iGenMu), genMuonMass->at(iGenMu));
+                  if (Tau.DeltaR(GenMuCand) <= smallestDR)
+                  {
+                      smallestDR = Tau.DeltaR(GenMuCand);
+                      findGenMuFakeRecTauHad = true;
+                  } // end if Tau.DeltaR(GenMuCand) <= smallestDR
+              } // end for loop on GenMu
+
+              if (findMatchedRecGenMu && (!findMatchedRecGenTauHad || findMatchedRecGenTauHadFromJets) && !findGenMuFakeRecTauHad && pzetaCut && mutauMtCut)
               {
                   tauPt->Fill(Tau.Pt(), weight);
-                  tauPtVSGenTauHadPt->Fill(Tau.Pt(), GenTauHad.Pt(), weight);
-                  tauPtVSGenTauHadVisPt->Fill(Tau.Pt(), GenTauHadVisiblePt, weight);
-                  tauPtResponse->Fill(Tau.Pt()/GenTauHadVisiblePt, weight);
-                  tauPtVSTauPtResponse->Fill(Tau.Pt(), Tau.Pt()/GenTauHadVisiblePt, weight);
-              } // end if findMatchedRecGenMu && !findMatchedRecGenTauHad && pzetaCut && mutauMtCut
+                  if (findMatchedRecGenTauHadFromJets)
+                  {
+                      tauPtVSGenTauHadPt->Fill(Tau.Pt(), GenTauHad.Pt(), weight);
+                      tauPtVSGenTauHadVisPt->Fill(Tau.Pt(), GenTauHadVisiblePt, weight);
+                      tauPtResponse->Fill(Tau.Pt()/GenTauHadVisiblePt, weight);
+                      tauPtVSTauPtResponse->Fill(Tau.Pt(), Tau.Pt()/GenTauHadVisiblePt, weight);
+                  } // end if findMatchedRecGenTauHadFromJets == true
+              } // end if findMatchedRecGenMu && (!findMatchedRecGenTauHad || findMatchedRecGenTauHadFromJets) && !findGenMuFakeRecTauHad && pzetaCut && mutauMtCut
 
-              if (findMatchedRecGenMu && !findMatchedRecGenTauHad && pzetaCut && tauPtCut)
+              if (findMatchedRecGenMu && (!findMatchedRecGenTauHad || findMatchedRecGenTauHadFromJets) && !findGenMuFakeRecTauHad && pzetaCut && tauPtCut)
               {
                   mtMuMet->Fill(MuTauMt, weight);
-              } // end if findMatchedRecGenMu && !findMatchedRecGenTauHad && pzetaCut && tauPtCut
+              } // end if findMatchedRecGenMu && (!findMatchedRecGenTauHad || findMatchedRecGenTauHadFromJets) && !findGenMuFakeRecTauHad && pzetaCut && tauPtCut
 
-              if (findMatchedRecGenMu && !findMatchedRecGenTauHad && mutauMtCut && tauPtCut)
+              if (findMatchedRecGenMu && (!findMatchedRecGenTauHad || findMatchedRecGenTauHadFromJets) && !findGenMuFakeRecTauHad && mutauMtCut && tauPtCut)
               {
                   pzeta->Fill(zeta, weight);
-              } // end if findMatchedRecGenMu && !findMatchedRecGenTauHad && mutauMtCut && tauPtCut
+              } // end if findMatchedRecGenMu && (!findMatchedRecGenTauHad || findMatchedRecGenTauHadFromJets) && !findGenMuFakeRecTauHad && mutauMtCut && tauPtCut
 
-              if (findMatchedRecGenMu && !findMatchedRecGenTauHad && pzetaCut && mutauMtCut && tauPtCut)
+              if (findMatchedRecGenMu && (!findMatchedRecGenTauHad || findMatchedRecGenTauHadFromJets) && !findGenMuFakeRecTauHad && pzetaCut && mutauMtCut && tauPtCut)
               {
                   muPt->Fill(Mu.Pt(), weight);
                   muEta->Fill(Mu.Eta(), weight);
@@ -419,9 +488,12 @@ void ZTauMuTauHadAnalyzer::Loop()
                   muEtaVSGenMuEta->Fill(Mu.Eta(), GenMu.Eta(), weight);
                   muPhiVSGenMuPhi->Fill(Mu.Phi(), GenMu.Phi(), weight);
 
-                  dRMuTauVSGenMuGenTauHad->Fill(Mu.DeltaR(Tau), GenMu.DeltaR(GenTauHad), weight);
-                  invMassMuTauVSGenMuGenTauHad->Fill(MuTau.M(), (GenMu + GenTauHad).M(), weight);
-              } // end if findMatchedRecGenMu && !findMatchedRecGenTauHad && pzetaCut && mutauMtCut && tauPtCut
+                  if (findMatchedRecGenTauHadFromJets)
+                  {
+                      dRMuTauVSGenMuGenTauHad->Fill(Mu.DeltaR(Tau), GenMu.DeltaR(GenTauHad), weight);
+                      invMassMuTauVSGenMuGenTauHad->Fill(MuTau.M(), (GenMu + GenTauHad).M(), weight);
+                  } // end if findMatchedRecGenTauHadFromJets == true
+              } // end if findMatchedRecGenMu && (!findMatchedRecGenTauHad || findMatchedRecGenTauHadFromJets) && !findGenMuFakeRecTauHad && pzetaCut && mutauMtCut && tauPtCut
           } // end if isMC && doWhatSample == "DYJ"
 
           if (doWhatSample != "ZTT" && doWhatSample != "DYB" && doWhatSample != "DYJ")

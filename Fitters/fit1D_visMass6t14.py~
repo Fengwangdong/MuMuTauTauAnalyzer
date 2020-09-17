@@ -1,0 +1,123 @@
+#!/usr/bin/python
+import ROOT
+from ROOT import RooFit
+import tdrStyle
+import math
+ROOT.gROOT.SetBatch()
+tdrStyle.setTDRStyle()
+ROOT.gStyle.SetErrorX(0.5)
+
+fileinDir = "/eos/uscms/store/user/rhabibul/HtoAA/HtoAA2017/TaueTauHad_InvertedIso/"
+treeName = "TreeMuMuTauTau"
+
+finName = fileinDir + "data6t14.root"
+fin = ROOT.TFile(finName)
+treein = fin.Get(treeName)
+
+
+
+
+visMass = ROOT.RooRealVar("visMass", "visMass", 0, 1000)
+dataColl = ROOT.RooDataSet("dataColl", "dataColl", ROOT.RooArgSet(visMass))
+
+for event in treein:
+    visMass.setVal(event.visMassMuMuTauTau)
+    dataColl.add(ROOT.RooArgSet(visMass))
+
+ws = ROOT.RooWorkspace("ws")
+ws.factory('visMass[0, 1000]')
+ws.factory("EXPR::errfunc1('0.5*(TMath::Erf(a1*({0}-b1))+1)', {0}, a1[0.055,0.1], b1[140,160])".format('visMass'))
+ws.factory("EXPR::errfunc2('0.5*(TMath::Erf(a2*({0}-b2))+1)', {0}, a2[0.049,0.1], b2[50,55])".format('visMass'))
+ws.factory("Exponential::exp1({0}, lamda1[-0.004,0])".format('visMass'))
+ws.factory("Exponential::exp2({0}, lamda2[-0.0201,0])".format('visMass'))
+ws.factory("PROD::prod1(errfunc1, exp1)")
+ws.factory("PROD::prod2(errfunc2, exp2)")
+ws.factory("SUM::model(frac1[0.01, 1.]*prod1, prod2)")
+model = ws.pdf("model")
+
+model.fitTo(dataColl)
+
+xframe = visMass.frame(ROOT.RooFit.Title("Example of composite pdf=(sig1+sig2)+bkg"))
+dataColl.plotOn(xframe)
+model.plotOn(xframe)
+model.Print("t")
+##residual and pull
+
+resid=xframe.residHist()
+pull=xframe.pullHist()
+
+##Second frame                                                                                                                                                                                                                                                                 
+xframe2=visMass.frame()
+xframe2.addPlotable(pull,'P')
+
+model.plotOn(xframe, ROOT.RooFit.Components("prod1"), ROOT.RooFit.LineStyle(ROOT.kDashed))
+model.plotOn(xframe, ROOT.RooFit.Components("prod2"), ROOT.RooFit.LineStyle(ROOT.kDotted))
+
+legend = ROOT.TLegend(0.50,0.78,0.65,0.95);
+legend.SetFillColor(0);
+legend.SetTextSize(0.03);
+legend.AddEntry(dataColl,"Data","elp");
+legend.AddEntry(model,"Background model","l");
+
+label1 = ROOT.TLatex(0.2,0.88, "CMS")
+label2 = ROOT.TLatex(0.22,0.97, "#sqrt{s} = 13 TeV, Lumi = 41.529 fb^{-1} (2017)")
+label3 = ROOT.TLatex(0.3,0.88, "Preliminary")
+label1.SetNDC()
+label1.SetTextSize(0.03)
+label2.SetNDC()
+label2.SetTextFont(42)
+label2.SetTextSize(0.03)
+label3.SetNDC()
+label3.SetTextFont(52)
+label3.SetTextSize(0.03)
+
+canvas = ROOT.TCanvas("haa_composite", "haa_composite", 1000, 1000)
+
+ROOT.SetOwnership(canvas,False)
+############ Adding the plot pad and the ratio pad along with the plots ##########                                                                                                                                                                                             
+plotpad = ROOT.TPad("plotpad", "top pad", 0.0, 0.21, 1.0, 1.0)
+ROOT.SetOwnership(plotpad,False)
+plotpad.SetLogy()
+plotpad.SetBottomMargin(0.00)
+plotpad.SetRightMargin(0.2)
+plotpad.SetLeftMargin(0.16)
+plotpad.Draw()
+
+ratiopad = ROOT.TPad("ratiopad", "bottom pad", 0.0, 0.0, 1.0, 0.21)
+ROOT.SetOwnership(ratiopad,False)
+ratiopad.SetTopMargin(0.00)
+ratiopad.SetRightMargin(0.2)
+ratiopad.SetBottomMargin(0.5)
+ratiopad.SetLeftMargin(0.16)
+ratiopad.SetTickx(1)
+ratiopad.SetTicky(1)
+ratiopad.Draw()
+
+#####Draw Model and fit#######                                                                                                                                                                                                                                                 
+if plotpad != ROOT.TVirtualPad.Pad(): plotpad.cd()
+xframe.GetYaxis().SetTitle("# Events")
+xframe.GetYaxis().SetTitleOffset(1.55)
+xframe.GetYaxis().SetLabelSize(0.020)
+xframe.GetYaxis().SetRangeUser(0.080, xframe.GetMaximum()*10)
+xframe.GetYaxis().SetTitleSize(0.030)
+#xframe.GetXaxis().SetTitle("M^{vis}_{#mu#mu#tau_{e}#tau_{h}} [GeV]")
+xframe.GetXaxis().SetLabelSize(0.035)
+xframe.Draw()
+######### Draw ratio/pull #####                                                                                                                                                                                                                                                
+ratiopad.cd()
+xframe2.Draw()
+xframe2.GetYaxis().SetTitleOffset(0.7)
+xframe2.GetXaxis().SetTitleOffset(1.55)
+xframe2.GetYaxis().SetLabelSize(0.08)
+xframe2.GetYaxis().SetTitle("Pull")
+xframe2.GetYaxis().SetTitleSize(0.07)
+xframe2.GetYaxis().SetRangeUser(-5,5)
+xframe2.GetXaxis().SetTitleSize(0.09)
+xframe2.GetXaxis().SetTitle("M^{vis}_{#mu#mu#tau_{e}#tau_{h}} [GeV]")
+xframe2.GetXaxis().SetLabelSize(0.08)
+###################################################################                                                                                                                                                                                                            
+canvas.cd()
+legend.Draw("same")
+label1.Draw("same")
+label2.Draw("same")
+canvas.SaveAs("haa_6t14_composite_visMass_mumutautau_ws_pull.png")
