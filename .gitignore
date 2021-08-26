@@ -19,7 +19,7 @@ runMuMuTauETauEAnalyzer
 runMuMuTauMuTauHadAnalyzer
 runMuMuTauETauHadAnalyzer
 runMuMuTauHadTauHadAnalyzer
-runMuTauFlatTreelizer
+runMuMuTauTauInclusiveAnalyzer
 runFakeMuMuTauMuAnalyzer
 runFakeMuMuTauMuTauEAnalyzer
 runFakeMuMuTauEAnalyzer
