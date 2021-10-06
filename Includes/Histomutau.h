@@ -162,6 +162,7 @@ class Histomutau{
         double Tau2DecayMode;
 
         double eventWeight;
+        double nPileup;
 };
 
 #endif

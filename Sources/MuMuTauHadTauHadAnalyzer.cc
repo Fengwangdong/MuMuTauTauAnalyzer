@@ -458,6 +458,7 @@ void MuMuTauHadTauHadAnalyzer::Loop()
           } // end if boostDiTauOpt == false
 
           eventWeight = weight/summedWeights;
+          nPileup = trueNInteraction; 
           TreeMuMuTauTau->Fill();
       } // end if findMu1 && findMu2 && findTauTauPair
    }// end loop for events

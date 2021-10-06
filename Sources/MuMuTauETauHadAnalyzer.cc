@@ -394,6 +394,7 @@ void MuMuTauETauHadAnalyzer::Loop()
           Tau2Isolation = TauIso;
 
           eventWeight = weight/summedWeights;
+          nPileup = trueNInteraction; 
           TreeMuMuTauTau->Fill();
       } // end if findMu1 && findMu2 && findEleTauPair
    }// end loop for events
