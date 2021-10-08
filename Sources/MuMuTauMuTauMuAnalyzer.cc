@@ -329,7 +329,8 @@ void MuMuTauMuTauMuAnalyzer::Loop()
           Tau2Isolation = Mu4Iso;
 
           eventWeight = weight/summedWeights;
-          nPileup = trueNInteraction; 
+          if (isMC){nPileup = trueNInteraction;} 
+          else {nPileup = recoNPrimaryVertex;} 
           TreeMuMuTauTau->Fill();
       } // end if findMu1 && findMu2 && findMuMuPair
    }// end loop for events
