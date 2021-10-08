@@ -19,6 +19,7 @@ int main(int argc, char **argv)
     double lumi                  = cfg.getD("lumi", 1);
     bool invertedMu1Iso          = cfg.getB("invertedMu1Iso", false);
     float Mu1IsoThreshold        = cfg.getF("Mu1IsoThreshold", 0.25); 
+    TString MuonId               = cfg.getS("MuonId", "MEDIUM");
     bool tauMVAIsoRawORWP        = cfg.getB("tauMVAIsoRawORWP", false);
     double tauMVAIsoRawThreshold = cfg.getD("tauMVAIsoRawThreshold", -0.5);
     TString tauMVAIsoWP          = cfg.getS("tauMVAIsoWP", "MEDIUM");
@@ -78,6 +79,11 @@ int main(int argc, char **argv)
             else if (currentArg.BeginsWith("Mu1IsoThreshold="))
             {
                 getArg(currentArg, Mu1IsoThreshold);
+            }
+
+            else if (currentArg.BeginsWith("MuonId="))
+            {
+                getArg(currentArg, MuonId);
             }
 
             else if (currentArg.BeginsWith("tauMVAIsoRawORWP="))
@@ -168,6 +174,7 @@ int main(int argc, char **argv)
     } // end if argc > 1
     
     doWhat.ToUpper();
+    MuonId.ToUpper();
     tauMVAIsoWP.ToUpper();
     tauAntiMuDisc.ToUpper();
     tauAntiEleDisc.ToUpper();
@@ -180,7 +187,7 @@ int main(int argc, char **argv)
     {
         if (inputFile.EndsWith(".root"))
         {
-            ZTauMuTauHadAnalyzer DataHist(inputFile, outputDir, 1, 1, maxEvents, false, invertedMu1Iso, Mu1IsoThreshold, tauMVAIsoRawORWP, tauMVAIsoRawThreshold, tauMVAIsoWP, signSameOROpposite, mTMuMetLowThreshold, mTMuMetHighThreshold, invertedPzetaCut, pzetaThreshold, tauPtLowThreshold, tauPtHighThreshold, tauAntiMuDisc, tauAntiEleDisc, "DATA", deepTauID, deepTauVSele, deepTauVSmu, deepTauVSjet, tauDecayModeThreshold);
+            ZTauMuTauHadAnalyzer DataHist(inputFile, outputDir, 1, 1, maxEvents, false, invertedMu1Iso, Mu1IsoThreshold, MuonId, tauMVAIsoRawORWP, tauMVAIsoRawThreshold, tauMVAIsoWP, signSameOROpposite, mTMuMetLowThreshold, mTMuMetHighThreshold, invertedPzetaCut, pzetaThreshold, tauPtLowThreshold, tauPtHighThreshold, tauAntiMuDisc, tauAntiEleDisc, "DATA", deepTauID, deepTauVSele, deepTauVSmu, deepTauVSjet, tauDecayModeThreshold);
             DataHist.Loop();
         } // end if inputFile.EndsWith(".root")
         
@@ -190,7 +197,7 @@ int main(int argc, char **argv)
             string fileName;
             while (getline(finTree, fileName))
             {
-                ZTauMuTauHadAnalyzer DataHist(fileName, outputDir, 1, 1, maxEvents, false, invertedMu1Iso, Mu1IsoThreshold, tauMVAIsoRawORWP, tauMVAIsoRawThreshold, tauMVAIsoWP, signSameOROpposite, mTMuMetLowThreshold, mTMuMetHighThreshold, invertedPzetaCut, pzetaThreshold, tauPtLowThreshold, tauPtHighThreshold, tauAntiMuDisc, tauAntiEleDisc, "DATA", deepTauID, deepTauVSele, deepTauVSmu, deepTauVSjet, tauDecayModeThreshold);
+                ZTauMuTauHadAnalyzer DataHist(fileName, outputDir, 1, 1, maxEvents, false, invertedMu1Iso, Mu1IsoThreshold, MuonId, tauMVAIsoRawORWP, tauMVAIsoRawThreshold, tauMVAIsoWP, signSameOROpposite, mTMuMetLowThreshold, mTMuMetHighThreshold, invertedPzetaCut, pzetaThreshold, tauPtLowThreshold, tauPtHighThreshold, tauAntiMuDisc, tauAntiEleDisc, "DATA", deepTauID, deepTauVSele, deepTauVSmu, deepTauVSjet, tauDecayModeThreshold);
                 DataHist.Loop();
             } // end while loop on file list 
         } // end else inputFile.EndsWith(".root")
@@ -207,7 +214,7 @@ int main(int argc, char **argv)
             lumiana DYJetsLumi(inputFile);
             summedWeights = DYJetsLumi.Loop();
 
-            ZTauMuTauHadAnalyzer DYJetsHist(inputFile, outputDir, lumi*6077.22*1000, summedWeights, maxEvents, true, invertedMu1Iso, Mu1IsoThreshold, tauMVAIsoRawORWP, tauMVAIsoRawThreshold, tauMVAIsoWP, signSameOROpposite, mTMuMetLowThreshold, mTMuMetHighThreshold, invertedPzetaCut, pzetaThreshold, tauPtLowThreshold, tauPtHighThreshold, tauAntiMuDisc, tauAntiEleDisc, "DYJ", deepTauID, deepTauVSele, deepTauVSmu, deepTauVSjet, tauDecayModeThreshold);
+            ZTauMuTauHadAnalyzer DYJetsHist(inputFile, outputDir, lumi*6077.22*1000, summedWeights, maxEvents, true, invertedMu1Iso, Mu1IsoThreshold, MuonId, tauMVAIsoRawORWP, tauMVAIsoRawThreshold, tauMVAIsoWP, signSameOROpposite, mTMuMetLowThreshold, mTMuMetHighThreshold, invertedPzetaCut, pzetaThreshold, tauPtLowThreshold, tauPtHighThreshold, tauAntiMuDisc, tauAntiEleDisc, "DYJ", deepTauID, deepTauVSele, deepTauVSmu, deepTauVSjet, tauDecayModeThreshold);
             DYJetsHist.Loop();
         } // end if inputFile.EndsWith(".root")
 
@@ -225,7 +232,7 @@ int main(int argc, char **argv)
             finTree.open(inputFile);
             while (getline(finTree, fileName))
             {
-                ZTauMuTauHadAnalyzer DYJetsHist(fileName, outputDir, lumi*6077.22*1000, summedWeights, maxEvents, true, invertedMu1Iso, Mu1IsoThreshold, tauMVAIsoRawORWP, tauMVAIsoRawThreshold, tauMVAIsoWP, signSameOROpposite, mTMuMetLowThreshold, mTMuMetHighThreshold, invertedPzetaCut, pzetaThreshold, tauPtLowThreshold, tauPtHighThreshold, tauAntiMuDisc, tauAntiEleDisc, "DYJ", deepTauID, deepTauVSele, deepTauVSmu, deepTauVSjet, tauDecayModeThreshold);
+                ZTauMuTauHadAnalyzer DYJetsHist(fileName, outputDir, lumi*6077.22*1000, summedWeights, maxEvents, true, invertedMu1Iso, Mu1IsoThreshold, MuonId, tauMVAIsoRawORWP, tauMVAIsoRawThreshold, tauMVAIsoWP, signSameOROpposite, mTMuMetLowThreshold, mTMuMetHighThreshold, invertedPzetaCut, pzetaThreshold, tauPtLowThreshold, tauPtHighThreshold, tauAntiMuDisc, tauAntiEleDisc, "DYJ", deepTauID, deepTauVSele, deepTauVSmu, deepTauVSjet, tauDecayModeThreshold);
                 DYJetsHist.Loop();
             } // end while loop on input file list
         } // end else
@@ -241,7 +248,7 @@ int main(int argc, char **argv)
             lumiana DYJetsLumi(inputFile);
             summedWeights = DYJetsLumi.Loop();
 
-            ZTauMuTauHadAnalyzer ZTauTauHist(inputFile, outputDir, lumi*6077.22*1000, summedWeights, maxEvents, true, invertedMu1Iso, Mu1IsoThreshold, tauMVAIsoRawORWP, tauMVAIsoRawThreshold, tauMVAIsoWP, signSameOROpposite, mTMuMetLowThreshold, mTMuMetHighThreshold, invertedPzetaCut, pzetaThreshold, tauPtLowThreshold, tauPtHighThreshold, tauAntiMuDisc, tauAntiEleDisc, "ZTT", deepTauID, deepTauVSele, deepTauVSmu, deepTauVSjet, tauDecayModeThreshold);
+            ZTauMuTauHadAnalyzer ZTauTauHist(inputFile, outputDir, lumi*6077.22*1000, summedWeights, maxEvents, true, invertedMu1Iso, Mu1IsoThreshold, MuonId, tauMVAIsoRawORWP, tauMVAIsoRawThreshold, tauMVAIsoWP, signSameOROpposite, mTMuMetLowThreshold, mTMuMetHighThreshold, invertedPzetaCut, pzetaThreshold, tauPtLowThreshold, tauPtHighThreshold, tauAntiMuDisc, tauAntiEleDisc, "ZTT", deepTauID, deepTauVSele, deepTauVSmu, deepTauVSjet, tauDecayModeThreshold);
             ZTauTauHist.Loop();
         } // end if inputFile.EndsWith(".root")
 
@@ -260,7 +267,7 @@ int main(int argc, char **argv)
             while (getline(finTree, fileName))
             {
                 // ----------------- ZTauTau -------------------
-                ZTauMuTauHadAnalyzer ZTauTauHist(fileName, outputDir, lumi*6077.22*1000, summedWeights, maxEvents, true, invertedMu1Iso, Mu1IsoThreshold, tauMVAIsoRawORWP, tauMVAIsoRawThreshold, tauMVAIsoWP, signSameOROpposite, mTMuMetLowThreshold, mTMuMetHighThreshold, invertedPzetaCut, pzetaThreshold, tauPtLowThreshold, tauPtHighThreshold, tauAntiMuDisc, tauAntiEleDisc, "ZTT", deepTauID, deepTauVSele, deepTauVSmu, deepTauVSjet, tauDecayModeThreshold);
+                ZTauMuTauHadAnalyzer ZTauTauHist(fileName, outputDir, lumi*6077.22*1000, summedWeights, maxEvents, true, invertedMu1Iso, Mu1IsoThreshold, MuonId, tauMVAIsoRawORWP, tauMVAIsoRawThreshold, tauMVAIsoWP, signSameOROpposite, mTMuMetLowThreshold, mTMuMetHighThreshold, invertedPzetaCut, pzetaThreshold, tauPtLowThreshold, tauPtHighThreshold, tauAntiMuDisc, tauAntiEleDisc, "ZTT", deepTauID, deepTauVSele, deepTauVSmu, deepTauVSjet, tauDecayModeThreshold);
                 ZTauTauHist.Loop();
             } // end while loop on input file list
         } // end else
@@ -276,7 +283,7 @@ int main(int argc, char **argv)
             lumiana DYJetsLumi(inputFile);
             summedWeights = DYJetsLumi.Loop();
 
-            ZTauMuTauHadAnalyzer ZMuMuTauHist(inputFile, outputDir, lumi*6077.22*1000, summedWeights, maxEvents, true, invertedMu1Iso, Mu1IsoThreshold, tauMVAIsoRawORWP, tauMVAIsoRawThreshold, tauMVAIsoWP, signSameOROpposite, mTMuMetLowThreshold, mTMuMetHighThreshold, invertedPzetaCut, pzetaThreshold, tauPtLowThreshold, tauPtHighThreshold, tauAntiMuDisc, tauAntiEleDisc, "DYB", deepTauID, deepTauVSele, deepTauVSmu, deepTauVSjet, tauDecayModeThreshold);
+            ZTauMuTauHadAnalyzer ZMuMuTauHist(inputFile, outputDir, lumi*6077.22*1000, summedWeights, maxEvents, true, invertedMu1Iso, Mu1IsoThreshold, MuonId, tauMVAIsoRawORWP, tauMVAIsoRawThreshold, tauMVAIsoWP, signSameOROpposite, mTMuMetLowThreshold, mTMuMetHighThreshold, invertedPzetaCut, pzetaThreshold, tauPtLowThreshold, tauPtHighThreshold, tauAntiMuDisc, tauAntiEleDisc, "DYB", deepTauID, deepTauVSele, deepTauVSmu, deepTauVSjet, tauDecayModeThreshold);
             ZMuMuTauHist.Loop();
         } // end if inputFile.EndsWith(".root")
 
@@ -294,7 +301,7 @@ int main(int argc, char **argv)
             finTree.open(inputFile);
             while (getline(finTree, fileName))
             {
-                ZTauMuTauHadAnalyzer ZMuMuTauHist(fileName, outputDir, lumi*6077.22*1000, summedWeights, maxEvents, true, invertedMu1Iso, Mu1IsoThreshold, tauMVAIsoRawORWP, tauMVAIsoRawThreshold, tauMVAIsoWP, signSameOROpposite, mTMuMetLowThreshold, mTMuMetHighThreshold, invertedPzetaCut, pzetaThreshold, tauPtLowThreshold, tauPtHighThreshold, tauAntiMuDisc, tauAntiEleDisc, "DYB", deepTauID, deepTauVSele, deepTauVSmu, deepTauVSjet, tauDecayModeThreshold);
+                ZTauMuTauHadAnalyzer ZMuMuTauHist(fileName, outputDir, lumi*6077.22*1000, summedWeights, maxEvents, true, invertedMu1Iso, Mu1IsoThreshold, MuonId, tauMVAIsoRawORWP, tauMVAIsoRawThreshold, tauMVAIsoWP, signSameOROpposite, mTMuMetLowThreshold, mTMuMetHighThreshold, invertedPzetaCut, pzetaThreshold, tauPtLowThreshold, tauPtHighThreshold, tauAntiMuDisc, tauAntiEleDisc, "DYB", deepTauID, deepTauVSele, deepTauVSmu, deepTauVSjet, tauDecayModeThreshold);
                 ZMuMuTauHist.Loop();
             } // end while loop on input file list
         } // end else
@@ -309,7 +316,7 @@ int main(int argc, char **argv)
         {
             lumiana WJetsLumi(inputFile);
             summedWeights = WJetsLumi.Loop();
-            ZTauMuTauHadAnalyzer WJetsHist(inputFile, outputDir, lumi*61526.7*1000, summedWeights, maxEvents, true, invertedMu1Iso, Mu1IsoThreshold, tauMVAIsoRawORWP, tauMVAIsoRawThreshold, tauMVAIsoWP, signSameOROpposite, mTMuMetLowThreshold, mTMuMetHighThreshold, invertedPzetaCut, pzetaThreshold, tauPtLowThreshold, tauPtHighThreshold, tauAntiMuDisc, tauAntiEleDisc, "WJETS", deepTauID, deepTauVSele, deepTauVSmu, deepTauVSjet, tauDecayModeThreshold);
+            ZTauMuTauHadAnalyzer WJetsHist(inputFile, outputDir, lumi*61526.7*1000, summedWeights, maxEvents, true, invertedMu1Iso, Mu1IsoThreshold, MuonId, tauMVAIsoRawORWP, tauMVAIsoRawThreshold, tauMVAIsoWP, signSameOROpposite, mTMuMetLowThreshold, mTMuMetHighThreshold, invertedPzetaCut, pzetaThreshold, tauPtLowThreshold, tauPtHighThreshold, tauAntiMuDisc, tauAntiEleDisc, "WJETS", deepTauID, deepTauVSele, deepTauVSmu, deepTauVSjet, tauDecayModeThreshold);
             WJetsHist.Loop();
         } // end if inputFile.EndsWith(".root")
 
@@ -327,7 +334,7 @@ int main(int argc, char **argv)
             finTree.open(inputFile);
             while (getline(finTree, fileName))
             {
-                ZTauMuTauHadAnalyzer WJetsHist(fileName, outputDir, lumi*61526.7*1000, summedWeights, maxEvents, true, invertedMu1Iso, Mu1IsoThreshold, tauMVAIsoRawORWP, tauMVAIsoRawThreshold, tauMVAIsoWP, signSameOROpposite, mTMuMetLowThreshold, mTMuMetHighThreshold, invertedPzetaCut, pzetaThreshold, tauPtLowThreshold, tauPtHighThreshold, tauAntiMuDisc, tauAntiEleDisc, "WJETS", deepTauID, deepTauVSele, deepTauVSmu, deepTauVSjet, tauDecayModeThreshold);
+                ZTauMuTauHadAnalyzer WJetsHist(fileName, outputDir, lumi*61526.7*1000, summedWeights, maxEvents, true, invertedMu1Iso, Mu1IsoThreshold, MuonId, tauMVAIsoRawORWP, tauMVAIsoRawThreshold, tauMVAIsoWP, signSameOROpposite, mTMuMetLowThreshold, mTMuMetHighThreshold, invertedPzetaCut, pzetaThreshold, tauPtLowThreshold, tauPtHighThreshold, tauAntiMuDisc, tauAntiEleDisc, "WJETS", deepTauID, deepTauVSele, deepTauVSmu, deepTauVSjet, tauDecayModeThreshold);
                 WJetsHist.Loop();
             } // end while loop on input file list
         } // end else
@@ -342,7 +349,7 @@ int main(int argc, char **argv)
         {
             lumiana TTJetsLumi(inputFile);
             summedWeights = TTJetsLumi.Loop();
-            ZTauMuTauHadAnalyzer TTJetsHist(inputFile, outputDir, lumi*831.76*1000, summedWeights, maxEvents, true, invertedMu1Iso, Mu1IsoThreshold, tauMVAIsoRawORWP, tauMVAIsoRawThreshold, tauMVAIsoWP, signSameOROpposite, mTMuMetLowThreshold, mTMuMetHighThreshold, invertedPzetaCut, pzetaThreshold, tauPtLowThreshold, tauPtHighThreshold, tauAntiMuDisc, tauAntiEleDisc, "TTJETS", deepTauID, deepTauVSele, deepTauVSmu, deepTauVSjet, tauDecayModeThreshold);
+            ZTauMuTauHadAnalyzer TTJetsHist(inputFile, outputDir, lumi*831.76*1000, summedWeights, maxEvents, true, invertedMu1Iso, Mu1IsoThreshold, MuonId, tauMVAIsoRawORWP, tauMVAIsoRawThreshold, tauMVAIsoWP, signSameOROpposite, mTMuMetLowThreshold, mTMuMetHighThreshold, invertedPzetaCut, pzetaThreshold, tauPtLowThreshold, tauPtHighThreshold, tauAntiMuDisc, tauAntiEleDisc, "TTJETS", deepTauID, deepTauVSele, deepTauVSmu, deepTauVSjet, tauDecayModeThreshold);
             TTJetsHist.Loop();
         } // end if inputFile.EndsWith(".root")
 
@@ -360,7 +367,7 @@ int main(int argc, char **argv)
             finTree.open(inputFile);
             while (getline(finTree, fileName))
             {
-                ZTauMuTauHadAnalyzer TTJetsHist(fileName, outputDir, lumi*831.76*1000, summedWeights, maxEvents, true, invertedMu1Iso, Mu1IsoThreshold, tauMVAIsoRawORWP, tauMVAIsoRawThreshold, tauMVAIsoWP, signSameOROpposite, mTMuMetLowThreshold, mTMuMetHighThreshold, invertedPzetaCut, pzetaThreshold, tauPtLowThreshold, tauPtHighThreshold, tauAntiMuDisc, tauAntiEleDisc, "TTJETS", deepTauID, deepTauVSele, deepTauVSmu, deepTauVSjet, tauDecayModeThreshold);
+                ZTauMuTauHadAnalyzer TTJetsHist(fileName, outputDir, lumi*831.76*1000, summedWeights, maxEvents, true, invertedMu1Iso, Mu1IsoThreshold, MuonId, tauMVAIsoRawORWP, tauMVAIsoRawThreshold, tauMVAIsoWP, signSameOROpposite, mTMuMetLowThreshold, mTMuMetHighThreshold, invertedPzetaCut, pzetaThreshold, tauPtLowThreshold, tauPtHighThreshold, tauAntiMuDisc, tauAntiEleDisc, "TTJETS", deepTauID, deepTauVSele, deepTauVSmu, deepTauVSjet, tauDecayModeThreshold);
                 TTJetsHist.Loop();
             } // end while loop on input file list
         } // end else
@@ -375,7 +382,7 @@ int main(int argc, char **argv)
         {
             lumiana WWIncLumi(inputFile);
             summedWeights = WWIncLumi.Loop();
-            ZTauMuTauHadAnalyzer WWIncHist(inputFile, outputDir, lumi*118.7*1000, summedWeights, maxEvents, true, invertedMu1Iso, Mu1IsoThreshold, tauMVAIsoRawORWP, tauMVAIsoRawThreshold, tauMVAIsoWP, signSameOROpposite, mTMuMetLowThreshold, mTMuMetHighThreshold, invertedPzetaCut, pzetaThreshold, tauPtLowThreshold, tauPtHighThreshold, tauAntiMuDisc, tauAntiEleDisc, "WW", deepTauID, deepTauVSele, deepTauVSmu, deepTauVSjet, tauDecayModeThreshold);
+            ZTauMuTauHadAnalyzer WWIncHist(inputFile, outputDir, lumi*118.7*1000, summedWeights, maxEvents, true, invertedMu1Iso, Mu1IsoThreshold, MuonId, tauMVAIsoRawORWP, tauMVAIsoRawThreshold, tauMVAIsoWP, signSameOROpposite, mTMuMetLowThreshold, mTMuMetHighThreshold, invertedPzetaCut, pzetaThreshold, tauPtLowThreshold, tauPtHighThreshold, tauAntiMuDisc, tauAntiEleDisc, "WW", deepTauID, deepTauVSele, deepTauVSmu, deepTauVSjet, tauDecayModeThreshold);
             WWIncHist.Loop();
         } // end if inputFile.EndsWith(".root")
 
@@ -393,7 +400,7 @@ int main(int argc, char **argv)
             finTree.open(inputFile);
             while (getline(finTree, fileName))
             {
-                ZTauMuTauHadAnalyzer WWIncHist(fileName, outputDir, lumi*118.7*1000, summedWeights, maxEvents, true, invertedMu1Iso, Mu1IsoThreshold, tauMVAIsoRawORWP, tauMVAIsoRawThreshold, tauMVAIsoWP, signSameOROpposite, mTMuMetLowThreshold, mTMuMetHighThreshold, invertedPzetaCut, pzetaThreshold, tauPtLowThreshold, tauPtHighThreshold, tauAntiMuDisc, tauAntiEleDisc, "WW", deepTauID, deepTauVSele, deepTauVSmu, deepTauVSjet, tauDecayModeThreshold);
+                ZTauMuTauHadAnalyzer WWIncHist(fileName, outputDir, lumi*118.7*1000, summedWeights, maxEvents, true, invertedMu1Iso, Mu1IsoThreshold, MuonId, tauMVAIsoRawORWP, tauMVAIsoRawThreshold, tauMVAIsoWP, signSameOROpposite, mTMuMetLowThreshold, mTMuMetHighThreshold, invertedPzetaCut, pzetaThreshold, tauPtLowThreshold, tauPtHighThreshold, tauAntiMuDisc, tauAntiEleDisc, "WW", deepTauID, deepTauVSele, deepTauVSmu, deepTauVSjet, tauDecayModeThreshold);
                 WWIncHist.Loop();
             } // end while loop on input file list
         } // end else
@@ -408,7 +415,7 @@ int main(int argc, char **argv)
         {
             lumiana WZIncLumi(inputFile);
             summedWeights = WZIncLumi.Loop();
-            ZTauMuTauHadAnalyzer WZIncHist(inputFile, outputDir, lumi*47.13*1000, summedWeights, maxEvents, true, invertedMu1Iso, Mu1IsoThreshold, tauMVAIsoRawORWP, tauMVAIsoRawThreshold, tauMVAIsoWP, signSameOROpposite, mTMuMetLowThreshold, mTMuMetHighThreshold, invertedPzetaCut, pzetaThreshold, tauPtLowThreshold, tauPtHighThreshold, tauAntiMuDisc, tauAntiEleDisc, "WZ", deepTauID, deepTauVSele, deepTauVSmu, deepTauVSjet, tauDecayModeThreshold);
+            ZTauMuTauHadAnalyzer WZIncHist(inputFile, outputDir, lumi*47.13*1000, summedWeights, maxEvents, true, invertedMu1Iso, Mu1IsoThreshold, MuonId, tauMVAIsoRawORWP, tauMVAIsoRawThreshold, tauMVAIsoWP, signSameOROpposite, mTMuMetLowThreshold, mTMuMetHighThreshold, invertedPzetaCut, pzetaThreshold, tauPtLowThreshold, tauPtHighThreshold, tauAntiMuDisc, tauAntiEleDisc, "WZ", deepTauID, deepTauVSele, deepTauVSmu, deepTauVSjet, tauDecayModeThreshold);
             WZIncHist.Loop();
         } // end if inputFile.EndsWith(".root")
 
@@ -426,7 +433,7 @@ int main(int argc, char **argv)
             finTree.open(inputFile);
             while (getline(finTree, fileName))
             {
-                ZTauMuTauHadAnalyzer WZIncHist(fileName, outputDir, lumi*47.13*1000, summedWeights, maxEvents, true, invertedMu1Iso, Mu1IsoThreshold, tauMVAIsoRawORWP, tauMVAIsoRawThreshold, tauMVAIsoWP, signSameOROpposite, mTMuMetLowThreshold, mTMuMetHighThreshold, invertedPzetaCut, pzetaThreshold, tauPtLowThreshold, tauPtHighThreshold, tauAntiMuDisc, tauAntiEleDisc, "WZ", deepTauID, deepTauVSele, deepTauVSmu, deepTauVSjet, tauDecayModeThreshold);
+                ZTauMuTauHadAnalyzer WZIncHist(fileName, outputDir, lumi*47.13*1000, summedWeights, maxEvents, true, invertedMu1Iso, Mu1IsoThreshold, MuonId, tauMVAIsoRawORWP, tauMVAIsoRawThreshold, tauMVAIsoWP, signSameOROpposite, mTMuMetLowThreshold, mTMuMetHighThreshold, invertedPzetaCut, pzetaThreshold, tauPtLowThreshold, tauPtHighThreshold, tauAntiMuDisc, tauAntiEleDisc, "WZ", deepTauID, deepTauVSele, deepTauVSmu, deepTauVSjet, tauDecayModeThreshold);
                 WZIncHist.Loop();
             } // end while loop on input file list
         } // end else
@@ -441,7 +448,7 @@ int main(int argc, char **argv)
         {
             lumiana ZZIncLumi(inputFile);
             summedWeights = ZZIncLumi.Loop();
-            ZTauMuTauHadAnalyzer ZZIncHist(inputFile, outputDir, lumi*16.523*1000, summedWeights, maxEvents, true, invertedMu1Iso, Mu1IsoThreshold, tauMVAIsoRawORWP, tauMVAIsoRawThreshold, tauMVAIsoWP, signSameOROpposite, mTMuMetLowThreshold, mTMuMetHighThreshold, invertedPzetaCut, pzetaThreshold, tauPtLowThreshold, tauPtHighThreshold, tauAntiMuDisc, tauAntiEleDisc, "ZZ", deepTauID, deepTauVSele, deepTauVSmu, deepTauVSjet, tauDecayModeThreshold);
+            ZTauMuTauHadAnalyzer ZZIncHist(inputFile, outputDir, lumi*16.523*1000, summedWeights, maxEvents, true, invertedMu1Iso, Mu1IsoThreshold, MuonId, tauMVAIsoRawORWP, tauMVAIsoRawThreshold, tauMVAIsoWP, signSameOROpposite, mTMuMetLowThreshold, mTMuMetHighThreshold, invertedPzetaCut, pzetaThreshold, tauPtLowThreshold, tauPtHighThreshold, tauAntiMuDisc, tauAntiEleDisc, "ZZ", deepTauID, deepTauVSele, deepTauVSmu, deepTauVSjet, tauDecayModeThreshold);
             ZZIncHist.Loop();
         } // end if inputFile.EndsWith(".root")
 
@@ -459,7 +466,7 @@ int main(int argc, char **argv)
             finTree.open(inputFile);
             while (getline(finTree, fileName))
             {
-                ZTauMuTauHadAnalyzer ZZIncHist(fileName, outputDir, lumi*16.523*1000, summedWeights, maxEvents, true, invertedMu1Iso, Mu1IsoThreshold, tauMVAIsoRawORWP, tauMVAIsoRawThreshold, tauMVAIsoWP, signSameOROpposite, mTMuMetLowThreshold, mTMuMetHighThreshold, invertedPzetaCut, pzetaThreshold, tauPtLowThreshold, tauPtHighThreshold, tauAntiMuDisc, tauAntiEleDisc, "ZZ", deepTauID, deepTauVSele, deepTauVSmu, deepTauVSjet, tauDecayModeThreshold);
+                ZTauMuTauHadAnalyzer ZZIncHist(fileName, outputDir, lumi*16.523*1000, summedWeights, maxEvents, true, invertedMu1Iso, Mu1IsoThreshold, MuonId, tauMVAIsoRawORWP, tauMVAIsoRawThreshold, tauMVAIsoWP, signSameOROpposite, mTMuMetLowThreshold, mTMuMetHighThreshold, invertedPzetaCut, pzetaThreshold, tauPtLowThreshold, tauPtHighThreshold, tauAntiMuDisc, tauAntiEleDisc, "ZZ", deepTauID, deepTauVSele, deepTauVSmu, deepTauVSjet, tauDecayModeThreshold);
                 ZZIncHist.Loop();
             } // end while loop on input file list
         } // end else
