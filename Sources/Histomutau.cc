@@ -234,7 +234,7 @@ Histomutau::Histomutau(){
     TreeMuMuTauTau->Branch("Tau2DecayMode", &Tau2DecayMode, "Tau2DecayMode/D");
 
     TreeMuMuTauTau->Branch("eventWeight", &eventWeight, "eventWeight/D");
-    TreeMuMuTauTau->Branch("nPileup", &nPileup, "nPileup/D");
+    TreeMuMuTauTau->Branch("nPileup", &nPileup, "nPileup/I");
 }
 
 Histomutau::~Histomutau()
