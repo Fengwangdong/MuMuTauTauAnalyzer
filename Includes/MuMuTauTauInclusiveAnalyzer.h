@@ -266,8 +266,10 @@ public :
    vector<float>   *recoJetPhi;
    vector<float>   *recoJetEnergy;
    vector<float>   *recoJetCSV;
-   vector<float>   *recoJetDeepDiTauValue;
-   vector<float>   *recoJetDeepDiTauValueMD;
+   vector<float>   *recoJetDeepDiTauValuev1;
+   vector<float>   *recoJetDeepDiTauValueMDv1;
+   vector<float>   *recoJetDeepDiTauValuev2;
+   vector<float>   *recoJetDeepDiTauValueMDv2;
    vector<int>     *recoJetIdLoose;
    vector<int>     *recoJetIdTight;
    vector<int>     *recoJetIdTightLepVeto;
@@ -523,8 +525,10 @@ public :
    TBranch        *b_recoJetPhi;   //!
    TBranch        *b_recoJetEnergy;   //!
    TBranch        *b_recoJetCSV;   //!
-   TBranch        *b_recoJetDeepDiTauValue;   //!
-   TBranch        *b_recoJetDeepDiTauValueMD;   //!
+   TBranch        *b_recoJetDeepDiTauValuev1;   //!
+   TBranch        *b_recoJetDeepDiTauValueMDv1;   //!
+   TBranch        *b_recoJetDeepDiTauValuev2;   //!
+   TBranch        *b_recoJetDeepDiTauValueMDv2;   //!
    TBranch        *b_recoJetIdLoose;   //!
    TBranch        *b_recoJetIdTight;   //!
    TBranch        *b_recoJetIdTightLepVeto;   //!
@@ -948,8 +952,10 @@ void MuMuTauTauInclusiveAnalyzer::Init()
    recoJetPhi = 0;
    recoJetEnergy = 0;
    recoJetCSV = 0;
-   recoJetDeepDiTauValue = 0;
-   recoJetDeepDiTauValueMD = 0;
+   recoJetDeepDiTauValuev1 = 0;
+   recoJetDeepDiTauValueMDv1 = 0;
+   recoJetDeepDiTauValuev2 = 0;
+   recoJetDeepDiTauValueMDv2 = 0;
    recoJetIdLoose = 0;
    recoJetIdTight = 0;
    recoJetIdTightLepVeto = 0;
@@ -1202,8 +1208,10 @@ void MuMuTauTauInclusiveAnalyzer::Init()
    fChain->SetBranchAddress("recoJetPhi", &recoJetPhi, &b_recoJetPhi);
    fChain->SetBranchAddress("recoJetEnergy", &recoJetEnergy, &b_recoJetEnergy);
    fChain->SetBranchAddress("recoJetCSV", &recoJetCSV, &b_recoJetCSV);
-   fChain->SetBranchAddress("recoJetDeepDiTauValue", &recoJetDeepDiTauValue, &b_recoJetDeepDiTauValue);
-   fChain->SetBranchAddress("recoJetDeepDiTauValueMD", &recoJetDeepDiTauValueMD, &b_recoJetDeepDiTauValueMD);
+   fChain->SetBranchAddress("recoJetDeepDiTauValuev1", &recoJetDeepDiTauValuev1, &b_recoJetDeepDiTauValuev1);
+   fChain->SetBranchAddress("recoJetDeepDiTauValueMDv1", &recoJetDeepDiTauValueMDv1, &b_recoJetDeepDiTauValueMDv1);
+   fChain->SetBranchAddress("recoJetDeepDiTauValuev2", &recoJetDeepDiTauValuev2, &b_recoJetDeepDiTauValuev2);
+   fChain->SetBranchAddress("recoJetDeepDiTauValueMDv2", &recoJetDeepDiTauValueMDv2, &b_recoJetDeepDiTauValueMDv2);
    fChain->SetBranchAddress("recoJetIdLoose", &recoJetIdLoose, &b_recoJetIdLoose);
    fChain->SetBranchAddress("recoJetIdTight", &recoJetIdTight, &b_recoJetIdTight);
    fChain->SetBranchAddress("recoJetIdTightLepVeto", &recoJetIdTightLepVeto, &b_recoJetIdTightLepVeto);

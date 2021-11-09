@@ -144,38 +144,38 @@ void MuMuTauETauHadAnalyzer::Loop()
       bool findEleTauPair = false;
 
       // ------- start loop on tau candidates -------
-      for (unsigned int iTau=0; iTau<recoTauPt->size(); iTau++)
+      for (unsigned int iTau=0; iTau<recoTauElectronCleanedPt->size(); iTau++)
       {
-          if (deepTauID && recoTauDeepVSjetraw->size() > 0)
+          if (deepTauID && recoTauElectronCleanedDeepVSjetraw->size() > 0)
           {
               // -------------------------------------------------------------------------------
-              bool condTauDeepVSeLoose = deepTauVSele == "LOOSE" && recoTauDeepVSeLoose->at(iTau)>0;
-              bool condTauDeepVSjetLoose = deepTauVSjet == "LOOSE" && recoTauDeepVSjetLoose->at(iTau)>0;
-              bool condTauDeepVSmuLoose = deepTauVSmu == "LOOSE" && recoTauDeepVSmuLoose->at(iTau)>0;
+              bool condTauDeepVSeLoose = deepTauVSele == "LOOSE" && recoTauElectronCleanedDeepVSeLoose->at(iTau)>0;
+              bool condTauDeepVSjetLoose = deepTauVSjet == "LOOSE" && recoTauElectronCleanedDeepVSjetLoose->at(iTau)>0;
+              bool condTauDeepVSmuLoose = deepTauVSmu == "LOOSE" && recoTauElectronCleanedDeepVSmuLoose->at(iTau)>0;
 
-              bool condTauDeepVSeMedium = deepTauVSele == "MEDIUM" && recoTauDeepVSeMedium->at(iTau)>0;
-              bool condTauDeepVSjetMedium = deepTauVSjet == "MEDIUM" && recoTauDeepVSjetMedium->at(iTau)>0;
-              bool condTauDeepVSmuMedium = deepTauVSmu == "MEDIUM" && recoTauDeepVSmuMedium->at(iTau)>0;
+              bool condTauDeepVSeMedium = deepTauVSele == "MEDIUM" && recoTauElectronCleanedDeepVSeMedium->at(iTau)>0;
+              bool condTauDeepVSjetMedium = deepTauVSjet == "MEDIUM" && recoTauElectronCleanedDeepVSjetMedium->at(iTau)>0;
+              bool condTauDeepVSmuMedium = deepTauVSmu == "MEDIUM" && recoTauElectronCleanedDeepVSmuMedium->at(iTau)>0;
 
-              bool condTauDeepVSeTight = deepTauVSele == "TIGHT" && recoTauDeepVSeTight->at(iTau)>0;
-              bool condTauDeepVSjetTight = deepTauVSjet == "TIGHT" && recoTauDeepVSjetTight->at(iTau)>0;
-              bool condTauDeepVSmuTight = deepTauVSmu == "TIGHT" && recoTauDeepVSmuTight->at(iTau)>0;
+              bool condTauDeepVSeTight = deepTauVSele == "TIGHT" && recoTauElectronCleanedDeepVSeTight->at(iTau)>0;
+              bool condTauDeepVSjetTight = deepTauVSjet == "TIGHT" && recoTauElectronCleanedDeepVSjetTight->at(iTau)>0;
+              bool condTauDeepVSmuTight = deepTauVSmu == "TIGHT" && recoTauElectronCleanedDeepVSmuTight->at(iTau)>0;
 
-              bool condTauDeepVSeVLoose = deepTauVSele == "VLOOSE" && recoTauDeepVSeVLoose->at(iTau)>0;
-              bool condTauDeepVSjetVLoose = deepTauVSjet == "VLOOSE" && recoTauDeepVSjetVLoose->at(iTau)>0;
-              bool condTauDeepVSmuVLoose = deepTauVSmu == "VLOOSE" && recoTauDeepVSmuVLoose->at(iTau)>0;
+              bool condTauDeepVSeVLoose = deepTauVSele == "VLOOSE" && recoTauElectronCleanedDeepVSeVLoose->at(iTau)>0;
+              bool condTauDeepVSjetVLoose = deepTauVSjet == "VLOOSE" && recoTauElectronCleanedDeepVSjetVLoose->at(iTau)>0;
+              bool condTauDeepVSmuVLoose = deepTauVSmu == "VLOOSE" && recoTauElectronCleanedDeepVSmuVLoose->at(iTau)>0;
 
-              bool condTauDeepVSeVTight = deepTauVSele == "VTIGHT" && recoTauDeepVSeVTight->at(iTau)>0;
-              bool condTauDeepVSjetVTight = deepTauVSjet == "VTIGHT" && recoTauDeepVSjetVTight->at(iTau)>0;
+              bool condTauDeepVSeVTight = deepTauVSele == "VTIGHT" && recoTauElectronCleanedDeepVSeVTight->at(iTau)>0;
+              bool condTauDeepVSjetVTight = deepTauVSjet == "VTIGHT" && recoTauElectronCleanedDeepVSjetVTight->at(iTau)>0;
 
-              bool condTauDeepVSeVVLoose = deepTauVSele == "VVLOOSE" && recoTauDeepVSeVVLoose->at(iTau)>0;
-              bool condTauDeepVSjetVVLoose = deepTauVSjet == "VVLOOSE" && recoTauDeepVSjetVVLoose->at(iTau)>0;
+              bool condTauDeepVSeVVLoose = deepTauVSele == "VVLOOSE" && recoTauElectronCleanedDeepVSeVVLoose->at(iTau)>0;
+              bool condTauDeepVSjetVVLoose = deepTauVSjet == "VVLOOSE" && recoTauElectronCleanedDeepVSjetVVLoose->at(iTau)>0;
               
-              bool condTauDeepVSeVVTight = deepTauVSele == "VVTIGHT" && recoTauDeepVSeVVTight->at(iTau)>0;
-              bool condTauDeepVSjetVVTight = deepTauVSjet == "VVTIGHT" && recoTauDeepVSjetVVTight->at(iTau)>0;
+              bool condTauDeepVSeVVTight = deepTauVSele == "VVTIGHT" && recoTauElectronCleanedDeepVSeVVTight->at(iTau)>0;
+              bool condTauDeepVSjetVVTight = deepTauVSjet == "VVTIGHT" && recoTauElectronCleanedDeepVSjetVVTight->at(iTau)>0;
 
-              bool condTauDeepVSeVVVLoose = deepTauVSele == "VVVLOOSE" && recoTauDeepVSeVVVLoose->at(iTau)>0;
-              bool condTauDeepVSjetVVVLoose = deepTauVSjet == "VVVLOOSE" && recoTauDeepVSjetVVVLoose->at(iTau)>0;
+              bool condTauDeepVSeVVVLoose = deepTauVSele == "VVVLOOSE" && recoTauElectronCleanedDeepVSeVVVLoose->at(iTau)>0;
+              bool condTauDeepVSjetVVVLoose = deepTauVSjet == "VVVLOOSE" && recoTauElectronCleanedDeepVSjetVVVLoose->at(iTau)>0;
 
               bool condTauDeepVSeNull = deepTauVSele != "LOOSE" && deepTauVSele != "MEDIUM" && deepTauVSele != "TIGHT" && deepTauVSele != "VLOOSE" && deepTauVSele != "VTIGHT" && deepTauVSele != "VVLOOSE" && deepTauVSele != "VVTIGHT" && deepTauVSele != "VVVLOOSE";
               bool condTauDeepVSmuNull = deepTauVSmu != "LOOSE" && deepTauVSmu != "MEDIUM" && deepTauVSmu != "TIGHT" && deepTauVSmu != "VLOOSE";
@@ -188,58 +188,58 @@ void MuMuTauETauHadAnalyzer::Loop()
               bool passCondTauDeep = passCondTauDeepVSele && passCondTauDeepVSjet && passCondTauDeepVSmu;
 
               // -------------------- inverted deep Tau ID -----------------------------
-              bool condInvertTauDeepVSjetLoose = deepTauVSjet == "LOOSE" && recoTauDeepVSjetLoose->at(iTau)<=0;
-              bool condInvertTauDeepVSjetMedium = deepTauVSjet == "MEDIUM" && recoTauDeepVSjetMedium->at(iTau)<=0;
-              bool condInvertTauDeepVSjetTight = deepTauVSjet == "TIGHT" && recoTauDeepVSjetTight->at(iTau)<=0;
-              bool condInvertTauDeepVSjetVLoose = deepTauVSjet == "VLOOSE" && recoTauDeepVSjetVLoose->at(iTau)<=0;
-              bool condInvertTauDeepVSjetVTight = deepTauVSjet == "VTIGHT" && recoTauDeepVSjetVTight->at(iTau)<=0;
-              bool condInvertTauDeepVSjetVVLoose = deepTauVSjet == "VVLOOSE" && recoTauDeepVSjetVVLoose->at(iTau)<=0;
-              bool condInvertTauDeepVSjetVVTight = deepTauVSjet == "VVTIGHT" && recoTauDeepVSjetVVTight->at(iTau)<=0;
-              bool condInvertTauDeepVSjetVVVLoose = recoTauDeepVSjetVVVLoose->at(iTau)>0;
+              bool condInvertTauDeepVSjetLoose = deepTauVSjet == "LOOSE" && recoTauElectronCleanedDeepVSjetLoose->at(iTau)<=0;
+              bool condInvertTauDeepVSjetMedium = deepTauVSjet == "MEDIUM" && recoTauElectronCleanedDeepVSjetMedium->at(iTau)<=0;
+              bool condInvertTauDeepVSjetTight = deepTauVSjet == "TIGHT" && recoTauElectronCleanedDeepVSjetTight->at(iTau)<=0;
+              bool condInvertTauDeepVSjetVLoose = deepTauVSjet == "VLOOSE" && recoTauElectronCleanedDeepVSjetVLoose->at(iTau)<=0;
+              bool condInvertTauDeepVSjetVTight = deepTauVSjet == "VTIGHT" && recoTauElectronCleanedDeepVSjetVTight->at(iTau)<=0;
+              bool condInvertTauDeepVSjetVVLoose = deepTauVSjet == "VVLOOSE" && recoTauElectronCleanedDeepVSjetVVLoose->at(iTau)<=0;
+              bool condInvertTauDeepVSjetVVTight = deepTauVSjet == "VVTIGHT" && recoTauElectronCleanedDeepVSjetVVTight->at(iTau)<=0;
+              bool condInvertTauDeepVSjetVVVLoose = recoTauElectronCleanedDeepVSjetVVVLoose->at(iTau)>0;
               // -------------------------------------------------------------------------------
 
               bool passCondInvertTauDeepVSjet = ((condInvertTauDeepVSjetLoose || condInvertTauDeepVSjetMedium || condInvertTauDeepVSjetTight || condInvertTauDeepVSjetVLoose || condInvertTauDeepVSjetVTight || condInvertTauDeepVSjetVVLoose || condInvertTauDeepVSjetVVTight) && condInvertTauDeepVSjetVVVLoose && passCondTauDeepVSele && passCondTauDeepVSmu);
               // -------------------------------------------------------------------------------
 
               if ((!invertedTauIso && !passCondTauDeep) || (invertedTauIso && !passCondInvertTauDeepVSjet)) continue;
-          } // end if deepTauID && recoTauDeepVSjetraw->size() > 0
+          } // end if deepTauID && recoTauElectronCleanedDeepVSjetraw->size() > 0
 
           else{
-              bool condTauMVARaw = tauMVAIsoRawORWP == true && recoTauIsoMVArawValue->at(iTau) > tauMVAIsoRawThreshold;
-              bool condTauMVAWPVVLoose = tauMVAIsoRawORWP == false && tauMVAIsoWP == "VVLOOSE" && recoTauIsoMVAVVLoose->at(iTau)>0;
-              bool condTauMVAWPVLoose = tauMVAIsoRawORWP == false && tauMVAIsoWP == "VLOOSE" && recoTauIsoMVAVLoose->at(iTau)>0;
-              bool condTauMVAWPLoose = tauMVAIsoRawORWP == false && tauMVAIsoWP == "LOOSE" && recoTauIsoMVALoose->at(iTau)>0;
-              bool condTauMVAWPMedium = tauMVAIsoRawORWP == false && tauMVAIsoWP == "MEDIUM" && recoTauIsoMVAMedium->at(iTau)>0;
-              bool condTauMVAWPTight = tauMVAIsoRawORWP == false && tauMVAIsoWP == "TIGHT" && recoTauIsoMVATight->at(iTau)>0;
-              bool condTauMVAWPVTight = tauMVAIsoRawORWP == false && tauMVAIsoWP == "VTIGHT" && recoTauIsoMVAVTight->at(iTau)>0;
-              bool condTauMVAWPVVTight = tauMVAIsoRawORWP == false && tauMVAIsoWP == "VVTIGHT" && recoTauIsoMVAVVTight->at(iTau)>0;
+              bool condTauMVARaw = tauMVAIsoRawORWP == true && recoTauElectronCleanedIsoMVArawValue->at(iTau) > tauMVAIsoRawThreshold;
+              bool condTauMVAWPVVLoose = tauMVAIsoRawORWP == false && tauMVAIsoWP == "VVLOOSE" && recoTauElectronCleanedIsoMVAVVLoose->at(iTau)>0;
+              bool condTauMVAWPVLoose = tauMVAIsoRawORWP == false && tauMVAIsoWP == "VLOOSE" && recoTauElectronCleanedIsoMVAVLoose->at(iTau)>0;
+              bool condTauMVAWPLoose = tauMVAIsoRawORWP == false && tauMVAIsoWP == "LOOSE" && recoTauElectronCleanedIsoMVALoose->at(iTau)>0;
+              bool condTauMVAWPMedium = tauMVAIsoRawORWP == false && tauMVAIsoWP == "MEDIUM" && recoTauElectronCleanedIsoMVAMedium->at(iTau)>0;
+              bool condTauMVAWPTight = tauMVAIsoRawORWP == false && tauMVAIsoWP == "TIGHT" && recoTauElectronCleanedIsoMVATight->at(iTau)>0;
+              bool condTauMVAWPVTight = tauMVAIsoRawORWP == false && tauMVAIsoWP == "VTIGHT" && recoTauElectronCleanedIsoMVAVTight->at(iTau)>0;
+              bool condTauMVAWPVVTight = tauMVAIsoRawORWP == false && tauMVAIsoWP == "VVTIGHT" && recoTauElectronCleanedIsoMVAVVTight->at(iTau)>0;
 
               bool passCondTauMVA = (condTauMVARaw || condTauMVAWPVVLoose || condTauMVAWPVLoose || condTauMVAWPLoose || condTauMVAWPMedium || condTauMVAWPTight || condTauMVAWPVTight || condTauMVAWPVVTight);
               // -------------------------------------------------------------------------------------------------
 
-              bool condInvertTauMVARaw = recoTauIsoMVArawValue->at(iTau) > tauMVAIsoRawThreshold;
-              bool condInvertTauMVAWPVVLoose = tauMVAIsoRawORWP == false && tauMVAIsoWP == "VVLOOSE" && recoTauIsoMVAVVLoose->at(iTau)<=0;
-              bool condInvertTauMVAWPVLoose = tauMVAIsoRawORWP == false && tauMVAIsoWP == "VLOOSE" && recoTauIsoMVAVLoose->at(iTau)<=0;
-              bool condInvertTauMVAWPLoose = tauMVAIsoRawORWP == false && tauMVAIsoWP == "LOOSE" && recoTauIsoMVALoose->at(iTau)<=0;
-              bool condInvertTauMVAWPMedium = tauMVAIsoRawORWP == false && tauMVAIsoWP == "MEDIUM" && recoTauIsoMVAMedium->at(iTau)<=0;
-              bool condInvertTauMVAWPTight = tauMVAIsoRawORWP == false && tauMVAIsoWP == "TIGHT" && recoTauIsoMVATight->at(iTau)<=0;
-              bool condInvertTauMVAWPVTight = tauMVAIsoRawORWP == false && tauMVAIsoWP == "VTIGHT" && recoTauIsoMVAVTight->at(iTau)<=0;
-              bool condInvertTauMVAWPVVTight = tauMVAIsoRawORWP == false && tauMVAIsoWP == "VVTIGHT" && recoTauIsoMVAVVTight->at(iTau)<=0;
+              bool condInvertTauMVARaw = recoTauElectronCleanedIsoMVArawValue->at(iTau) > tauMVAIsoRawThreshold;
+              bool condInvertTauMVAWPVVLoose = tauMVAIsoRawORWP == false && tauMVAIsoWP == "VVLOOSE" && recoTauElectronCleanedIsoMVAVVLoose->at(iTau)<=0;
+              bool condInvertTauMVAWPVLoose = tauMVAIsoRawORWP == false && tauMVAIsoWP == "VLOOSE" && recoTauElectronCleanedIsoMVAVLoose->at(iTau)<=0;
+              bool condInvertTauMVAWPLoose = tauMVAIsoRawORWP == false && tauMVAIsoWP == "LOOSE" && recoTauElectronCleanedIsoMVALoose->at(iTau)<=0;
+              bool condInvertTauMVAWPMedium = tauMVAIsoRawORWP == false && tauMVAIsoWP == "MEDIUM" && recoTauElectronCleanedIsoMVAMedium->at(iTau)<=0;
+              bool condInvertTauMVAWPTight = tauMVAIsoRawORWP == false && tauMVAIsoWP == "TIGHT" && recoTauElectronCleanedIsoMVATight->at(iTau)<=0;
+              bool condInvertTauMVAWPVTight = tauMVAIsoRawORWP == false && tauMVAIsoWP == "VTIGHT" && recoTauElectronCleanedIsoMVAVTight->at(iTau)<=0;
+              bool condInvertTauMVAWPVVTight = tauMVAIsoRawORWP == false && tauMVAIsoWP == "VVTIGHT" && recoTauElectronCleanedIsoMVAVVTight->at(iTau)<=0;
 
               // ------ always require tau candidates pass vvvloose MVA id in order to have similar dynamic shape as real tau
               bool passCondInvertTauMVA = (condInvertTauMVARaw && (condInvertTauMVAWPVVLoose || condInvertTauMVAWPVLoose || condInvertTauMVAWPLoose || condInvertTauMVAWPMedium || condInvertTauMVAWPTight || condInvertTauMVAWPVTight || condInvertTauMVAWPVVTight));
               // -------------------------------------------------------------------------------------------------
 
-              bool condTauAntiMuMVALoose = tauAntiMuDisc == "LOOSE" && recoTauAntiMuMVALoose->at(iTau)>0;
-              bool condTauAntiMuMVATight = tauAntiMuDisc == "TIGHT" && recoTauAntiMuMVATight->at(iTau)>0; 
+              bool condTauAntiMuMVALoose = tauAntiMuDisc == "LOOSE" && recoTauElectronCleanedAntiMuMVALoose->at(iTau)>0;
+              bool condTauAntiMuMVATight = tauAntiMuDisc == "TIGHT" && recoTauElectronCleanedAntiMuMVATight->at(iTau)>0; 
               bool condTauAntiMuMVANull = tauAntiMuDisc != "LOOSE" && tauAntiMuDisc != "TIGHT";
 
               bool passCondTauAntiMuMVA = (condTauAntiMuMVALoose || condTauAntiMuMVATight || condTauAntiMuMVANull);
               // -------------------------------------------------------------------------------------------------
 
-              bool condTauAntiEleMVALoose = tauAntiEleDisc == "LOOSE" && recoTauAntiEleMVALoose->at(iTau)>0;
-              bool condTauAntiEleMVAMedium = tauAntiEleDisc == "MEDIUM" && recoTauAntiEleMVAMedium->at(iTau)>0;
-              bool condTauAntiEleMVATight = tauAntiEleDisc == "TIGHT" && recoTauAntiEleMVATight->at(iTau)>0; 
+              bool condTauAntiEleMVALoose = tauAntiEleDisc == "LOOSE" && recoTauElectronCleanedAntiEleMVALoose->at(iTau)>0;
+              bool condTauAntiEleMVAMedium = tauAntiEleDisc == "MEDIUM" && recoTauElectronCleanedAntiEleMVAMedium->at(iTau)>0;
+              bool condTauAntiEleMVATight = tauAntiEleDisc == "TIGHT" && recoTauElectronCleanedAntiEleMVATight->at(iTau)>0; 
               bool condTauAntiEleMVANull = tauAntiEleDisc != "LOOSE" && tauAntiEleDisc != "MEDIUM" && tauAntiEleDisc != "TIGHT";
 
               bool passCondTauAntiEleMVA = (condTauAntiEleMVALoose || condTauAntiEleMVAMedium || condTauAntiEleMVATight || condTauAntiEleMVANull);
@@ -249,9 +249,9 @@ void MuMuTauETauHadAnalyzer::Loop()
           } // end if !deepTauID (tauMVAID)
 
           TLorentzVector TauCand;
-          TauCand.SetPtEtaPhiE(recoTauPt->at(iTau), recoTauEta->at(iTau), recoTauPhi->at(iTau), recoTauEnergy->at(iTau));
-          double recoTauMass = TauCand.M();
-          TauCand.SetPtEtaPhiM(recoTauPt->at(iTau)*tauScaleCorr, recoTauEta->at(iTau), recoTauPhi->at(iTau), recoTauMass);
+          TauCand.SetPtEtaPhiE(recoTauElectronCleanedPt->at(iTau), recoTauElectronCleanedEta->at(iTau), recoTauElectronCleanedPhi->at(iTau), recoTauElectronCleanedEnergy->at(iTau));
+          double recoTauElectronCleanedMass = TauCand.M();
+          TauCand.SetPtEtaPhiM(recoTauElectronCleanedPt->at(iTau)*tauScaleCorr, recoTauElectronCleanedEta->at(iTau), recoTauElectronCleanedPhi->at(iTau), recoTauElectronCleanedMass);
 
           if (TauCand.DeltaR(Mu1) < 0.8 || TauCand.DeltaR(Mu2) < 0.8) continue;
 
@@ -269,10 +269,10 @@ void MuMuTauETauHadAnalyzer::Loop()
           //} // end for loop over the reco-jets
           //if (bjetVeto) continue;
 
-          if ((recoTauDecayMode->at(iTau) != tauDecayModeThreshold) && (tauDecayModeThreshold == 0 || tauDecayModeThreshold == 1 || tauDecayModeThreshold == 5 || tauDecayModeThreshold == 6 || tauDecayModeThreshold == 10 || tauDecayModeThreshold == 11)) continue;
-          Tau.SetPtEtaPhiM(recoTauPt->at(iTau)*tauScaleCorr, recoTauEta->at(iTau), recoTauPhi->at(iTau), recoTauMass);
-          TauIso = deepTauID ? recoTauDeepVSjetraw->at(iTau) : recoTauIsoMVArawValue->at(iTau);
-          TauDM = recoTauDecayMode->at(iTau);
+          if ((recoTauElectronCleanedDecayMode->at(iTau) != tauDecayModeThreshold) && (tauDecayModeThreshold == 0 || tauDecayModeThreshold == 1 || tauDecayModeThreshold == 5 || tauDecayModeThreshold == 6 || tauDecayModeThreshold == 10 || tauDecayModeThreshold == 11)) continue;
+          Tau.SetPtEtaPhiM(recoTauElectronCleanedPt->at(iTau)*tauScaleCorr, recoTauElectronCleanedEta->at(iTau), recoTauElectronCleanedPhi->at(iTau), recoTauElectronCleanedMass);
+          TauIso = deepTauID ? recoTauElectronCleanedDeepVSjetraw->at(iTau) : recoTauElectronCleanedIsoMVArawValue->at(iTau);
+          TauDM = recoTauElectronCleanedDecayMode->at(iTau);
 
           float smallestDR = 0.8; // dR cut between electron and tau
           bool findEle = false;
@@ -299,10 +299,10 @@ void MuMuTauETauHadAnalyzer::Loop()
               if (electronScaleSyst == -2) recoElectronPtCorr = recoElectronPt->at(iEle) * recoElectronEnergySigmaDown->at(iEle) / recoElectronEnergy->at(iEle); 
 
               EleCand.SetPtEtaPhiM(recoElectronPtCorr, recoElectronEta->at(iEle), recoElectronPhi->at(iEle), recoElectronMass);
-              bool overlapEleTau = recoElectronRefToTau->at(iEle) > 0 && recoTauRefToElectron->at(iTau) > 0 && recoElectronRefToTau->at(iEle) == recoTauRefToElectron->at(iTau);
+              bool overlapEleTau = recoElectronRefToTau->at(iEle) > 0 && recoTauElectronCleanedRefToElectron->at(iTau) > 0 && recoElectronRefToTau->at(iEle) == recoTauElectronCleanedRefToElectron->at(iTau);
 
-              //if ((Tau.DeltaR(EleCand) < smallestDR) && (recoTauPDGId->at(iTau)/fabs(recoTauPDGId->at(iTau)) == (-1) * recoElectronPDGId->at(iEle)/fabs(recoElectronPDGId->at(iEle))) && ((Tau+EleCand).M() < 60.0) && (EleCand.DeltaR(Mu1) > 0.4) && (EleCand.DeltaR(Mu2) > 0.4) && !overlapEleTau)
-              if ((Tau.DeltaR(EleCand) < smallestDR) && (recoTauPDGId->at(iTau)/fabs(recoTauPDGId->at(iTau)) == (-1) * recoElectronPDGId->at(iEle)/fabs(recoElectronPDGId->at(iEle))) && (EleCand.DeltaR(Mu1) > 0.4) && (EleCand.DeltaR(Mu2) > 0.4) && !overlapEleTau)
+              //if ((Tau.DeltaR(EleCand) < smallestDR) && (recoTauElectronCleanedPDGId->at(iTau)/fabs(recoTauElectronCleanedPDGId->at(iTau)) == (-1) * recoElectronPDGId->at(iEle)/fabs(recoElectronPDGId->at(iEle))) && ((Tau+EleCand).M() < 60.0) && (EleCand.DeltaR(Mu1) > 0.4) && (EleCand.DeltaR(Mu2) > 0.4) && !overlapEleTau)
+              if ((Tau.DeltaR(EleCand) < smallestDR) && (recoTauElectronCleanedPDGId->at(iTau)/fabs(recoTauElectronCleanedPDGId->at(iTau)) == (-1) * recoElectronPDGId->at(iEle)/fabs(recoElectronPDGId->at(iEle))) && (EleCand.DeltaR(Mu1) > 0.4) && (EleCand.DeltaR(Mu2) > 0.4) && !overlapEleTau)
               {
                   Ele.SetPtEtaPhiM(recoElectronPtCorr, recoElectronEta->at(iEle), recoElectronPhi->at(iEle), recoElectronMass);
                   EleIso = recoElectronIsolation->at(iEle); 

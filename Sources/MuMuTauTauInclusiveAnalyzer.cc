@@ -844,8 +844,8 @@ void MuMuTauTauInclusiveAnalyzer::Loop()
           if (!passCondJetId) continue;
           if (recoJetCSV->at(iJet) > 0.5426) continue; // bjet veto
 
-          bool condDiTauDisc = (!massDecorrelation && recoJetDeepDiTauValue->at(iJet) > deepDiTauRawThreshold) || (massDecorrelation && recoJetDeepDiTauValueMD->at(iJet) > deepDiTauRawThreshold);
-          bool condInvertDiTauDisc = (!massDecorrelation && recoJetDeepDiTauValue->at(iJet) < deepDiTauRawThreshold && recoJetDeepDiTauValue->at(iJet) > deepDiTauRawLowerBound) || (massDecorrelation && recoJetDeepDiTauValueMD->at(iJet) < deepDiTauRawThreshold && recoJetDeepDiTauValueMD->at(iJet) > deepDiTauRawLowerBound);
+          bool condDiTauDisc = (!massDecorrelation && recoJetDeepDiTauValuev1->at(iJet) > deepDiTauRawThreshold) || (massDecorrelation && recoJetDeepDiTauValueMDv1->at(iJet) > deepDiTauRawThreshold);
+          bool condInvertDiTauDisc = (!massDecorrelation && recoJetDeepDiTauValuev1->at(iJet) < deepDiTauRawThreshold && recoJetDeepDiTauValuev1->at(iJet) > deepDiTauRawLowerBound) || (massDecorrelation && recoJetDeepDiTauValueMDv1->at(iJet) < deepDiTauRawThreshold && recoJetDeepDiTauValueMDv1->at(iJet) > deepDiTauRawLowerBound);
 
           if ((!invertedTauIso && !condDiTauDisc) || (invertedTauIso && !condInvertDiTauDisc)) continue;
 
@@ -860,7 +860,7 @@ void MuMuTauTauInclusiveAnalyzer::Loop()
           if (TauCand.Pt() > highestPt)
           {
               Tau.SetPtEtaPhiE(recoJetPt->at(iJet) * jetEnergyCorr, recoJetEta->at(iJet), recoJetPhi->at(iJet), recoJetEnergy->at(iJet) * jetEnergyCorr);
-              TauIso = massDecorrelation ? recoJetDeepDiTauValueMD->at(iJet) : recoJetDeepDiTauValue->at(iJet);
+              TauIso = massDecorrelation ? recoJetDeepDiTauValueMDv1->at(iJet) : recoJetDeepDiTauValuev1->at(iJet);
               highestPt = Tau.Pt();
               findTauTauPair = true;
           } // end if highest pt

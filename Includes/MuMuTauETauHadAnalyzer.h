@@ -63,55 +63,55 @@ public :
    vector<float>   *recoElectronEnergySigmaDown;
    vector<int>     *recoElectronRefToMuon;
    vector<int>     *recoElectronRefToTau;
-   vector<float>   *recoTauPt;
-   vector<float>   *recoTauEta;
-   vector<float>   *recoTauPhi;
-   vector<float>   *recoTauEnergy;
-   vector<int>     *recoTauPDGId;
-   vector<float>   *recoTauDecayMode;
-   vector<float>   *recoTauDecayModeFinding;
-   vector<float>   *recoTauDecayModeFindingNewDMs;
-   vector<int>     *recoTauRefToMuon;
-   vector<int>     *recoTauRefToElectron;
-   vector<float>   *recoTauDeepVSeraw;
-   vector<float>   *recoTauDeepVSjetraw;
-   vector<float>   *recoTauDeepVSmuraw;
-   vector<float>   *recoTauDeepVSeLoose;
-   vector<float>   *recoTauDeepVSjetLoose;
-   vector<float>   *recoTauDeepVSmuLoose;
-   vector<float>   *recoTauDeepVSeMedium;
-   vector<float>   *recoTauDeepVSjetMedium;
-   vector<float>   *recoTauDeepVSmuMedium;
-   vector<float>   *recoTauDeepVSeTight;
-   vector<float>   *recoTauDeepVSjetTight;
-   vector<float>   *recoTauDeepVSmuTight;
-   vector<float>   *recoTauDeepVSeVLoose;
-   vector<float>   *recoTauDeepVSjetVLoose;
-   vector<float>   *recoTauDeepVSmuVLoose;
-   vector<float>   *recoTauDeepVSeVTight;
-   vector<float>   *recoTauDeepVSjetVTight;
-   vector<float>   *recoTauDeepVSeVVLoose;
-   vector<float>   *recoTauDeepVSjetVVLoose;
-   vector<float>   *recoTauDeepVSeVVTight;
-   vector<float>   *recoTauDeepVSjetVVTight;
-   vector<float>   *recoTauDeepVSeVVVLoose;
-   vector<float>   *recoTauDeepVSjetVVVLoose;
-   vector<float>   *recoTauIsoMVArawValue;
-   vector<float>   *recoTauIsoMVAVVLoose;
-   vector<float>   *recoTauIsoMVAVLoose;
-   vector<float>   *recoTauIsoMVALoose;
-   vector<float>   *recoTauIsoMVAMedium;
-   vector<float>   *recoTauIsoMVATight;
-   vector<float>   *recoTauIsoMVAVTight;
-   vector<float>   *recoTauIsoMVAVVTight;
-   vector<float>   *recoTauAntiMuMVALoose;
-   vector<float>   *recoTauAntiMuMVATight;
-   vector<float>   *recoTauAntiEleMVArawValue;
-   vector<float>   *recoTauAntiEleMVAVLoose;
-   vector<float>   *recoTauAntiEleMVALoose;
-   vector<float>   *recoTauAntiEleMVAMedium;
-   vector<float>   *recoTauAntiEleMVATight;
-   vector<float>   *recoTauAntiEleMVAVTight;
+   vector<float>   *recoTauElectronCleanedPt;
+   vector<float>   *recoTauElectronCleanedEta;
+   vector<float>   *recoTauElectronCleanedPhi;
+   vector<float>   *recoTauElectronCleanedEnergy;
+   vector<int>     *recoTauElectronCleanedPDGId;
+   vector<float>   *recoTauElectronCleanedDecayMode;
+   vector<float>   *recoTauElectronCleanedDecayModeFinding;
+   vector<float>   *recoTauElectronCleanedDecayModeFindingNewDMs;
+   vector<int>     *recoTauElectronCleanedRefToMuon;
+   vector<int>     *recoTauElectronCleanedRefToElectron;
+   vector<float>   *recoTauElectronCleanedDeepVSeraw;
+   vector<float>   *recoTauElectronCleanedDeepVSjetraw;
+   vector<float>   *recoTauElectronCleanedDeepVSmuraw;
+   vector<float>   *recoTauElectronCleanedDeepVSeLoose;
+   vector<float>   *recoTauElectronCleanedDeepVSjetLoose;
+   vector<float>   *recoTauElectronCleanedDeepVSmuLoose;
+   vector<float>   *recoTauElectronCleanedDeepVSeMedium;
+   vector<float>   *recoTauElectronCleanedDeepVSjetMedium;
+   vector<float>   *recoTauElectronCleanedDeepVSmuMedium;
+   vector<float>   *recoTauElectronCleanedDeepVSeTight;
+   vector<float>   *recoTauElectronCleanedDeepVSjetTight;
+   vector<float>   *recoTauElectronCleanedDeepVSmuTight;
+   vector<float>   *recoTauElectronCleanedDeepVSeVLoose;
+   vector<float>   *recoTauElectronCleanedDeepVSjetVLoose;
+   vector<float>   *recoTauElectronCleanedDeepVSmuVLoose;
+   vector<float>   *recoTauElectronCleanedDeepVSeVTight;
+   vector<float>   *recoTauElectronCleanedDeepVSjetVTight;
+   vector<float>   *recoTauElectronCleanedDeepVSeVVLoose;
+   vector<float>   *recoTauElectronCleanedDeepVSjetVVLoose;
+   vector<float>   *recoTauElectronCleanedDeepVSeVVTight;
+   vector<float>   *recoTauElectronCleanedDeepVSjetVVTight;
+   vector<float>   *recoTauElectronCleanedDeepVSeVVVLoose;
+   vector<float>   *recoTauElectronCleanedDeepVSjetVVVLoose;
+   vector<float>   *recoTauElectronCleanedIsoMVArawValue;
+   vector<float>   *recoTauElectronCleanedIsoMVAVVLoose;
+   vector<float>   *recoTauElectronCleanedIsoMVAVLoose;
+   vector<float>   *recoTauElectronCleanedIsoMVALoose;
+   vector<float>   *recoTauElectronCleanedIsoMVAMedium;
+   vector<float>   *recoTauElectronCleanedIsoMVATight;
+   vector<float>   *recoTauElectronCleanedIsoMVAVTight;
+   vector<float>   *recoTauElectronCleanedIsoMVAVVTight;
+   vector<float>   *recoTauElectronCleanedAntiMuMVALoose;
+   vector<float>   *recoTauElectronCleanedAntiMuMVATight;
+   vector<float>   *recoTauElectronCleanedAntiEleMVArawValue;
+   vector<float>   *recoTauElectronCleanedAntiEleMVAVLoose;
+   vector<float>   *recoTauElectronCleanedAntiEleMVALoose;
+   vector<float>   *recoTauElectronCleanedAntiEleMVAMedium;
+   vector<float>   *recoTauElectronCleanedAntiEleMVATight;
+   vector<float>   *recoTauElectronCleanedAntiEleMVAVTight;
    vector<float>   *recoJetPt;
    vector<float>   *recoJetEta;
    vector<float>   *recoJetPhi;
@@ -165,55 +165,55 @@ public :
    TBranch        *b_recoElectronEnergySigmaDown;   //!
    TBranch        *b_recoElectronRefToMuon;   //!
    TBranch        *b_recoElectronRefToTau;   //!
-   TBranch        *b_recoTauPt;   //!
-   TBranch        *b_recoTauEta;   //!
-   TBranch        *b_recoTauPhi;   //!
-   TBranch        *b_recoTauEnergy;   //!
-   TBranch        *b_recoTauPDGId;   //!
-   TBranch        *b_recoTauDecayMode;   //!
-   TBranch        *b_recoTauDecayModeFinding;   //!
-   TBranch        *b_recoTauDecayModeFindingNewDMs;   //!
-   TBranch        *b_recoTauRefToMuon;   //!
-   TBranch        *b_recoTauRefToElectron;   //!
-   TBranch        *b_recoTauDeepVSeraw;   //!
-   TBranch        *b_recoTauDeepVSjetraw;   //!
-   TBranch        *b_recoTauDeepVSmuraw;   //!
-   TBranch        *b_recoTauDeepVSeLoose;   //!
-   TBranch        *b_recoTauDeepVSjetLoose;   //!
-   TBranch        *b_recoTauDeepVSmuLoose;   //!
-   TBranch        *b_recoTauDeepVSeMedium;   //!
-   TBranch        *b_recoTauDeepVSjetMedium;   //!
-   TBranch        *b_recoTauDeepVSmuMedium;   //!
-   TBranch        *b_recoTauDeepVSeTight;   //!
-   TBranch        *b_recoTauDeepVSjetTight;   //!
-   TBranch        *b_recoTauDeepVSmuTight;   //!
-   TBranch        *b_recoTauDeepVSeVLoose;   //!
-   TBranch        *b_recoTauDeepVSjetVLoose;   //!
-   TBranch        *b_recoTauDeepVSmuVLoose;   //!
-   TBranch        *b_recoTauDeepVSeVTight;   //!
-   TBranch        *b_recoTauDeepVSjetVTight;   //!
-   TBranch        *b_recoTauDeepVSeVVLoose;   //!
-   TBranch        *b_recoTauDeepVSjetVVLoose;   //!
-   TBranch        *b_recoTauDeepVSeVVTight;   //!
-   TBranch        *b_recoTauDeepVSjetVVTight;   //!
-   TBranch        *b_recoTauDeepVSeVVVLoose;   //!
-   TBranch        *b_recoTauDeepVSjetVVVLoose;   //!
-   TBranch        *b_recoTauIsoMVArawValue;   //!
-   TBranch        *b_recoTauIsoMVAVVLoose;   //!
-   TBranch        *b_recoTauIsoMVAVLoose;   //!
-   TBranch        *b_recoTauIsoMVALoose;   //!
-   TBranch        *b_recoTauIsoMVAMedium;   //!
-   TBranch        *b_recoTauIsoMVATight;   //!
-   TBranch        *b_recoTauIsoMVAVTight;   //!
-   TBranch        *b_recoTauIsoMVAVVTight;   //!
-   TBranch        *b_recoTauAntiMuMVALoose;   //!
-   TBranch        *b_recoTauAntiMuMVATight;   //!
-   TBranch        *b_recoTauAntiEleMVArawValue;   //!
-   TBranch        *b_recoTauAntiEleMVAVLoose;   //!
-   TBranch        *b_recoTauAntiEleMVALoose;   //!
-   TBranch        *b_recoTauAntiEleMVAMedium;   //!
-   TBranch        *b_recoTauAntiEleMVATight;   //!
-   TBranch        *b_recoTauAntiEleMVAVTight;   //!
+   TBranch        *b_recoTauElectronCleanedPt;   //!
+   TBranch        *b_recoTauElectronCleanedEta;   //!
+   TBranch        *b_recoTauElectronCleanedPhi;   //!
+   TBranch        *b_recoTauElectronCleanedEnergy;   //!
+   TBranch        *b_recoTauElectronCleanedPDGId;   //!
+   TBranch        *b_recoTauElectronCleanedDecayMode;   //!
+   TBranch        *b_recoTauElectronCleanedDecayModeFinding;   //!
+   TBranch        *b_recoTauElectronCleanedDecayModeFindingNewDMs;   //!
+   TBranch        *b_recoTauElectronCleanedRefToMuon;   //!
+   TBranch        *b_recoTauElectronCleanedRefToElectron;   //!
+   TBranch        *b_recoTauElectronCleanedDeepVSeraw;   //!
+   TBranch        *b_recoTauElectronCleanedDeepVSjetraw;   //!
+   TBranch        *b_recoTauElectronCleanedDeepVSmuraw;   //!
+   TBranch        *b_recoTauElectronCleanedDeepVSeLoose;   //!
+   TBranch        *b_recoTauElectronCleanedDeepVSjetLoose;   //!
+   TBranch        *b_recoTauElectronCleanedDeepVSmuLoose;   //!
+   TBranch        *b_recoTauElectronCleanedDeepVSeMedium;   //!
+   TBranch        *b_recoTauElectronCleanedDeepVSjetMedium;   //!
+   TBranch        *b_recoTauElectronCleanedDeepVSmuMedium;   //!
+   TBranch        *b_recoTauElectronCleanedDeepVSeTight;   //!
+   TBranch        *b_recoTauElectronCleanedDeepVSjetTight;   //!
+   TBranch        *b_recoTauElectronCleanedDeepVSmuTight;   //!
+   TBranch        *b_recoTauElectronCleanedDeepVSeVLoose;   //!
+   TBranch        *b_recoTauElectronCleanedDeepVSjetVLoose;   //!
+   TBranch        *b_recoTauElectronCleanedDeepVSmuVLoose;   //!
+   TBranch        *b_recoTauElectronCleanedDeepVSeVTight;   //!
+   TBranch        *b_recoTauElectronCleanedDeepVSjetVTight;   //!
+   TBranch        *b_recoTauElectronCleanedDeepVSeVVLoose;   //!
+   TBranch        *b_recoTauElectronCleanedDeepVSjetVVLoose;   //!
+   TBranch        *b_recoTauElectronCleanedDeepVSeVVTight;   //!
+   TBranch        *b_recoTauElectronCleanedDeepVSjetVVTight;   //!
+   TBranch        *b_recoTauElectronCleanedDeepVSeVVVLoose;   //!
+   TBranch        *b_recoTauElectronCleanedDeepVSjetVVVLoose;   //!
+   TBranch        *b_recoTauElectronCleanedIsoMVArawValue;   //!
+   TBranch        *b_recoTauElectronCleanedIsoMVAVVLoose;   //!
+   TBranch        *b_recoTauElectronCleanedIsoMVAVLoose;   //!
+   TBranch        *b_recoTauElectronCleanedIsoMVALoose;   //!
+   TBranch        *b_recoTauElectronCleanedIsoMVAMedium;   //!
+   TBranch        *b_recoTauElectronCleanedIsoMVATight;   //!
+   TBranch        *b_recoTauElectronCleanedIsoMVAVTight;   //!
+   TBranch        *b_recoTauElectronCleanedIsoMVAVVTight;   //!
+   TBranch        *b_recoTauElectronCleanedAntiMuMVALoose;   //!
+   TBranch        *b_recoTauElectronCleanedAntiMuMVATight;   //!
+   TBranch        *b_recoTauElectronCleanedAntiEleMVArawValue;   //!
+   TBranch        *b_recoTauElectronCleanedAntiEleMVAVLoose;   //!
+   TBranch        *b_recoTauElectronCleanedAntiEleMVALoose;   //!
+   TBranch        *b_recoTauElectronCleanedAntiEleMVAMedium;   //!
+   TBranch        *b_recoTauElectronCleanedAntiEleMVATight;   //!
+   TBranch        *b_recoTauElectronCleanedAntiEleMVAVTight;   //!
    TBranch        *b_recoJetPt;   //!
    TBranch        *b_recoJetEta;   //!
    TBranch        *b_recoJetPhi;   //!
@@ -412,55 +412,55 @@ void MuMuTauETauHadAnalyzer::Init()
    recoElectronEnergySigmaDown = 0;
    recoElectronRefToMuon = 0;
    recoElectronRefToTau = 0;
-   recoTauPt = 0;
-   recoTauEta = 0;
-   recoTauPhi = 0;
-   recoTauEnergy = 0;
-   recoTauPDGId = 0;
-   recoTauDecayMode = 0;
-   recoTauDecayModeFinding = 0;
-   recoTauDecayModeFindingNewDMs = 0;
-   recoTauRefToMuon = 0;
-   recoTauRefToElectron = 0;
-   recoTauDeepVSeraw = 0;
-   recoTauDeepVSjetraw = 0;
-   recoTauDeepVSmuraw = 0;
-   recoTauDeepVSeLoose = 0;
-   recoTauDeepVSjetLoose = 0;
-   recoTauDeepVSmuLoose = 0;
-   recoTauDeepVSeMedium = 0;
-   recoTauDeepVSjetMedium = 0;
-   recoTauDeepVSmuMedium = 0;
-   recoTauDeepVSeTight = 0;
-   recoTauDeepVSjetTight = 0;
-   recoTauDeepVSmuTight = 0;
-   recoTauDeepVSeVLoose = 0;
-   recoTauDeepVSjetVLoose = 0;
-   recoTauDeepVSmuVLoose = 0;
-   recoTauDeepVSeVTight = 0;
-   recoTauDeepVSjetVTight = 0;
-   recoTauDeepVSeVVLoose = 0;
-   recoTauDeepVSjetVVLoose = 0;
-   recoTauDeepVSeVVTight = 0;
-   recoTauDeepVSjetVVTight = 0;
-   recoTauDeepVSeVVVLoose = 0;
-   recoTauDeepVSjetVVVLoose = 0;
-   recoTauIsoMVArawValue = 0;
-   recoTauIsoMVAVVLoose = 0;
-   recoTauIsoMVAVLoose = 0;
-   recoTauIsoMVALoose = 0;
-   recoTauIsoMVAMedium = 0;
-   recoTauIsoMVATight = 0;
-   recoTauIsoMVAVTight = 0;
-   recoTauIsoMVAVVTight = 0;
-   recoTauAntiMuMVALoose = 0;
-   recoTauAntiMuMVATight = 0;
-   recoTauAntiEleMVArawValue = 0;
-   recoTauAntiEleMVAVLoose = 0;
-   recoTauAntiEleMVALoose = 0;
-   recoTauAntiEleMVAMedium = 0;
-   recoTauAntiEleMVATight = 0;
-   recoTauAntiEleMVAVTight = 0;
+   recoTauElectronCleanedPt = 0;
+   recoTauElectronCleanedEta = 0;
+   recoTauElectronCleanedPhi = 0;
+   recoTauElectronCleanedEnergy = 0;
+   recoTauElectronCleanedPDGId = 0;
+   recoTauElectronCleanedDecayMode = 0;
+   recoTauElectronCleanedDecayModeFinding = 0;
+   recoTauElectronCleanedDecayModeFindingNewDMs = 0;
+   recoTauElectronCleanedRefToMuon = 0;
+   recoTauElectronCleanedRefToElectron = 0;
+   recoTauElectronCleanedDeepVSeraw = 0;
+   recoTauElectronCleanedDeepVSjetraw = 0;
+   recoTauElectronCleanedDeepVSmuraw = 0;
+   recoTauElectronCleanedDeepVSeLoose = 0;
+   recoTauElectronCleanedDeepVSjetLoose = 0;
+   recoTauElectronCleanedDeepVSmuLoose = 0;
+   recoTauElectronCleanedDeepVSeMedium = 0;
+   recoTauElectronCleanedDeepVSjetMedium = 0;
+   recoTauElectronCleanedDeepVSmuMedium = 0;
+   recoTauElectronCleanedDeepVSeTight = 0;
+   recoTauElectronCleanedDeepVSjetTight = 0;
+   recoTauElectronCleanedDeepVSmuTight = 0;
+   recoTauElectronCleanedDeepVSeVLoose = 0;
+   recoTauElectronCleanedDeepVSjetVLoose = 0;
+   recoTauElectronCleanedDeepVSmuVLoose = 0;
+   recoTauElectronCleanedDeepVSeVTight = 0;
+   recoTauElectronCleanedDeepVSjetVTight = 0;
+   recoTauElectronCleanedDeepVSeVVLoose = 0;
+   recoTauElectronCleanedDeepVSjetVVLoose = 0;
+   recoTauElectronCleanedDeepVSeVVTight = 0;
+   recoTauElectronCleanedDeepVSjetVVTight = 0;
+   recoTauElectronCleanedDeepVSeVVVLoose = 0;
+   recoTauElectronCleanedDeepVSjetVVVLoose = 0;
+   recoTauElectronCleanedIsoMVArawValue = 0;
+   recoTauElectronCleanedIsoMVAVVLoose = 0;
+   recoTauElectronCleanedIsoMVAVLoose = 0;
+   recoTauElectronCleanedIsoMVALoose = 0;
+   recoTauElectronCleanedIsoMVAMedium = 0;
+   recoTauElectronCleanedIsoMVATight = 0;
+   recoTauElectronCleanedIsoMVAVTight = 0;
+   recoTauElectronCleanedIsoMVAVVTight = 0;
+   recoTauElectronCleanedAntiMuMVALoose = 0;
+   recoTauElectronCleanedAntiMuMVATight = 0;
+   recoTauElectronCleanedAntiEleMVArawValue = 0;
+   recoTauElectronCleanedAntiEleMVAVLoose = 0;
+   recoTauElectronCleanedAntiEleMVALoose = 0;
+   recoTauElectronCleanedAntiEleMVAMedium = 0;
+   recoTauElectronCleanedAntiEleMVATight = 0;
+   recoTauElectronCleanedAntiEleMVAVTight = 0;
    recoJetPt = 0;
    recoJetEta = 0;
    recoJetPhi = 0;
@@ -511,61 +511,61 @@ void MuMuTauETauHadAnalyzer::Init()
    fChain->SetBranchAddress("recoElectronEnergySigmaDown", &recoElectronEnergySigmaDown, &b_recoElectronEnergySigmaDown);
    fChain->SetBranchAddress("recoElectronRefToMuon", &recoElectronRefToMuon, &b_recoElectronRefToMuon);
    fChain->SetBranchAddress("recoElectronRefToTau", &recoElectronRefToTau, &b_recoElectronRefToTau);
-   fChain->SetBranchAddress("recoTauPt", &recoTauPt, &b_recoTauPt);
-   fChain->SetBranchAddress("recoTauEta", &recoTauEta, &b_recoTauEta);
-   fChain->SetBranchAddress("recoTauPhi", &recoTauPhi, &b_recoTauPhi);
-   fChain->SetBranchAddress("recoTauEnergy", &recoTauEnergy, &b_recoTauEnergy);
-   fChain->SetBranchAddress("recoTauPDGId", &recoTauPDGId, &b_recoTauPDGId);
-   fChain->SetBranchAddress("recoTauDecayMode", &recoTauDecayMode, &b_recoTauDecayMode);
-   fChain->SetBranchAddress("recoTauDecayModeFinding", &recoTauDecayModeFinding, &b_recoTauDecayModeFinding);
-   fChain->SetBranchAddress("recoTauDecayModeFindingNewDMs", &recoTauDecayModeFindingNewDMs, &b_recoTauDecayModeFindingNewDMs);
-   fChain->SetBranchAddress("recoTauRefToMuon", &recoTauRefToMuon, &b_recoTauRefToMuon);
-   fChain->SetBranchAddress("recoTauRefToElectron", &recoTauRefToElectron, &b_recoTauRefToElectron);
+   fChain->SetBranchAddress("recoTauElectronCleanedPt", &recoTauElectronCleanedPt, &b_recoTauElectronCleanedPt);
+   fChain->SetBranchAddress("recoTauElectronCleanedEta", &recoTauElectronCleanedEta, &b_recoTauElectronCleanedEta);
+   fChain->SetBranchAddress("recoTauElectronCleanedPhi", &recoTauElectronCleanedPhi, &b_recoTauElectronCleanedPhi);
+   fChain->SetBranchAddress("recoTauElectronCleanedEnergy", &recoTauElectronCleanedEnergy, &b_recoTauElectronCleanedEnergy);
+   fChain->SetBranchAddress("recoTauElectronCleanedPDGId", &recoTauElectronCleanedPDGId, &b_recoTauElectronCleanedPDGId);
+   fChain->SetBranchAddress("recoTauElectronCleanedDecayMode", &recoTauElectronCleanedDecayMode, &b_recoTauElectronCleanedDecayMode);
+   fChain->SetBranchAddress("recoTauElectronCleanedDecayModeFinding", &recoTauElectronCleanedDecayModeFinding, &b_recoTauElectronCleanedDecayModeFinding);
+   fChain->SetBranchAddress("recoTauElectronCleanedDecayModeFindingNewDMs", &recoTauElectronCleanedDecayModeFindingNewDMs, &b_recoTauElectronCleanedDecayModeFindingNewDMs);
+   fChain->SetBranchAddress("recoTauElectronCleanedRefToMuon", &recoTauElectronCleanedRefToMuon, &b_recoTauElectronCleanedRefToMuon);
+   fChain->SetBranchAddress("recoTauElectronCleanedRefToElectron", &recoTauElectronCleanedRefToElectron, &b_recoTauElectronCleanedRefToElectron);
    
    if (deepTauID)
    {
-       fChain->SetBranchAddress("recoTauDeepVSeraw", &recoTauDeepVSeraw, &b_recoTauDeepVSeraw);
-       fChain->SetBranchAddress("recoTauDeepVSjetraw", &recoTauDeepVSjetraw, &b_recoTauDeepVSjetraw);
-       fChain->SetBranchAddress("recoTauDeepVSmuraw", &recoTauDeepVSmuraw, &b_recoTauDeepVSmuraw);
-       fChain->SetBranchAddress("recoTauDeepVSeLoose", &recoTauDeepVSeLoose, &b_recoTauDeepVSeLoose);
-       fChain->SetBranchAddress("recoTauDeepVSjetLoose", &recoTauDeepVSjetLoose, &b_recoTauDeepVSjetLoose);
-       fChain->SetBranchAddress("recoTauDeepVSmuLoose", &recoTauDeepVSmuLoose, &b_recoTauDeepVSmuLoose);
-       fChain->SetBranchAddress("recoTauDeepVSeMedium", &recoTauDeepVSeMedium, &b_recoTauDeepVSeMedium);
-       fChain->SetBranchAddress("recoTauDeepVSjetMedium", &recoTauDeepVSjetMedium, &b_recoTauDeepVSjetMedium);
-       fChain->SetBranchAddress("recoTauDeepVSmuMedium", &recoTauDeepVSmuMedium, &b_recoTauDeepVSmuMedium);
-       fChain->SetBranchAddress("recoTauDeepVSeTight", &recoTauDeepVSeTight, &b_recoTauDeepVSeTight);
-       fChain->SetBranchAddress("recoTauDeepVSjetTight", &recoTauDeepVSjetTight, &b_recoTauDeepVSjetTight);
-       fChain->SetBranchAddress("recoTauDeepVSmuTight", &recoTauDeepVSmuTight, &b_recoTauDeepVSmuTight);
-       fChain->SetBranchAddress("recoTauDeepVSeVLoose", &recoTauDeepVSeVLoose, &b_recoTauDeepVSeVLoose);
-       fChain->SetBranchAddress("recoTauDeepVSjetVLoose", &recoTauDeepVSjetVLoose, &b_recoTauDeepVSjetVLoose);
-       fChain->SetBranchAddress("recoTauDeepVSmuVLoose", &recoTauDeepVSmuVLoose, &b_recoTauDeepVSmuVLoose);
-       fChain->SetBranchAddress("recoTauDeepVSeVTight", &recoTauDeepVSeVTight, &b_recoTauDeepVSeVTight);
-       fChain->SetBranchAddress("recoTauDeepVSjetVTight", &recoTauDeepVSjetVTight, &b_recoTauDeepVSjetVTight);
-       fChain->SetBranchAddress("recoTauDeepVSeVVLoose", &recoTauDeepVSeVVLoose, &b_recoTauDeepVSeVVLoose);
-       fChain->SetBranchAddress("recoTauDeepVSjetVVLoose", &recoTauDeepVSjetVVLoose, &b_recoTauDeepVSjetVVLoose);
-       fChain->SetBranchAddress("recoTauDeepVSeVVTight", &recoTauDeepVSeVVTight, &b_recoTauDeepVSeVVTight);
-       fChain->SetBranchAddress("recoTauDeepVSjetVVTight", &recoTauDeepVSjetVVTight, &b_recoTauDeepVSjetVVTight);
-       fChain->SetBranchAddress("recoTauDeepVSeVVVLoose", &recoTauDeepVSeVVVLoose, &b_recoTauDeepVSeVVVLoose);
-       fChain->SetBranchAddress("recoTauDeepVSjetVVVLoose", &recoTauDeepVSjetVVVLoose, &b_recoTauDeepVSjetVVVLoose);
+       fChain->SetBranchAddress("recoTauElectronCleanedDeepVSeraw", &recoTauElectronCleanedDeepVSeraw, &b_recoTauElectronCleanedDeepVSeraw);
+       fChain->SetBranchAddress("recoTauElectronCleanedDeepVSjetraw", &recoTauElectronCleanedDeepVSjetraw, &b_recoTauElectronCleanedDeepVSjetraw);
+       fChain->SetBranchAddress("recoTauElectronCleanedDeepVSmuraw", &recoTauElectronCleanedDeepVSmuraw, &b_recoTauElectronCleanedDeepVSmuraw);
+       fChain->SetBranchAddress("recoTauElectronCleanedDeepVSeLoose", &recoTauElectronCleanedDeepVSeLoose, &b_recoTauElectronCleanedDeepVSeLoose);
+       fChain->SetBranchAddress("recoTauElectronCleanedDeepVSjetLoose", &recoTauElectronCleanedDeepVSjetLoose, &b_recoTauElectronCleanedDeepVSjetLoose);
+       fChain->SetBranchAddress("recoTauElectronCleanedDeepVSmuLoose", &recoTauElectronCleanedDeepVSmuLoose, &b_recoTauElectronCleanedDeepVSmuLoose);
+       fChain->SetBranchAddress("recoTauElectronCleanedDeepVSeMedium", &recoTauElectronCleanedDeepVSeMedium, &b_recoTauElectronCleanedDeepVSeMedium);
+       fChain->SetBranchAddress("recoTauElectronCleanedDeepVSjetMedium", &recoTauElectronCleanedDeepVSjetMedium, &b_recoTauElectronCleanedDeepVSjetMedium);
+       fChain->SetBranchAddress("recoTauElectronCleanedDeepVSmuMedium", &recoTauElectronCleanedDeepVSmuMedium, &b_recoTauElectronCleanedDeepVSmuMedium);
+       fChain->SetBranchAddress("recoTauElectronCleanedDeepVSeTight", &recoTauElectronCleanedDeepVSeTight, &b_recoTauElectronCleanedDeepVSeTight);
+       fChain->SetBranchAddress("recoTauElectronCleanedDeepVSjetTight", &recoTauElectronCleanedDeepVSjetTight, &b_recoTauElectronCleanedDeepVSjetTight);
+       fChain->SetBranchAddress("recoTauElectronCleanedDeepVSmuTight", &recoTauElectronCleanedDeepVSmuTight, &b_recoTauElectronCleanedDeepVSmuTight);
+       fChain->SetBranchAddress("recoTauElectronCleanedDeepVSeVLoose", &recoTauElectronCleanedDeepVSeVLoose, &b_recoTauElectronCleanedDeepVSeVLoose);
+       fChain->SetBranchAddress("recoTauElectronCleanedDeepVSjetVLoose", &recoTauElectronCleanedDeepVSjetVLoose, &b_recoTauElectronCleanedDeepVSjetVLoose);
+       fChain->SetBranchAddress("recoTauElectronCleanedDeepVSmuVLoose", &recoTauElectronCleanedDeepVSmuVLoose, &b_recoTauElectronCleanedDeepVSmuVLoose);
+       fChain->SetBranchAddress("recoTauElectronCleanedDeepVSeVTight", &recoTauElectronCleanedDeepVSeVTight, &b_recoTauElectronCleanedDeepVSeVTight);
+       fChain->SetBranchAddress("recoTauElectronCleanedDeepVSjetVTight", &recoTauElectronCleanedDeepVSjetVTight, &b_recoTauElectronCleanedDeepVSjetVTight);
+       fChain->SetBranchAddress("recoTauElectronCleanedDeepVSeVVLoose", &recoTauElectronCleanedDeepVSeVVLoose, &b_recoTauElectronCleanedDeepVSeVVLoose);
+       fChain->SetBranchAddress("recoTauElectronCleanedDeepVSjetVVLoose", &recoTauElectronCleanedDeepVSjetVVLoose, &b_recoTauElectronCleanedDeepVSjetVVLoose);
+       fChain->SetBranchAddress("recoTauElectronCleanedDeepVSeVVTight", &recoTauElectronCleanedDeepVSeVVTight, &b_recoTauElectronCleanedDeepVSeVVTight);
+       fChain->SetBranchAddress("recoTauElectronCleanedDeepVSjetVVTight", &recoTauElectronCleanedDeepVSjetVVTight, &b_recoTauElectronCleanedDeepVSjetVVTight);
+       fChain->SetBranchAddress("recoTauElectronCleanedDeepVSeVVVLoose", &recoTauElectronCleanedDeepVSeVVVLoose, &b_recoTauElectronCleanedDeepVSeVVVLoose);
+       fChain->SetBranchAddress("recoTauElectronCleanedDeepVSjetVVVLoose", &recoTauElectronCleanedDeepVSjetVVVLoose, &b_recoTauElectronCleanedDeepVSjetVVVLoose);
    } // end if deepTauID
 
    else{
-       fChain->SetBranchAddress("recoTauIsoMVArawValue", &recoTauIsoMVArawValue, &b_recoTauIsoMVArawValue);
-       fChain->SetBranchAddress("recoTauIsoMVAVVLoose", &recoTauIsoMVAVVLoose, &b_recoTauIsoMVAVVLoose);
-       fChain->SetBranchAddress("recoTauIsoMVAVLoose", &recoTauIsoMVAVLoose, &b_recoTauIsoMVAVLoose);
-       fChain->SetBranchAddress("recoTauIsoMVALoose", &recoTauIsoMVALoose, &b_recoTauIsoMVALoose);
-       fChain->SetBranchAddress("recoTauIsoMVAMedium", &recoTauIsoMVAMedium, &b_recoTauIsoMVAMedium);
-       fChain->SetBranchAddress("recoTauIsoMVATight", &recoTauIsoMVATight, &b_recoTauIsoMVATight);
-       fChain->SetBranchAddress("recoTauIsoMVAVTight", &recoTauIsoMVAVTight, &b_recoTauIsoMVAVTight);
-       fChain->SetBranchAddress("recoTauIsoMVAVVTight", &recoTauIsoMVAVVTight, &b_recoTauIsoMVAVVTight);
-       fChain->SetBranchAddress("recoTauAntiMuMVALoose", &recoTauAntiMuMVALoose, &b_recoTauAntiMuMVALoose);
-       fChain->SetBranchAddress("recoTauAntiMuMVATight", &recoTauAntiMuMVATight, &b_recoTauAntiMuMVATight);
-       fChain->SetBranchAddress("recoTauAntiEleMVArawValue", &recoTauAntiEleMVArawValue, &b_recoTauAntiEleMVArawValue);
-       fChain->SetBranchAddress("recoTauAntiEleMVAVLoose", &recoTauAntiEleMVAVLoose, &b_recoTauAntiEleMVAVLoose);
-       fChain->SetBranchAddress("recoTauAntiEleMVALoose", &recoTauAntiEleMVALoose, &b_recoTauAntiEleMVALoose);
-       fChain->SetBranchAddress("recoTauAntiEleMVAMedium", &recoTauAntiEleMVAMedium, &b_recoTauAntiEleMVAMedium);
-       fChain->SetBranchAddress("recoTauAntiEleMVATight", &recoTauAntiEleMVATight, &b_recoTauAntiEleMVATight);
-       fChain->SetBranchAddress("recoTauAntiEleMVAVTight", &recoTauAntiEleMVAVTight, &b_recoTauAntiEleMVAVTight);
+       fChain->SetBranchAddress("recoTauElectronCleanedIsoMVArawValue", &recoTauElectronCleanedIsoMVArawValue, &b_recoTauElectronCleanedIsoMVArawValue);
+       fChain->SetBranchAddress("recoTauElectronCleanedIsoMVAVVLoose", &recoTauElectronCleanedIsoMVAVVLoose, &b_recoTauElectronCleanedIsoMVAVVLoose);
+       fChain->SetBranchAddress("recoTauElectronCleanedIsoMVAVLoose", &recoTauElectronCleanedIsoMVAVLoose, &b_recoTauElectronCleanedIsoMVAVLoose);
+       fChain->SetBranchAddress("recoTauElectronCleanedIsoMVALoose", &recoTauElectronCleanedIsoMVALoose, &b_recoTauElectronCleanedIsoMVALoose);
+       fChain->SetBranchAddress("recoTauElectronCleanedIsoMVAMedium", &recoTauElectronCleanedIsoMVAMedium, &b_recoTauElectronCleanedIsoMVAMedium);
+       fChain->SetBranchAddress("recoTauElectronCleanedIsoMVATight", &recoTauElectronCleanedIsoMVATight, &b_recoTauElectronCleanedIsoMVATight);
+       fChain->SetBranchAddress("recoTauElectronCleanedIsoMVAVTight", &recoTauElectronCleanedIsoMVAVTight, &b_recoTauElectronCleanedIsoMVAVTight);
+       fChain->SetBranchAddress("recoTauElectronCleanedIsoMVAVVTight", &recoTauElectronCleanedIsoMVAVVTight, &b_recoTauElectronCleanedIsoMVAVVTight);
+       fChain->SetBranchAddress("recoTauElectronCleanedAntiMuMVALoose", &recoTauElectronCleanedAntiMuMVALoose, &b_recoTauElectronCleanedAntiMuMVALoose);
+       fChain->SetBranchAddress("recoTauElectronCleanedAntiMuMVATight", &recoTauElectronCleanedAntiMuMVATight, &b_recoTauElectronCleanedAntiMuMVATight);
+       fChain->SetBranchAddress("recoTauElectronCleanedAntiEleMVArawValue", &recoTauElectronCleanedAntiEleMVArawValue, &b_recoTauElectronCleanedAntiEleMVArawValue);
+       fChain->SetBranchAddress("recoTauElectronCleanedAntiEleMVAVLoose", &recoTauElectronCleanedAntiEleMVAVLoose, &b_recoTauElectronCleanedAntiEleMVAVLoose);
+       fChain->SetBranchAddress("recoTauElectronCleanedAntiEleMVALoose", &recoTauElectronCleanedAntiEleMVALoose, &b_recoTauElectronCleanedAntiEleMVALoose);
+       fChain->SetBranchAddress("recoTauElectronCleanedAntiEleMVAMedium", &recoTauElectronCleanedAntiEleMVAMedium, &b_recoTauElectronCleanedAntiEleMVAMedium);
+       fChain->SetBranchAddress("recoTauElectronCleanedAntiEleMVATight", &recoTauElectronCleanedAntiEleMVATight, &b_recoTauElectronCleanedAntiEleMVATight);
+       fChain->SetBranchAddress("recoTauElectronCleanedAntiEleMVAVTight", &recoTauElectronCleanedAntiEleMVAVTight, &b_recoTauElectronCleanedAntiEleMVAVTight);
    } // end if not deepTauID
 
    fChain->SetBranchAddress("recoJetPt", &recoJetPt, &b_recoJetPt);
