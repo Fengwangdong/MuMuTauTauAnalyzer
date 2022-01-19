@@ -190,7 +190,7 @@ void MuMuTauTauInclusiveAnalyzer::Loop()
           float smallestDR = 1.0; // dR cut between Mu3 and Mu4
           bool findMu3 = false;
 
-          for (unsigned int iMuon3=0; iMuon3<recoMuonPt->size(); iMuon3++)
+          for (unsigned int iMuon3=iMuon+1; iMuon3<recoMuonPt->size(); iMuon3++)
           {
               bool isLoose = MuonId == "LOOSE" && recoMuonIdLoose->at(iMuon3) > 0;
               bool isMedium = MuonId == "MEDIUM" && recoMuonIdMedium->at(iMuon3) > 0;
@@ -198,7 +198,7 @@ void MuMuTauTauInclusiveAnalyzer::Loop()
               bool passMuonID = isLoose || isMedium || isTight;
               //bool passDXYDZ = fabs(recoMuonDXY->at(iMuon3)) < 0.2 && fabs(recoMuonDZ->at(iMuon3)) < 0.5;
 
-              if (iMuon3 == indexMu1 || iMuon3 == indexMu2 || iMuon3 == iMuon) continue;
+              if (iMuon3 == indexMu1 || iMuon3 == indexMu2) continue;
               //if ((!invertedMu3Iso && recoMuonIsolation->at(iMuon3) > Mu3IsoThreshold) || (invertedMu3Iso && recoMuonIsolation->at(iMuon3) < Mu3IsoThreshold) || (invertedMu3Iso && recoMuonIsolation->at(iMuon3) > MuIsoUpperBound) || !passMuonID || !passDXYDZ) continue;
               if ((!invertedMu3Iso && recoMuonIsolation->at(iMuon3) > Mu3IsoThreshold) || (invertedMu3Iso && recoMuonIsolation->at(iMuon3) < Mu3IsoThreshold) || (invertedMu3Iso && recoMuonIsolation->at(iMuon3) > MuIsoUpperBound) || !passMuonID) continue;
 
