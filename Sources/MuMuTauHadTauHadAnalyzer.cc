@@ -299,7 +299,7 @@ void MuMuTauHadTauHadAnalyzer::Loop()
           TauIso = deepTauID ? recoTauDeepVSjetraw->at(iTau) : recoTauIsoMVArawValue->at(iTau);
           TauDM = recoTauDecayMode->at(iTau);
 
-          float smallestDR = 1.0; // dR cut between tau1 and tau2
+          //float smallestDR = 1.0; // dR cut between tau1 and tau2
           bool findTau2 = false;
 
           for (unsigned int iTau2=iTau+1; iTau2<recoTauPt->size(); iTau2++)
