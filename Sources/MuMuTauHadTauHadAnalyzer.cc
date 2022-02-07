@@ -293,7 +293,7 @@ void MuMuTauHadTauHadAnalyzer::Loop()
           double recoTauMass = TauCand.M();
           TauCand.SetPtEtaPhiM(recoTauPt->at(iTau)*tauScaleCorr, recoTauEta->at(iTau), recoTauPhi->at(iTau), recoTauMass);
 
-          if (TauCand.DeltaR(Mu1) < 0.4 || TauCand.DeltaR(Mu2) < 0.4) continue;
+          if (TauCand.Pt() < 10.0 || TauCand.DeltaR(Mu1) < 0.4 || TauCand.DeltaR(Mu2) < 0.4) continue;
           if ((recoTauDecayMode->at(iTau) != tauDecayModeThreshold) && (tauDecayModeThreshold == 0 || tauDecayModeThreshold == 1 || tauDecayModeThreshold == 5 || tauDecayModeThreshold == 6 || tauDecayModeThreshold == 10 || tauDecayModeThreshold == 11)) continue;
           Tau.SetPtEtaPhiM(recoTauPt->at(iTau)*tauScaleCorr, recoTauEta->at(iTau), recoTauPhi->at(iTau), recoTauMass);
           TauIso = deepTauID ? recoTauDeepVSjetraw->at(iTau) : recoTauIsoMVArawValue->at(iTau);
@@ -412,7 +412,7 @@ void MuMuTauHadTauHadAnalyzer::Loop()
               Tau2Cand.SetPtEtaPhiE(recoTauPt->at(iTau2), recoTauEta->at(iTau2), recoTauPhi->at(iTau2), recoTauEnergy->at(iTau2));
               double recoTauMass = Tau2Cand.M();
               Tau2Cand.SetPtEtaPhiM(recoTauPt->at(iTau2)*tauScaleCorr, recoTauEta->at(iTau2), recoTauPhi->at(iTau2), recoTauMass);
-              if (((Tau+Tau2Cand).M() < 60.0) && (recoTauPDGId->at(iTau) == (-1) * recoTauPDGId->at(iTau2)) && (Tau2Cand.DeltaR(Mu1) > 0.4) && (Tau2Cand.DeltaR(Mu2) > 0.4))
+              if ((Tau2Cand.Pt() > 10.0) && ((Tau+Tau2Cand).M() < 60.0) && (recoTauPDGId->at(iTau) == (-1) * recoTauPDGId->at(iTau2)) && (Tau2Cand.DeltaR(Mu1) > 0.4) && (Tau2Cand.DeltaR(Mu2) > 0.4))
               {
                   Tau2.SetPtEtaPhiM(recoTauPt->at(iTau2)*tauScaleCorr, recoTauEta->at(iTau2), recoTauPhi->at(iTau2), recoTauMass);
                   Tau2Iso = deepTauID ? recoTauDeepVSjetraw->at(iTau2) : recoTauIsoMVArawValue->at(iTau2);
