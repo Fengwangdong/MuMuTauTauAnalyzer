@@ -509,7 +509,7 @@ void MuMuTauTauInclusiveAnalyzer::Loop()
           double recoTauMuonCleanedMass = TauCand.M();
           TauCand.SetPtEtaPhiM(recoTauMuonCleanedPt->at(iTau)*tauScaleCorr, recoTauMuonCleanedEta->at(iTau), recoTauMuonCleanedPhi->at(iTau), recoTauMuonCleanedMass);
 
-          if (TauCand.DeltaR(Mu1) < 0.8 || TauCand.DeltaR(Mu2) < 0.8) continue;
+          if (TauCand.Pt() < 10.0 || TauCand.DeltaR(Mu1) < 0.8 || TauCand.DeltaR(Mu2) < 0.8) continue;
 
           // ---- bjet veto for tau ---
           //bool bjetVeto = false;
@@ -727,7 +727,7 @@ void MuMuTauTauInclusiveAnalyzer::Loop()
           double recoTauElectronCleanedMass = TauCand.M();
           TauCand.SetPtEtaPhiM(recoTauElectronCleanedPt->at(iTau)*tauScaleCorr, recoTauElectronCleanedEta->at(iTau), recoTauElectronCleanedPhi->at(iTau), recoTauElectronCleanedMass);
 
-          if (TauCand.DeltaR(Mu1) < 0.8 || TauCand.DeltaR(Mu2) < 0.8) continue;
+          if (TauCand.Pt() < 10.0 || TauCand.DeltaR(Mu1) < 0.8 || TauCand.DeltaR(Mu2) < 0.8) continue;
 
           // ---- bjet veto for tau ---
           //bool bjetVeto = false;
@@ -856,7 +856,7 @@ void MuMuTauTauInclusiveAnalyzer::Loop()
           TLorentzVector TauCand;
           TauCand.SetPtEtaPhiE(recoJetPt->at(iJet) * jetEnergyCorr, recoJetEta->at(iJet), recoJetPhi->at(iJet), recoJetEnergy->at(iJet) * jetEnergyCorr);
 
-          if (TauCand.DeltaR(Mu1) < 0.8 || TauCand.DeltaR(Mu2) < 0.8) continue;
+          if (TauCand.Pt() < 20.0 || TauCand.DeltaR(Mu1) < 0.8 || TauCand.DeltaR(Mu2) < 0.8) continue;
           if (TauCand.Pt() > highestPt)
           {
               Tau.SetPtEtaPhiE(recoJetPt->at(iJet) * jetEnergyCorr, recoJetEta->at(iJet), recoJetPhi->at(iJet), recoJetEnergy->at(iJet) * jetEnergyCorr);
