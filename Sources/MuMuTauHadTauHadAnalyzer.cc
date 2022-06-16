@@ -62,6 +62,7 @@ void MuMuTauHadTauHadAnalyzer::Loop()
       float Tau2DM;
 
       unsigned int indexMu1 = -1;
+      unsigned int indexMu2 = -1;
       // =============================================================================
 
       // ---- start loop on muon candidates for mu1 ----
@@ -137,6 +138,7 @@ void MuMuTauHadTauHadAnalyzer::Loop()
               Mu2Iso = recoMuonIsolation->at(iMuon);
               smallestDR = Mu1.DeltaR(Mu2);
               findMu2 = true;
+              indexMu2 = iMuon;
           } // end if pair candidates
       } // end loop for mu2
           

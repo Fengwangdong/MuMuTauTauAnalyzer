@@ -41,6 +41,28 @@ public :
    vector<int>     *recoMuonIdLoose;
    vector<int>     *recoMuonIdMedium;
    vector<int>     *recoMuonIdTight;
+   vector<float>   *recoElectronPt;
+   vector<float>   *recoElectronEta;
+   vector<float>   *recoElectronPhi;
+   vector<float>   *recoElectronEnergy;
+   vector<int>     *recoElectronPDGId;
+   vector<float>   *recoElectronIsolation;
+   vector<int>     *recoElectronIdLoose;
+   vector<int>     *recoElectronIdMedium;
+   vector<int>     *recoElectronIdTight;
+   vector<int>     *recoElectronIdLooseNoIso;
+   vector<int>     *recoElectronIdMediumNoIso;
+   vector<int>     *recoElectronIdTightNoIso;
+   vector<float>   *recoElectronEcalTrkEnergyPostCorr;
+   vector<float>   *recoElectronEcalTrkEnergyErrPostCorr;
+   vector<float>   *recoElectronEnergyScaleValue;
+   vector<float>   *recoElectronEnergyScaleUp;
+   vector<float>   *recoElectronEnergyScaleDown;
+   vector<float>   *recoElectronEnergySigmaValue;
+   vector<float>   *recoElectronEnergySigmaUp;
+   vector<float>   *recoElectronEnergySigmaDown;
+   vector<int>     *recoElectronRefToMuon;
+   vector<int>     *recoElectronRefToTau;
    vector<float>   *recoTauPt;
    vector<float>   *recoTauEta;
    vector<float>   *recoTauPhi;
@@ -129,6 +151,28 @@ public :
    TBranch        *b_recoMuonIdLoose;   //!
    TBranch        *b_recoMuonIdMedium;   //!
    TBranch        *b_recoMuonIdTight;   //!
+   TBranch        *b_recoElectronPt;   //!
+   TBranch        *b_recoElectronEta;   //!
+   TBranch        *b_recoElectronPhi;   //!
+   TBranch        *b_recoElectronEnergy;   //!
+   TBranch        *b_recoElectronPDGId;   //!
+   TBranch        *b_recoElectronIsolation;   //!
+   TBranch        *b_recoElectronIdLoose;   //!
+   TBranch        *b_recoElectronIdMedium;   //!
+   TBranch        *b_recoElectronIdTight;   //!
+   TBranch        *b_recoElectronIdLooseNoIso;   //!
+   TBranch        *b_recoElectronIdMediumNoIso;   //!
+   TBranch        *b_recoElectronIdTightNoIso;   //!
+   TBranch        *b_recoElectronEcalTrkEnergyPostCorr;   //!
+   TBranch        *b_recoElectronEcalTrkEnergyErrPostCorr;   //!
+   TBranch        *b_recoElectronEnergyScaleValue;   //!
+   TBranch        *b_recoElectronEnergyScaleUp;   //!
+   TBranch        *b_recoElectronEnergyScaleDown;   //!
+   TBranch        *b_recoElectronEnergySigmaValue;   //!
+   TBranch        *b_recoElectronEnergySigmaUp;   //!
+   TBranch        *b_recoElectronEnergySigmaDown;   //!
+   TBranch        *b_recoElectronRefToMuon;   //!
+   TBranch        *b_recoElectronRefToTau;   //!
    TBranch        *b_recoTauPt;   //!
    TBranch        *b_recoTauEta;   //!
    TBranch        *b_recoTauPhi;   //!
@@ -372,6 +416,28 @@ void MuMuTauHadTauHadAnalyzer::Init()
    recoMuonIdLoose = 0;
    recoMuonIdMedium = 0;
    recoMuonIdTight = 0;
+   recoElectronPt = 0;
+   recoElectronEta = 0;
+   recoElectronPhi = 0;
+   recoElectronEnergy = 0;
+   recoElectronPDGId = 0;
+   recoElectronIsolation = 0;
+   recoElectronIdLoose = 0;
+   recoElectronIdMedium = 0;
+   recoElectronIdTight = 0;
+   recoElectronIdLooseNoIso = 0;
+   recoElectronIdMediumNoIso = 0;
+   recoElectronIdTightNoIso = 0;
+   recoElectronEcalTrkEnergyPostCorr = 0;
+   recoElectronEcalTrkEnergyErrPostCorr = 0;
+   recoElectronEnergyScaleValue = 0;
+   recoElectronEnergyScaleUp = 0;
+   recoElectronEnergyScaleDown = 0;
+   recoElectronEnergySigmaValue = 0;
+   recoElectronEnergySigmaUp = 0;
+   recoElectronEnergySigmaDown = 0;
+   recoElectronRefToMuon = 0;
+   recoElectronRefToTau = 0;
    recoTauPt = 0;
    recoTauEta = 0;
    recoTauPhi = 0;
@@ -457,6 +523,28 @@ void MuMuTauHadTauHadAnalyzer::Init()
    fChain->SetBranchAddress("recoMuonIdLoose", &recoMuonIdLoose, &b_recoMuonIdLoose);
    fChain->SetBranchAddress("recoMuonIdMedium", &recoMuonIdMedium, &b_recoMuonIdMedium);
    fChain->SetBranchAddress("recoMuonIdTight", &recoMuonIdTight, &b_recoMuonIdTight);
+   fChain->SetBranchAddress("recoElectronPt", &recoElectronPt, &b_recoElectronPt);
+   fChain->SetBranchAddress("recoElectronEta", &recoElectronEta, &b_recoElectronEta);
+   fChain->SetBranchAddress("recoElectronPhi", &recoElectronPhi, &b_recoElectronPhi);
+   fChain->SetBranchAddress("recoElectronEnergy", &recoElectronEnergy, &b_recoElectronEnergy);
+   fChain->SetBranchAddress("recoElectronPDGId", &recoElectronPDGId, &b_recoElectronPDGId);
+   fChain->SetBranchAddress("recoElectronIsolation", &recoElectronIsolation, &b_recoElectronIsolation);
+   fChain->SetBranchAddress("recoElectronIdLoose", &recoElectronIdLoose, &b_recoElectronIdLoose);
+   fChain->SetBranchAddress("recoElectronIdMedium", &recoElectronIdMedium, &b_recoElectronIdMedium);
+   fChain->SetBranchAddress("recoElectronIdTight", &recoElectronIdTight, &b_recoElectronIdTight);
+   fChain->SetBranchAddress("recoElectronIdLooseNoIso", &recoElectronIdLooseNoIso, &b_recoElectronIdLooseNoIso);
+   fChain->SetBranchAddress("recoElectronIdMediumNoIso", &recoElectronIdMediumNoIso, &b_recoElectronIdMediumNoIso);
+   fChain->SetBranchAddress("recoElectronIdTightNoIso", &recoElectronIdTightNoIso, &b_recoElectronIdTightNoIso);
+   fChain->SetBranchAddress("recoElectronEcalTrkEnergyPostCorr", &recoElectronEcalTrkEnergyPostCorr, &b_recoElectronEcalTrkEnergyPostCorr);
+   fChain->SetBranchAddress("recoElectronEcalTrkEnergyErrPostCorr", &recoElectronEcalTrkEnergyErrPostCorr, &b_recoElectronEcalTrkEnergyErrPostCorr);
+   fChain->SetBranchAddress("recoElectronEnergyScaleValue", &recoElectronEnergyScaleValue, &b_recoElectronEnergyScaleValue);
+   fChain->SetBranchAddress("recoElectronEnergyScaleUp", &recoElectronEnergyScaleUp, &b_recoElectronEnergyScaleUp);
+   fChain->SetBranchAddress("recoElectronEnergyScaleDown", &recoElectronEnergyScaleDown, &b_recoElectronEnergyScaleDown);
+   fChain->SetBranchAddress("recoElectronEnergySigmaValue", &recoElectronEnergySigmaValue, &b_recoElectronEnergySigmaValue);
+   fChain->SetBranchAddress("recoElectronEnergySigmaUp", &recoElectronEnergySigmaUp, &b_recoElectronEnergySigmaUp);
+   fChain->SetBranchAddress("recoElectronEnergySigmaDown", &recoElectronEnergySigmaDown, &b_recoElectronEnergySigmaDown);
+   fChain->SetBranchAddress("recoElectronRefToMuon", &recoElectronRefToMuon, &b_recoElectronRefToMuon);
+   fChain->SetBranchAddress("recoElectronRefToTau", &recoElectronRefToTau, &b_recoElectronRefToTau);
    fChain->SetBranchAddress("recoTauPt", &recoTauPt, &b_recoTauPt);
    fChain->SetBranchAddress("recoTauEta", &recoTauEta, &b_recoTauEta);
    fChain->SetBranchAddress("recoTauPhi", &recoTauPhi, &b_recoTauPhi);
