@@ -830,6 +830,36 @@ void MuMuTauTauInclusiveAnalyzer::Loop()
       bool findTauTauPair = false;
       double highestPt = 0;
 
+      // ------- veto more muons and/or electrons ---------
+      bool findThirdMuon = false;
+      for (unsigned int iMuon=0; iMuon<recoMuonPt->size(); iMuon++)
+      {
+          bool passMuonID = recoMuonIdLoose->at(iMuon) > 0;
+          if (iMuon == indexMu1 || iMuon == indexMu2) continue;
+          if (!passMuonID) continue;
+
+          findThirdMuon = true;
+          break;
+      } // end for loop on muon veto
+
+      if (findThirdMuon) continue;
+
+      bool findElectron = false;
+      for (unsigned int iEle=0; iEle<recoElectronPt->size(); iEle++)
+      {
+          bool passCondEleId = recoElectronIdLooseNoIso->at(iEle) > 0;
+          if (!passCondEleId) continue;
+
+          TLorentzVector EleCand;
+          EleCand.SetPtEtaPhiE(recoElectronPt->at(iEle), recoElectronEta->at(iEle), recoElectronPhi->at(iEle), recoElectronEnergy->at(iEle));
+
+          if ((EleCand.DeltaR(Mu1) < 0.2) || (EleCand.DeltaR(Mu2) < 0.2)) continue;
+          findElectron = true;
+          break;
+      } // end for loop over electron veto
+      
+      if (findElectron) continue;
+
       // ------- start loop on jet (di-tau_h) candidates -------
       for (unsigned int iJet=0; iJet<recoJetPt->size(); iJet++)
       {
