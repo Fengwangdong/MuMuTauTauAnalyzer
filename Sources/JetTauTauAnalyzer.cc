@@ -112,8 +112,6 @@ void JetTauTauAnalyzer::Loop()
       {
           float MetPt = recoMET->at(0);
           float MetPhi= recoMETPhi->at(0);
-          float MetPx = recoMETPx->at(0);
-          float MetPy = recoMETPy->at(0);
 
           // --------------- rec-gen matching for separating ZTT, DYJ, and other backgrounds and data -------------------
           if (isMC && doWhatSample == "ZTT")
@@ -151,7 +149,7 @@ void JetTauTauAnalyzer::Loop()
 
                   if (findMatchedRecJetGenTauHad)
                   {
-                      GenTauHad1 = GenTauHadCand;
+                      GenTauHad1 = GenTauHadCand1;
                       break;
                   } // end if findMatchedRecJetGenTauHad == true
               } // end for loop on GenTauHad
@@ -269,6 +267,9 @@ void JetTauTauAnalyzer::Loop()
 
           if (doWhatSample != "ZTT" && doWhatSample != "DYJ")
           {
+              TLorentzVector GenTauHad1;
+              TLorentzVector GenTauHad2;
+
               Jet1Pt->Fill(Jet1.Pt(), weight);
               Jet1Eta->Fill(Jet1.Eta(), weight);
               Jet1Phi->Fill(Jet1.Phi(), weight);
