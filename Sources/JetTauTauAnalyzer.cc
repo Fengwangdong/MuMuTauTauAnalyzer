@@ -93,10 +93,7 @@ void JetTauTauAnalyzer::Loop()
           Jet2.SetPtEtaPhiE(recoJetPt->at(iJet), recoJetEta->at(iJet), recoJetPhi->at(iJet), recoJetEnergy->at(iJet));
           Jet2DCM = massDecorrelation ? recoJetDeepDiTauValueMDv1->at(iJet) : recoJetDeepDiTauValuev1->at(iJet);
 
-          if (((!invertedTauIso && condDiTauDisc) || (invertedTauIso && condInvertDiTauDisc)) && (recoJetCSV->at(iJet) < 0.5426)) 
-          {
-              findDiTauCandJet2 = true;
-          }
+          if (((!invertedTauIso && condDiTauDisc) || (invertedTauIso && condInvertDiTauDisc)) && (recoJetCSV->at(iJet) < 0.5426)) findDiTauCandJet2 = true;
           break;
       } // end loop for j2
 
