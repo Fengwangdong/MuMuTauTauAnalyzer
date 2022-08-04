@@ -125,6 +125,8 @@ class Histomutau{
         TH1D* dRMu2Tau;
         TH1D* dRMu2Tau2;
 
+        TH1D* dMMuMuTauTau;
+
         TH2D* dRInvMassMu1Mu2;
         TH2D* dRInvMassMu3Mu4;
         TH2D* dRInvMassMu3Ele;

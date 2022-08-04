@@ -197,6 +197,8 @@ Histomutau::Histomutau(){
     dRMu2Tau = newTH1D("dRMu2Tau", "#Delta R(#mu_{2}#tau)", 25, 0, 5);
     dRMu2Tau2 = newTH1D("dRMu2Tau2", "#Delta R(#mu_{2},#tau#tau)", 25, 0, 5);
 
+    dMMuMuTauTau = newTH1D("dMMuMuTauTau", "#frac{M(#mu#mu)-M(#tau#tau)}{M(#mu#mu)}", 20, -1, 1);
+
     dRInvMassMu1Mu2 = newTH2D("dRInvMassMu1Mu2", "#Delta R(#mu_{1}#mu_{2})", "M(#mu_{1}#mu_{2})[GeV]", 25, 0, 1, 20, 0, 60);
     dRInvMassMu3Mu4 = newTH2D("dRInvMassMu3Mu4", "#Delta R(#mu_{3}#mu_{4})", "M(#mu_{3}#mu_{4})[GeV]", 25, 0, 1, 20, 0, 60);
     dRInvMassMu3Ele = newTH2D("dRInvMassMu3Ele", "#Delta R(#mu_{3}e)", "M(#mu_{3}e)[GeV]", 25, 0, 1, 20, 0, 60);

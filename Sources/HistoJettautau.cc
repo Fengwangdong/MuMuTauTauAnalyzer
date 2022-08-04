@@ -77,7 +77,7 @@ TH2D* HistoJettautau::newTH2D(string name, string xTitle, string yTitle, int nBi
 HistoJettautau::HistoJettautau(){
 
     double jetPtBin [] = {20, 30, 50, 80, 120, 170, 230, 300, 380, 500, 640, 800, 980, 1180, 1400};
-    double metPtBin [] = {4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 66, 74, 84, 96, 110, 126, 144, 164, 186, 210};
+    double metPtBin [] = {10, 20, 30, 50, 80, 120, 170, 230, 300, 380, 500, 640, 800, 980, 1180, 1400};
 
     int NBinsJetPt = sizeof(jetPtBin)/sizeof(jetPtBin[0])-1;
     int NBinsMetPt = sizeof(metPtBin)/sizeof(metPtBin[0])-1;

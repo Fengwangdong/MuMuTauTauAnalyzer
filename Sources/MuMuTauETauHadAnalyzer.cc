@@ -369,6 +369,7 @@ void MuMuTauETauHadAnalyzer::Loop()
 
           ptMuMuTauEleTauHad->Fill((Mu1+Mu2+Ele+Tau).Pt(), weight);
           invMassMuMuTauEleTauHad->Fill((Mu1+Mu2+Ele+Tau).M(), weight);
+          dMMuMuTauTau->Fill(((Mu1+Mu2).M()-(Ele+Tau).M())/(Mu1+Mu2).M());
 
           // ----- fill flat trees -----
           invMassMuMu = (Mu1+Mu2).M();
