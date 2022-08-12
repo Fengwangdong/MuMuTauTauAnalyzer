@@ -151,6 +151,278 @@ int main(int argc, char **argv)
     // --- always need to reinitialize the weight parameter for new sample -----
     summedWeights = 0;
 
+    if (doWhat == "DYJETSHT70" || doWhat == "ALL")
+    {
+        if (inputFile.EndsWith(".root"))
+        {
+            lumiana DYJetsLumi(inputFile);
+            summedWeights = DYJetsLumi.Loop();
+
+            JetTauTauAnalyzer DYJetsHist(inputFile, outputDir, lumi*146.5*1000, summedWeights, maxEvents, true, invertedTauIso, invertedTau2Iso, JetId, massDecorrelation, deepDiTauRawThreshold, deepDiTauRawLowerBound, "DYJ");
+            DYJetsHist.Loop();
+        } // end if inputFile.EndsWith(".root")
+
+        else{
+            ifstream finLumi;
+            finLumi.open(inputFile);
+            string fileName;
+            while (getline(finLumi, fileName))
+            {
+                lumiana DYJetsLumi(fileName);
+                summedWeights += DYJetsLumi.Loop();
+            } // end while loop on weight sum
+
+            ifstream finTree;
+            finTree.open(inputFile);
+            while (getline(finTree, fileName))
+            {
+                JetTauTauAnalyzer DYJetsHist(fileName, outputDir, lumi*146.5*1000, summedWeights, maxEvents, true, invertedTauIso, invertedTau2Iso, JetId, massDecorrelation, deepDiTauRawThreshold, deepDiTauRawLowerBound, "DYJ");
+                DYJetsHist.Loop();
+            } // end while loop on input file list
+        } // end else
+    } // end if DYJETSHT70
+
+    // --- always need to reinitialize the weight parameter for new sample -----
+    summedWeights = 0;
+
+    if (doWhat == "DYJETSHT100" || doWhat == "ALL")
+    {
+        if (inputFile.EndsWith(".root"))
+        {
+            lumiana DYJetsLumi(inputFile);
+            summedWeights = DYJetsLumi.Loop();
+
+            JetTauTauAnalyzer DYJetsHist(inputFile, outputDir, lumi*160.7*1000, summedWeights, maxEvents, true, invertedTauIso, invertedTau2Iso, JetId, massDecorrelation, deepDiTauRawThreshold, deepDiTauRawLowerBound, "DYJ");
+            DYJetsHist.Loop();
+        } // end if inputFile.EndsWith(".root")
+
+        else{
+            ifstream finLumi;
+            finLumi.open(inputFile);
+            string fileName;
+            while (getline(finLumi, fileName))
+            {
+                lumiana DYJetsLumi(fileName);
+                summedWeights += DYJetsLumi.Loop();
+            } // end while loop on weight sum
+
+            ifstream finTree;
+            finTree.open(inputFile);
+            while (getline(finTree, fileName))
+            {
+                JetTauTauAnalyzer DYJetsHist(fileName, outputDir, lumi*160.7*1000, summedWeights, maxEvents, true, invertedTauIso, invertedTau2Iso, JetId, massDecorrelation, deepDiTauRawThreshold, deepDiTauRawLowerBound, "DYJ");
+                DYJetsHist.Loop();
+            } // end while loop on input file list
+        } // end else
+    } // end if DYJETSHT100
+
+    // --- always need to reinitialize the weight parameter for new sample -----
+    summedWeights = 0;
+
+    if (doWhat == "DYJETSHT200" || doWhat == "ALL")
+    {
+        if (inputFile.EndsWith(".root"))
+        {
+            lumiana DYJetsLumi(inputFile);
+            summedWeights = DYJetsLumi.Loop();
+
+            JetTauTauAnalyzer DYJetsHist(inputFile, outputDir, lumi*48.63*1000, summedWeights, maxEvents, true, invertedTauIso, invertedTau2Iso, JetId, massDecorrelation, deepDiTauRawThreshold, deepDiTauRawLowerBound, "DYJ");
+            DYJetsHist.Loop();
+        } // end if inputFile.EndsWith(".root")
+
+        else{
+            ifstream finLumi;
+            finLumi.open(inputFile);
+            string fileName;
+            while (getline(finLumi, fileName))
+            {
+                lumiana DYJetsLumi(fileName);
+                summedWeights += DYJetsLumi.Loop();
+            } // end while loop on weight sum
+
+            ifstream finTree;
+            finTree.open(inputFile);
+            while (getline(finTree, fileName))
+            {
+                JetTauTauAnalyzer DYJetsHist(fileName, outputDir, lumi*48.63*1000, summedWeights, maxEvents, true, invertedTauIso, invertedTau2Iso, JetId, massDecorrelation, deepDiTauRawThreshold, deepDiTauRawLowerBound, "DYJ");
+                DYJetsHist.Loop();
+            } // end while loop on input file list
+        } // end else
+    } // end if DYJETSHT200
+
+    // --- always need to reinitialize the weight parameter for new sample -----
+    summedWeights = 0;
+
+    if (doWhat == "DYJETSHT400" || doWhat == "ALL")
+    {
+        if (inputFile.EndsWith(".root"))
+        {
+            lumiana DYJetsLumi(inputFile);
+            summedWeights = DYJetsLumi.Loop();
+
+            JetTauTauAnalyzer DYJetsHist(inputFile, outputDir, lumi*6.993*1000, summedWeights, maxEvents, true, invertedTauIso, invertedTau2Iso, JetId, massDecorrelation, deepDiTauRawThreshold, deepDiTauRawLowerBound, "DYJ");
+            DYJetsHist.Loop();
+        } // end if inputFile.EndsWith(".root")
+
+        else{
+            ifstream finLumi;
+            finLumi.open(inputFile);
+            string fileName;
+            while (getline(finLumi, fileName))
+            {
+                lumiana DYJetsLumi(fileName);
+                summedWeights += DYJetsLumi.Loop();
+            } // end while loop on weight sum
+
+            ifstream finTree;
+            finTree.open(inputFile);
+            while (getline(finTree, fileName))
+            {
+                JetTauTauAnalyzer DYJetsHist(fileName, outputDir, lumi*6.993*1000, summedWeights, maxEvents, true, invertedTauIso, invertedTau2Iso, JetId, massDecorrelation, deepDiTauRawThreshold, deepDiTauRawLowerBound, "DYJ");
+                DYJetsHist.Loop();
+            } // end while loop on input file list
+        } // end else
+    } // end if DYJETSHT400
+
+    // --- always need to reinitialize the weight parameter for new sample -----
+    summedWeights = 0;
+
+    if (doWhat == "DYJETSHT600" || doWhat == "ALL")
+    {
+        if (inputFile.EndsWith(".root"))
+        {
+            lumiana DYJetsLumi(inputFile);
+            summedWeights = DYJetsLumi.Loop();
+
+            JetTauTauAnalyzer DYJetsHist(inputFile, outputDir, lumi*1.761*1000, summedWeights, maxEvents, true, invertedTauIso, invertedTau2Iso, JetId, massDecorrelation, deepDiTauRawThreshold, deepDiTauRawLowerBound, "DYJ");
+            DYJetsHist.Loop();
+        } // end if inputFile.EndsWith(".root")
+
+        else{
+            ifstream finLumi;
+            finLumi.open(inputFile);
+            string fileName;
+            while (getline(finLumi, fileName))
+            {
+                lumiana DYJetsLumi(fileName);
+                summedWeights += DYJetsLumi.Loop();
+            } // end while loop on weight sum
+
+            ifstream finTree;
+            finTree.open(inputFile);
+            while (getline(finTree, fileName))
+            {
+                JetTauTauAnalyzer DYJetsHist(fileName, outputDir, lumi*1.761*1000, summedWeights, maxEvents, true, invertedTauIso, invertedTau2Iso, JetId, massDecorrelation, deepDiTauRawThreshold, deepDiTauRawLowerBound, "DYJ");
+                DYJetsHist.Loop();
+            } // end while loop on input file list
+        } // end else
+    } // end if DYJETSHT600
+
+    // --- always need to reinitialize the weight parameter for new sample -----
+    summedWeights = 0;
+
+    if (doWhat == "DYJETSHT800" || doWhat == "ALL")
+    {
+        if (inputFile.EndsWith(".root"))
+        {
+            lumiana DYJetsLumi(inputFile);
+            summedWeights = DYJetsLumi.Loop();
+
+            JetTauTauAnalyzer DYJetsHist(inputFile, outputDir, lumi*0.8021*1000, summedWeights, maxEvents, true, invertedTauIso, invertedTau2Iso, JetId, massDecorrelation, deepDiTauRawThreshold, deepDiTauRawLowerBound, "DYJ");
+            DYJetsHist.Loop();
+        } // end if inputFile.EndsWith(".root")
+
+        else{
+            ifstream finLumi;
+            finLumi.open(inputFile);
+            string fileName;
+            while (getline(finLumi, fileName))
+            {
+                lumiana DYJetsLumi(fileName);
+                summedWeights += DYJetsLumi.Loop();
+            } // end while loop on weight sum
+
+            ifstream finTree;
+            finTree.open(inputFile);
+            while (getline(finTree, fileName))
+            {
+                JetTauTauAnalyzer DYJetsHist(fileName, outputDir, lumi*0.8021*1000, summedWeights, maxEvents, true, invertedTauIso, invertedTau2Iso, JetId, massDecorrelation, deepDiTauRawThreshold, deepDiTauRawLowerBound, "DYJ");
+                DYJetsHist.Loop();
+            } // end while loop on input file list
+        } // end else
+    } // end if DYJETSHT800
+
+    // --- always need to reinitialize the weight parameter for new sample -----
+    summedWeights = 0;
+
+    if (doWhat == "DYJETSHT1200" || doWhat == "ALL")
+    {
+        if (inputFile.EndsWith(".root"))
+        {
+            lumiana DYJetsLumi(inputFile);
+            summedWeights = DYJetsLumi.Loop();
+
+            JetTauTauAnalyzer DYJetsHist(inputFile, outputDir, lumi*0.1937*1000, summedWeights, maxEvents, true, invertedTauIso, invertedTau2Iso, JetId, massDecorrelation, deepDiTauRawThreshold, deepDiTauRawLowerBound, "DYJ");
+            DYJetsHist.Loop();
+        } // end if inputFile.EndsWith(".root")
+
+        else{
+            ifstream finLumi;
+            finLumi.open(inputFile);
+            string fileName;
+            while (getline(finLumi, fileName))
+            {
+                lumiana DYJetsLumi(fileName);
+                summedWeights += DYJetsLumi.Loop();
+            } // end while loop on weight sum
+
+            ifstream finTree;
+            finTree.open(inputFile);
+            while (getline(finTree, fileName))
+            {
+                JetTauTauAnalyzer DYJetsHist(fileName, outputDir, lumi*0.1937*1000, summedWeights, maxEvents, true, invertedTauIso, invertedTau2Iso, JetId, massDecorrelation, deepDiTauRawThreshold, deepDiTauRawLowerBound, "DYJ");
+                DYJetsHist.Loop();
+            } // end while loop on input file list
+        } // end else
+    } // end if DYJETSHT1200
+
+    // --- always need to reinitialize the weight parameter for new sample -----
+    summedWeights = 0;
+
+    if (doWhat == "DYJETSHT2500" || doWhat == "ALL")
+    {
+        if (inputFile.EndsWith(".root"))
+        {
+            lumiana DYJetsLumi(inputFile);
+            summedWeights = DYJetsLumi.Loop();
+
+            JetTauTauAnalyzer DYJetsHist(inputFile, outputDir, lumi*0.003514*1000, summedWeights, maxEvents, true, invertedTauIso, invertedTau2Iso, JetId, massDecorrelation, deepDiTauRawThreshold, deepDiTauRawLowerBound, "DYJ");
+            DYJetsHist.Loop();
+        } // end if inputFile.EndsWith(".root")
+
+        else{
+            ifstream finLumi;
+            finLumi.open(inputFile);
+            string fileName;
+            while (getline(finLumi, fileName))
+            {
+                lumiana DYJetsLumi(fileName);
+                summedWeights += DYJetsLumi.Loop();
+            } // end while loop on weight sum
+
+            ifstream finTree;
+            finTree.open(inputFile);
+            while (getline(finTree, fileName))
+            {
+                JetTauTauAnalyzer DYJetsHist(fileName, outputDir, lumi*0.003514*1000, summedWeights, maxEvents, true, invertedTauIso, invertedTau2Iso, JetId, massDecorrelation, deepDiTauRawThreshold, deepDiTauRawLowerBound, "DYJ");
+                DYJetsHist.Loop();
+            } // end while loop on input file list
+        } // end else
+    } // end if DYJETSHT2500
+
+    // --- always need to reinitialize the weight parameter for new sample -----
+    summedWeights = 0;
+
     if (doWhat == "ZTT" || doWhat == "ALL")
     {
         if (inputFile.EndsWith(".root"))
@@ -182,6 +454,286 @@ int main(int argc, char **argv)
             } // end while loop on input file list
         } // end else
     } // end if ZTT
+
+    // --- always need to reinitialize the weight parameter for new sample -----
+    summedWeights = 0;
+
+    if (doWhat == "ZTTHT70" || doWhat == "ALL")
+    {
+        if (inputFile.EndsWith(".root"))
+        {
+            lumiana DYJetsLumi(inputFile);
+            summedWeights = DYJetsLumi.Loop();
+
+            JetTauTauAnalyzer ZTauTauHist(inputFile, outputDir, lumi*146.5*1000, summedWeights, maxEvents, true, invertedTauIso, invertedTau2Iso, JetId, massDecorrelation, deepDiTauRawThreshold, deepDiTauRawLowerBound, "ZTT");
+            ZTauTauHist.Loop();
+        } // end if inputFile.EndsWith(".root")
+
+        else{
+            ifstream finLumi;
+            finLumi.open(inputFile);
+            string fileName;
+            while (getline(finLumi, fileName))
+            {
+                lumiana DYJetsLumi(fileName);
+                summedWeights += DYJetsLumi.Loop();
+            } // end while loop on weight sum
+
+            ifstream finTree;
+            finTree.open(inputFile);
+            while (getline(finTree, fileName))
+            {
+                // ----------------- ZTauTau -------------------
+                JetTauTauAnalyzer ZTauTauHist(fileName, outputDir, lumi*146.5*1000, summedWeights, maxEvents, true, invertedTauIso, invertedTau2Iso, JetId, massDecorrelation, deepDiTauRawThreshold, deepDiTauRawLowerBound, "ZTT");
+                ZTauTauHist.Loop();
+            } // end while loop on input file list
+        } // end else
+    } // end if ZTTHT70
+
+    // --- always need to reinitialize the weight parameter for new sample -----
+    summedWeights = 0;
+
+    if (doWhat == "ZTTHT100" || doWhat == "ALL")
+    {
+        if (inputFile.EndsWith(".root"))
+        {
+            lumiana DYJetsLumi(inputFile);
+            summedWeights = DYJetsLumi.Loop();
+
+            JetTauTauAnalyzer ZTauTauHist(inputFile, outputDir, lumi*160.7*1000, summedWeights, maxEvents, true, invertedTauIso, invertedTau2Iso, JetId, massDecorrelation, deepDiTauRawThreshold, deepDiTauRawLowerBound, "ZTT");
+            ZTauTauHist.Loop();
+        } // end if inputFile.EndsWith(".root")
+
+        else{
+            ifstream finLumi;
+            finLumi.open(inputFile);
+            string fileName;
+            while (getline(finLumi, fileName))
+            {
+                lumiana DYJetsLumi(fileName);
+                summedWeights += DYJetsLumi.Loop();
+            } // end while loop on weight sum
+
+            ifstream finTree;
+            finTree.open(inputFile);
+            while (getline(finTree, fileName))
+            {
+                // ----------------- ZTauTau -------------------
+                JetTauTauAnalyzer ZTauTauHist(fileName, outputDir, lumi*160.7*1000, summedWeights, maxEvents, true, invertedTauIso, invertedTau2Iso, JetId, massDecorrelation, deepDiTauRawThreshold, deepDiTauRawLowerBound, "ZTT");
+                ZTauTauHist.Loop();
+            } // end while loop on input file list
+        } // end else
+    } // end if ZTTHT100
+
+    // --- always need to reinitialize the weight parameter for new sample -----
+    summedWeights = 0;
+
+    if (doWhat == "ZTTHT200" || doWhat == "ALL")
+    {
+        if (inputFile.EndsWith(".root"))
+        {
+            lumiana DYJetsLumi(inputFile);
+            summedWeights = DYJetsLumi.Loop();
+
+            JetTauTauAnalyzer ZTauTauHist(inputFile, outputDir, lumi*48.63*1000, summedWeights, maxEvents, true, invertedTauIso, invertedTau2Iso, JetId, massDecorrelation, deepDiTauRawThreshold, deepDiTauRawLowerBound, "ZTT");
+            ZTauTauHist.Loop();
+        } // end if inputFile.EndsWith(".root")
+
+        else{
+            ifstream finLumi;
+            finLumi.open(inputFile);
+            string fileName;
+            while (getline(finLumi, fileName))
+            {
+                lumiana DYJetsLumi(fileName);
+                summedWeights += DYJetsLumi.Loop();
+            } // end while loop on weight sum
+
+            ifstream finTree;
+            finTree.open(inputFile);
+            while (getline(finTree, fileName))
+            {
+                // ----------------- ZTauTau -------------------
+                JetTauTauAnalyzer ZTauTauHist(fileName, outputDir, lumi*48.63*1000, summedWeights, maxEvents, true, invertedTauIso, invertedTau2Iso, JetId, massDecorrelation, deepDiTauRawThreshold, deepDiTauRawLowerBound, "ZTT");
+                ZTauTauHist.Loop();
+            } // end while loop on input file list
+        } // end else
+    } // end if ZTTHT200
+
+    // --- always need to reinitialize the weight parameter for new sample -----
+    summedWeights = 0;
+
+    if (doWhat == "ZTTHT400" || doWhat == "ALL")
+    {
+        if (inputFile.EndsWith(".root"))
+        {
+            lumiana DYJetsLumi(inputFile);
+            summedWeights = DYJetsLumi.Loop();
+
+            JetTauTauAnalyzer ZTauTauHist(inputFile, outputDir, lumi*6.993*1000, summedWeights, maxEvents, true, invertedTauIso, invertedTau2Iso, JetId, massDecorrelation, deepDiTauRawThreshold, deepDiTauRawLowerBound, "ZTT");
+            ZTauTauHist.Loop();
+        } // end if inputFile.EndsWith(".root")
+
+        else{
+            ifstream finLumi;
+            finLumi.open(inputFile);
+            string fileName;
+            while (getline(finLumi, fileName))
+            {
+                lumiana DYJetsLumi(fileName);
+                summedWeights += DYJetsLumi.Loop();
+            } // end while loop on weight sum
+
+            ifstream finTree;
+            finTree.open(inputFile);
+            while (getline(finTree, fileName))
+            {
+                // ----------------- ZTauTau -------------------
+                JetTauTauAnalyzer ZTauTauHist(fileName, outputDir, lumi*6.993*1000, summedWeights, maxEvents, true, invertedTauIso, invertedTau2Iso, JetId, massDecorrelation, deepDiTauRawThreshold, deepDiTauRawLowerBound, "ZTT");
+                ZTauTauHist.Loop();
+            } // end while loop on input file list
+        } // end else
+    } // end if ZTTHT400
+
+    // --- always need to reinitialize the weight parameter for new sample -----
+    summedWeights = 0;
+
+    if (doWhat == "ZTTHT600" || doWhat == "ALL")
+    {
+        if (inputFile.EndsWith(".root"))
+        {
+            lumiana DYJetsLumi(inputFile);
+            summedWeights = DYJetsLumi.Loop();
+
+            JetTauTauAnalyzer ZTauTauHist(inputFile, outputDir, lumi*1.761*1000, summedWeights, maxEvents, true, invertedTauIso, invertedTau2Iso, JetId, massDecorrelation, deepDiTauRawThreshold, deepDiTauRawLowerBound, "ZTT");
+            ZTauTauHist.Loop();
+        } // end if inputFile.EndsWith(".root")
+
+        else{
+            ifstream finLumi;
+            finLumi.open(inputFile);
+            string fileName;
+            while (getline(finLumi, fileName))
+            {
+                lumiana DYJetsLumi(fileName);
+                summedWeights += DYJetsLumi.Loop();
+            } // end while loop on weight sum
+
+            ifstream finTree;
+            finTree.open(inputFile);
+            while (getline(finTree, fileName))
+            {
+                // ----------------- ZTauTau -------------------
+                JetTauTauAnalyzer ZTauTauHist(fileName, outputDir, lumi*1.761*1000, summedWeights, maxEvents, true, invertedTauIso, invertedTau2Iso, JetId, massDecorrelation, deepDiTauRawThreshold, deepDiTauRawLowerBound, "ZTT");
+                ZTauTauHist.Loop();
+            } // end while loop on input file list
+        } // end else
+    } // end if ZTTHT600
+
+    // --- always need to reinitialize the weight parameter for new sample -----
+    summedWeights = 0;
+
+    if (doWhat == "ZTTHT800" || doWhat == "ALL")
+    {
+        if (inputFile.EndsWith(".root"))
+        {
+            lumiana DYJetsLumi(inputFile);
+            summedWeights = DYJetsLumi.Loop();
+
+            JetTauTauAnalyzer ZTauTauHist(inputFile, outputDir, lumi*0.8021*1000, summedWeights, maxEvents, true, invertedTauIso, invertedTau2Iso, JetId, massDecorrelation, deepDiTauRawThreshold, deepDiTauRawLowerBound, "ZTT");
+            ZTauTauHist.Loop();
+        } // end if inputFile.EndsWith(".root")
+
+        else{
+            ifstream finLumi;
+            finLumi.open(inputFile);
+            string fileName;
+            while (getline(finLumi, fileName))
+            {
+                lumiana DYJetsLumi(fileName);
+                summedWeights += DYJetsLumi.Loop();
+            } // end while loop on weight sum
+
+            ifstream finTree;
+            finTree.open(inputFile);
+            while (getline(finTree, fileName))
+            {
+                // ----------------- ZTauTau -------------------
+                JetTauTauAnalyzer ZTauTauHist(fileName, outputDir, lumi*0.8021*1000, summedWeights, maxEvents, true, invertedTauIso, invertedTau2Iso, JetId, massDecorrelation, deepDiTauRawThreshold, deepDiTauRawLowerBound, "ZTT");
+                ZTauTauHist.Loop();
+            } // end while loop on input file list
+        } // end else
+    } // end if ZTTHT800
+
+    // --- always need to reinitialize the weight parameter for new sample -----
+    summedWeights = 0;
+
+    if (doWhat == "ZTTHT1200" || doWhat == "ALL")
+    {
+        if (inputFile.EndsWith(".root"))
+        {
+            lumiana DYJetsLumi(inputFile);
+            summedWeights = DYJetsLumi.Loop();
+
+            JetTauTauAnalyzer ZTauTauHist(inputFile, outputDir, lumi*0.1937*1000, summedWeights, maxEvents, true, invertedTauIso, invertedTau2Iso, JetId, massDecorrelation, deepDiTauRawThreshold, deepDiTauRawLowerBound, "ZTT");
+            ZTauTauHist.Loop();
+        } // end if inputFile.EndsWith(".root")
+
+        else{
+            ifstream finLumi;
+            finLumi.open(inputFile);
+            string fileName;
+            while (getline(finLumi, fileName))
+            {
+                lumiana DYJetsLumi(fileName);
+                summedWeights += DYJetsLumi.Loop();
+            } // end while loop on weight sum
+
+            ifstream finTree;
+            finTree.open(inputFile);
+            while (getline(finTree, fileName))
+            {
+                // ----------------- ZTauTau -------------------
+                JetTauTauAnalyzer ZTauTauHist(fileName, outputDir, lumi*0.1937*1000, summedWeights, maxEvents, true, invertedTauIso, invertedTau2Iso, JetId, massDecorrelation, deepDiTauRawThreshold, deepDiTauRawLowerBound, "ZTT");
+                ZTauTauHist.Loop();
+            } // end while loop on input file list
+        } // end else
+    } // end if ZTTHT1200
+
+    // --- always need to reinitialize the weight parameter for new sample -----
+    summedWeights = 0;
+
+    if (doWhat == "ZTTHT2500" || doWhat == "ALL")
+    {
+        if (inputFile.EndsWith(".root"))
+        {
+            lumiana DYJetsLumi(inputFile);
+            summedWeights = DYJetsLumi.Loop();
+
+            JetTauTauAnalyzer ZTauTauHist(inputFile, outputDir, lumi*0.003514*1000, summedWeights, maxEvents, true, invertedTauIso, invertedTau2Iso, JetId, massDecorrelation, deepDiTauRawThreshold, deepDiTauRawLowerBound, "ZTT");
+            ZTauTauHist.Loop();
+        } // end if inputFile.EndsWith(".root")
+
+        else{
+            ifstream finLumi;
+            finLumi.open(inputFile);
+            string fileName;
+            while (getline(finLumi, fileName))
+            {
+                lumiana DYJetsLumi(fileName);
+                summedWeights += DYJetsLumi.Loop();
+            } // end while loop on weight sum
+
+            ifstream finTree;
+            finTree.open(inputFile);
+            while (getline(finTree, fileName))
+            {
+                // ----------------- ZTauTau -------------------
+                JetTauTauAnalyzer ZTauTauHist(fileName, outputDir, lumi*0.003514*1000, summedWeights, maxEvents, true, invertedTauIso, invertedTau2Iso, JetId, massDecorrelation, deepDiTauRawThreshold, deepDiTauRawLowerBound, "ZTT");
+                ZTauTauHist.Loop();
+            } // end while loop on input file list
+        } // end else
+    } // end if ZTTHT2500
 
     // --- always need to reinitialize the weight parameter for new sample -----
     summedWeights = 0;
@@ -347,6 +899,312 @@ int main(int argc, char **argv)
             } // end while loop on input file list
         } // end else
     } // end if ZZInc
+
+    // --- always need to reinitialize the weight parameter for new sample -----
+    summedWeights = 0;
+
+    if (doWhat == "QCDHT50" || doWhat == "ALL")
+    {
+        if (inputFile.EndsWith(".root"))
+        {
+            lumiana QCDLumi(inputFile);
+            summedWeights = QCDLumi.Loop();
+
+            JetTauTauAnalyzer QCDHist(inputFile, outputDir, lumi*185300000.0*1000, summedWeights, maxEvents, true, invertedTauIso, invertedTau2Iso, JetId, massDecorrelation, deepDiTauRawThreshold, deepDiTauRawLowerBound, "QCD");
+            QCDHist.Loop();
+        } // end if inputFile.EndsWith(".root")
+
+        else{
+            ifstream finLumi;
+            finLumi.open(inputFile);
+            string fileName;
+            while (getline(finLumi, fileName))
+            {
+                lumiana QCDLumi(fileName);
+                summedWeights += QCDLumi.Loop();
+            } // end while loop on weight sum
+
+            ifstream finTree;
+            finTree.open(inputFile);
+            while (getline(finTree, fileName))
+            {
+                JetTauTauAnalyzer QCDHist(fileName, outputDir, lumi*185300000.0*1000, summedWeights, maxEvents, true, invertedTauIso, invertedTau2Iso, JetId, massDecorrelation, deepDiTauRawThreshold, deepDiTauRawLowerBound, "QCD");
+                QCDHist.Loop();
+            } // end while loop on input file list
+        } // end else
+    } // end if QCDHT50
+
+    // --- always need to reinitialize the weight parameter for new sample -----
+    summedWeights = 0;
+
+    if (doWhat == "QCDHT100" || doWhat == "ALL")
+    {
+        if (inputFile.EndsWith(".root"))
+        {
+            lumiana QCDLumi(inputFile);
+            summedWeights = QCDLumi.Loop();
+
+            JetTauTauAnalyzer QCDHist(inputFile, outputDir, lumi*23590000.0*1000, summedWeights, maxEvents, true, invertedTauIso, invertedTau2Iso, JetId, massDecorrelation, deepDiTauRawThreshold, deepDiTauRawLowerBound, "QCD");
+            QCDHist.Loop();
+        } // end if inputFile.EndsWith(".root")
+
+        else{
+            ifstream finLumi;
+            finLumi.open(inputFile);
+            string fileName;
+            while (getline(finLumi, fileName))
+            {
+                lumiana QCDLumi(fileName);
+                summedWeights += QCDLumi.Loop();
+            } // end while loop on weight sum
+
+            ifstream finTree;
+            finTree.open(inputFile);
+            while (getline(finTree, fileName))
+            {
+                JetTauTauAnalyzer QCDHist(fileName, outputDir, lumi*23590000.0*1000, summedWeights, maxEvents, true, invertedTauIso, invertedTau2Iso, JetId, massDecorrelation, deepDiTauRawThreshold, deepDiTauRawLowerBound, "QCD");
+                QCDHist.Loop();
+            } // end while loop on input file list
+        } // end else
+    } // end if QCDHT100
+
+    // --- always need to reinitialize the weight parameter for new sample -----
+    summedWeights = 0;
+
+    if (doWhat == "QCDHT200" || doWhat == "ALL")
+    {
+        if (inputFile.EndsWith(".root"))
+        {
+            lumiana QCDLumi(inputFile);
+            summedWeights = QCDLumi.Loop();
+
+            JetTauTauAnalyzer QCDHist(inputFile, outputDir, lumi*1551000.0*1000, summedWeights, maxEvents, true, invertedTauIso, invertedTau2Iso, JetId, massDecorrelation, deepDiTauRawThreshold, deepDiTauRawLowerBound, "QCD");
+            QCDHist.Loop();
+        } // end if inputFile.EndsWith(".root")
+
+        else{
+            ifstream finLumi;
+            finLumi.open(inputFile);
+            string fileName;
+            while (getline(finLumi, fileName))
+            {
+                lumiana QCDLumi(fileName);
+                summedWeights += QCDLumi.Loop();
+            } // end while loop on weight sum
+
+            ifstream finTree;
+            finTree.open(inputFile);
+            while (getline(finTree, fileName))
+            {
+                JetTauTauAnalyzer QCDHist(fileName, outputDir, lumi*1551000.0*1000, summedWeights, maxEvents, true, invertedTauIso, invertedTau2Iso, JetId, massDecorrelation, deepDiTauRawThreshold, deepDiTauRawLowerBound, "QCD");
+                QCDHist.Loop();
+            } // end while loop on input file list
+        } // end else
+    } // end if QCDHT200
+
+    // --- always need to reinitialize the weight parameter for new sample -----
+    summedWeights = 0;
+
+    if (doWhat == "QCDHT300" || doWhat == "ALL")
+    {
+        if (inputFile.EndsWith(".root"))
+        {
+            lumiana QCDLumi(inputFile);
+            summedWeights = QCDLumi.Loop();
+
+            JetTauTauAnalyzer QCDHist(inputFile, outputDir, lumi*323400.0*1000, summedWeights, maxEvents, true, invertedTauIso, invertedTau2Iso, JetId, massDecorrelation, deepDiTauRawThreshold, deepDiTauRawLowerBound, "QCD");
+            QCDHist.Loop();
+        } // end if inputFile.EndsWith(".root")
+
+        else{
+            ifstream finLumi;
+            finLumi.open(inputFile);
+            string fileName;
+            while (getline(finLumi, fileName))
+            {
+                lumiana QCDLumi(fileName);
+                summedWeights += QCDLumi.Loop();
+            } // end while loop on weight sum
+
+            ifstream finTree;
+            finTree.open(inputFile);
+            while (getline(finTree, fileName))
+            {
+                JetTauTauAnalyzer QCDHist(fileName, outputDir, lumi*323400.0*1000, summedWeights, maxEvents, true, invertedTauIso, invertedTau2Iso, JetId, massDecorrelation, deepDiTauRawThreshold, deepDiTauRawLowerBound, "QCD");
+                QCDHist.Loop();
+            } // end while loop on input file list
+        } // end else
+    } // end if QCDHT300
+
+    // --- always need to reinitialize the weight parameter for new sample -----
+    summedWeights = 0;
+
+    if (doWhat == "QCDHT500" || doWhat == "ALL")
+    {
+        if (inputFile.EndsWith(".root"))
+        {
+            lumiana QCDLumi(inputFile);
+            summedWeights = QCDLumi.Loop();
+
+            JetTauTauAnalyzer QCDHist(inputFile, outputDir, lumi*30140.0*1000, summedWeights, maxEvents, true, invertedTauIso, invertedTau2Iso, JetId, massDecorrelation, deepDiTauRawThreshold, deepDiTauRawLowerBound, "QCD");
+            QCDHist.Loop();
+        } // end if inputFile.EndsWith(".root")
+
+        else{
+            ifstream finLumi;
+            finLumi.open(inputFile);
+            string fileName;
+            while (getline(finLumi, fileName))
+            {
+                lumiana QCDLumi(fileName);
+                summedWeights += QCDLumi.Loop();
+            } // end while loop on weight sum
+
+            ifstream finTree;
+            finTree.open(inputFile);
+            while (getline(finTree, fileName))
+            {
+                JetTauTauAnalyzer QCDHist(fileName, outputDir, lumi*30140.0*1000, summedWeights, maxEvents, true, invertedTauIso, invertedTau2Iso, JetId, massDecorrelation, deepDiTauRawThreshold, deepDiTauRawLowerBound, "QCD");
+                QCDHist.Loop();
+            } // end while loop on input file list
+        } // end else
+    } // end if QCDHT500
+
+    // --- always need to reinitialize the weight parameter for new sample -----
+    summedWeights = 0;
+
+    if (doWhat == "QCDHT700" || doWhat == "ALL")
+    {
+        if (inputFile.EndsWith(".root"))
+        {
+            lumiana QCDLumi(inputFile);
+            summedWeights = QCDLumi.Loop();
+
+            JetTauTauAnalyzer QCDHist(inputFile, outputDir, lumi*6344.0*1000, summedWeights, maxEvents, true, invertedTauIso, invertedTau2Iso, JetId, massDecorrelation, deepDiTauRawThreshold, deepDiTauRawLowerBound, "QCD");
+            QCDHist.Loop();
+        } // end if inputFile.EndsWith(".root")
+
+        else{
+            ifstream finLumi;
+            finLumi.open(inputFile);
+            string fileName;
+            while (getline(finLumi, fileName))
+            {
+                lumiana QCDLumi(fileName);
+                summedWeights += QCDLumi.Loop();
+            } // end while loop on weight sum
+
+            ifstream finTree;
+            finTree.open(inputFile);
+            while (getline(finTree, fileName))
+            {
+                JetTauTauAnalyzer QCDHist(fileName, outputDir, lumi*6344.0*1000, summedWeights, maxEvents, true, invertedTauIso, invertedTau2Iso, JetId, massDecorrelation, deepDiTauRawThreshold, deepDiTauRawLowerBound, "QCD");
+                QCDHist.Loop();
+            } // end while loop on input file list
+        } // end else
+    } // end if QCDHT700
+
+    // --- always need to reinitialize the weight parameter for new sample -----
+    summedWeights = 0;
+
+    if (doWhat == "QCDHT1000" || doWhat == "ALL")
+    {
+        if (inputFile.EndsWith(".root"))
+        {
+            lumiana QCDLumi(inputFile);
+            summedWeights = QCDLumi.Loop();
+
+            JetTauTauAnalyzer QCDHist(inputFile, outputDir, lumi*1092.0*1000, summedWeights, maxEvents, true, invertedTauIso, invertedTau2Iso, JetId, massDecorrelation, deepDiTauRawThreshold, deepDiTauRawLowerBound, "QCD");
+            QCDHist.Loop();
+        } // end if inputFile.EndsWith(".root")
+
+        else{
+            ifstream finLumi;
+            finLumi.open(inputFile);
+            string fileName;
+            while (getline(finLumi, fileName))
+            {
+                lumiana QCDLumi(fileName);
+                summedWeights += QCDLumi.Loop();
+            } // end while loop on weight sum
+
+            ifstream finTree;
+            finTree.open(inputFile);
+            while (getline(finTree, fileName))
+            {
+                JetTauTauAnalyzer QCDHist(fileName, outputDir, lumi*1092.0*1000, summedWeights, maxEvents, true, invertedTauIso, invertedTau2Iso, JetId, massDecorrelation, deepDiTauRawThreshold, deepDiTauRawLowerBound, "QCD");
+                QCDHist.Loop();
+            } // end while loop on input file list
+        } // end else
+    } // end if QCDHT1000
+
+    // --- always need to reinitialize the weight parameter for new sample -----
+    summedWeights = 0;
+
+    if (doWhat == "QCDHT1500" || doWhat == "ALL")
+    {
+        if (inputFile.EndsWith(".root"))
+        {
+            lumiana QCDLumi(inputFile);
+            summedWeights = QCDLumi.Loop();
+
+            JetTauTauAnalyzer QCDHist(inputFile, outputDir, lumi*99.76*1000, summedWeights, maxEvents, true, invertedTauIso, invertedTau2Iso, JetId, massDecorrelation, deepDiTauRawThreshold, deepDiTauRawLowerBound, "QCD");
+            QCDHist.Loop();
+        } // end if inputFile.EndsWith(".root")
+
+        else{
+            ifstream finLumi;
+            finLumi.open(inputFile);
+            string fileName;
+            while (getline(finLumi, fileName))
+            {
+                lumiana QCDLumi(fileName);
+                summedWeights += QCDLumi.Loop();
+            } // end while loop on weight sum
+
+            ifstream finTree;
+            finTree.open(inputFile);
+            while (getline(finTree, fileName))
+            {
+                JetTauTauAnalyzer QCDHist(fileName, outputDir, lumi*99.76*1000, summedWeights, maxEvents, true, invertedTauIso, invertedTau2Iso, JetId, massDecorrelation, deepDiTauRawThreshold, deepDiTauRawLowerBound, "QCD");
+                QCDHist.Loop();
+            } // end while loop on input file list
+        } // end else
+    } // end if QCDHT1500
+
+    // --- always need to reinitialize the weight parameter for new sample -----
+    summedWeights = 0;
+
+    if (doWhat == "QCDHT2000" || doWhat == "ALL")
+    {
+        if (inputFile.EndsWith(".root"))
+        {
+            lumiana QCDLumi(inputFile);
+            summedWeights = QCDLumi.Loop();
+
+            JetTauTauAnalyzer QCDHist(inputFile, outputDir, lumi*20.35*1000, summedWeights, maxEvents, true, invertedTauIso, invertedTau2Iso, JetId, massDecorrelation, deepDiTauRawThreshold, deepDiTauRawLowerBound, "QCD");
+            QCDHist.Loop();
+        } // end if inputFile.EndsWith(".root")
+
+        else{
+            ifstream finLumi;
+            finLumi.open(inputFile);
+            string fileName;
+            while (getline(finLumi, fileName))
+            {
+                lumiana QCDLumi(fileName);
+                summedWeights += QCDLumi.Loop();
+            } // end while loop on weight sum
+
+            ifstream finTree;
+            finTree.open(inputFile);
+            while (getline(finTree, fileName))
+            {
+                JetTauTauAnalyzer QCDHist(fileName, outputDir, lumi*20.35*1000, summedWeights, maxEvents, true, invertedTauIso, invertedTau2Iso, JetId, massDecorrelation, deepDiTauRawThreshold, deepDiTauRawLowerBound, "QCD");
+                QCDHist.Loop();
+            } // end while loop on input file list
+        } // end else
+    } // end if QCDHT2000
 
     return 0;
 }

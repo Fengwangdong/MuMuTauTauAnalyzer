@@ -34,10 +34,13 @@ void JetTauTauAnalyzer::Loop()
       // ---- define varibles that will be used to be filled into histograms ---
       TLorentzVector Jet1;
       TLorentzVector Jet2;
+      TLorentzVector Jet3;
 
       unsigned int indexJ1;
-      float Jet1DCM;
-      float Jet2DCM;
+      unsigned int indexJ2;
+      float Jet1DCM = -1;
+      float Jet2DCM = -1;
+      float Jet3DCM = -1;
       // =============================================================================
 
       // ---- start loop on jet candidates for j1 ----
@@ -83,7 +86,7 @@ void JetTauTauAnalyzer::Loop()
           bool condJetIdPU = recoJetIdPileUp->at(iJet) > 0;
           bool passCondJetId = ((condJetIdLoose || condJetIdTight || condJetIdTightLepVeto) && condJetIdPU) || condJetIdNull;
 
-          if (!passCondJetId) continue;
+          if (!passCondJetId || recoJetPt->at(iJet) < 20.0) continue;
 
           bool condDiTauDisc = (!massDecorrelation && recoJetDeepDiTauValuev1->at(iJet) > deepDiTauRawThreshold) || (massDecorrelation && recoJetDeepDiTauValueMDv1->at(iJet) > deepDiTauRawThreshold);
           bool condInvertDiTauDisc = (!massDecorrelation && recoJetDeepDiTauValuev1->at(iJet) < deepDiTauRawThreshold && recoJetDeepDiTauValuev1->at(iJet) > deepDiTauRawLowerBound) || (massDecorrelation && recoJetDeepDiTauValueMDv1->at(iJet) < deepDiTauRawThreshold && recoJetDeepDiTauValueMDv1->at(iJet) > deepDiTauRawLowerBound);
@@ -94,10 +97,37 @@ void JetTauTauAnalyzer::Loop()
           Jet2.SetPtEtaPhiE(recoJetPt->at(iJet), recoJetEta->at(iJet), recoJetPhi->at(iJet), recoJetEnergy->at(iJet));
           Jet2DCM = massDecorrelation ? recoJetDeepDiTauValueMDv1->at(iJet) : recoJetDeepDiTauValuev1->at(iJet);
           findDiTauCandJet2 = true;
-
-          //if (((!invertedTauIso && condDiTauDisc) || (invertedTauIso && condInvertDiTauDisc)) && (recoJetCSV->at(iJet) < 0.5426)) findDiTauCandJet2 = true;
+          indexJ2 = iJet;
           break;
+          //if (((!invertedTauIso && condDiTauDisc) || (invertedTauIso && condInvertDiTauDisc)) && (recoJetCSV->at(iJet) < 0.5426)) findDiTauCandJet2 = true;
       } // end loop for j2
+
+      bool findDiTauCandJet3 = false;
+      // ------- start loop on j3 candidate -------
+      for (unsigned int iJet=0; iJet<recoJetPt->size(); iJet++)
+      {
+          if (iJet == indexJ1 || iJet == indexJ2) continue;
+          bool condJetIdLoose = JetId == "LOOSE" && recoJetIdLoose->at(iJet) > 0;
+          bool condJetIdTight = JetId == "TIGHT" && recoJetIdTight->at(iJet) > 0;
+          bool condJetIdTightLepVeto = JetId == "TIGHTLEPVETO" && recoJetIdTightLepVeto->at(iJet) > 0;
+          bool condJetIdNull = JetId != "LOOSE" && JetId != "TIGHT" && JetId != "TIGHTLEPVETO";
+          bool condJetIdPU = recoJetIdPileUp->at(iJet) > 0;
+          bool passCondJetId = ((condJetIdLoose || condJetIdTight || condJetIdTightLepVeto) && condJetIdPU) || condJetIdNull;
+
+          if (!passCondJetId || recoJetPt->at(iJet) < 20.0 || recoJetPt->at(iJet) > Jet2.Pt()) continue;
+
+          bool condDiTauDisc = (!massDecorrelation && recoJetDeepDiTauValuev1->at(iJet) > deepDiTauRawLowerBound) || (massDecorrelation && recoJetDeepDiTauValueMDv1->at(iJet) > deepDiTauRawLowerBound);
+          if (!condDiTauDisc || recoJetCSV->at(iJet) > 0.5426) continue;
+
+          TLorentzVector Jet3Cand;
+          Jet3Cand.SetPtEtaPhiE(recoJetPt->at(iJet), recoJetEta->at(iJet), recoJetPhi->at(iJet), recoJetEnergy->at(iJet));
+          if (Jet3Cand.DeltaR(Jet2) > 0.8) continue;
+
+          Jet3.SetPtEtaPhiE(recoJetPt->at(iJet), recoJetEta->at(iJet), recoJetPhi->at(iJet), recoJetEnergy->at(iJet));
+          Jet3DCM = massDecorrelation ? recoJetDeepDiTauValueMDv1->at(iJet) : recoJetDeepDiTauValuev1->at(iJet);
+          findDiTauCandJet3 = true;
+          break;
+      } // end loop for j3
 
       // ---- prepare event weight info ----
       double weight = 1;
@@ -112,6 +142,7 @@ void JetTauTauAnalyzer::Loop()
       {
           float MetPt = recoMET->at(0);
           float MetPhi= recoMETPhi->at(0);
+          if (MetPt < 180.0) continue;
 
           // --------------- rec-gen matching for separating ZTT, DYJ, and other backgrounds and data -------------------
           if (isMC && doWhatSample == "ZTT")
@@ -127,9 +158,11 @@ void JetTauTauAnalyzer::Loop()
                   TLorentzVector GenTauHadCand1;
                   GenTauHadCand1.SetPtEtaPhiM(genTauHadPt->at(iGenTauHad), genTauHadEta->at(iGenTauHad), genTauHadPhi->at(iGenTauHad), genTauHadMass->at(iGenTauHad));
                   //bool genTau1matchWithJ1 = findDiTauCandJet1 && Jet1.DeltaR(GenTauHadCand1) < smallestDR && fabs(genTauHadMotherPDGId->at(iGenTauHad)) == 23;
-                  bool genTau1matchWithJ2 = findDiTauCandJet2 && Jet2.DeltaR(GenTauHadCand1) < smallestDR && fabs(genTauHadMotherPDGId->at(iGenTauHad)) == 23;
+                  bool genTau1matchWithJ2 = Jet2.DeltaR(GenTauHadCand1) < smallestDR && fabs(genTauHadMotherPDGId->at(iGenTauHad)) == 23;
+                  bool genTau1matchWithJ3 = findDiTauCandJet3 && Jet3.DeltaR(GenTauHadCand1) < smallestDR && fabs(genTauHadMotherPDGId->at(iGenTauHad)) == 23;
+                  bool genTau1matchWithJ23 = genTau1matchWithJ2 || genTau1matchWithJ3;
                   //if (!genTau1matchWithJ1 && !genTau1matchWithJ2) continue;
-                  if (!genTau1matchWithJ2) continue;
+                  if (!genTau1matchWithJ23) continue;
 
                   // --------- search for matched genTauHad2 for recJet --------------
                   for (unsigned int iGenTauHad2=iGenTauHad+1; iGenTauHad2<genTauHadPt->size(); iGenTauHad2++)
@@ -138,10 +171,12 @@ void JetTauTauAnalyzer::Loop()
                       GenTauHadCand2.SetPtEtaPhiM(genTauHadPt->at(iGenTauHad2), genTauHadEta->at(iGenTauHad2), genTauHadPhi->at(iGenTauHad2), genTauHadMass->at(iGenTauHad2));
 
                       //bool genTau2matchWithJ1 = findDiTauCandJet1 && Jet1.DeltaR(GenTauHadCand2) < smallestDR && fabs(genTauHadMotherPDGId->at(iGenTauHad2)) == 23;
-                      bool genTau2matchWithJ2 = findDiTauCandJet2 && Jet2.DeltaR(GenTauHadCand2) < smallestDR && fabs(genTauHadMotherPDGId->at(iGenTauHad2)) == 23;
+                      bool genTau2matchWithJ2 = Jet2.DeltaR(GenTauHadCand2) < smallestDR && fabs(genTauHadMotherPDGId->at(iGenTauHad2)) == 23;
+                      bool genTau2matchWithJ3 = findDiTauCandJet3 && Jet3.DeltaR(GenTauHadCand2) < smallestDR && fabs(genTauHadMotherPDGId->at(iGenTauHad2)) == 23;
+                      bool genTau2matchWithJ23 = genTau2matchWithJ2 || genTau2matchWithJ3;
                       //if (!genTau2matchWithJ1 && !genTau2matchWithJ2) continue;
                       //if ((genTau1matchWithJ1 && genTau2matchWithJ1) || (genTau1matchWithJ2 && genTau2matchWithJ2))
-                      if (genTau1matchWithJ2 && genTau2matchWithJ2)
+                      if (genTau1matchWithJ23 && genTau2matchWithJ23)
                       {
                           GenTauHad2 = GenTauHadCand2;
                           findMatchedRecJetGenTauHad = true;
@@ -164,23 +199,25 @@ void JetTauTauAnalyzer::Loop()
                   Jet1Mass->Fill(Jet1.M(), weight);
                   Jet1Disc->Fill(Jet1DCM, weight);
 
-                  Jet2Pt->Fill(Jet2.Pt(), weight);
-                  Jet2Eta->Fill(Jet2.Eta(), weight);
-                  Jet2Phi->Fill(Jet2.Phi(), weight);
-                  Jet2Mass->Fill(Jet2.M(), weight);
+                  Jet2Pt->Fill((Jet2+Jet3).Pt(), weight);
+                  Jet2Eta->Fill((Jet2+Jet3).Eta(), weight);
+                  Jet2Phi->Fill((Jet2+Jet3).Phi(), weight);
+                  Jet2Mass->Fill((Jet2+Jet3).M(), weight);
                   Jet2Disc->Fill(Jet2DCM, weight);
+                  Jet2Disc->Fill(Jet3DCM, weight);
 
-                  dRJet1Jet2->Fill(Jet1.DeltaR(Jet2), weight);
+                  dRJet1Jet2->Fill(Jet1.DeltaR(Jet2+Jet3), weight);
 
                   metPt->Fill(MetPt, weight);
                   metPhi->Fill(MetPhi, weight);
 
                   Jet1MassDisc->Fill(Jet1.M(), Jet1DCM, weight);
-                  Jet2MassDisc->Fill(Jet2.M(), Jet2DCM, weight);
+                  Jet2MassDisc->Fill((Jet2+Jet3).M(), Jet2DCM, weight);
+                  Jet2MassDisc->Fill((Jet2+Jet3).M(), Jet3DCM, weight);
 
                   invMassGenTauHadGenTauHad->Fill((GenTauHad1+GenTauHad2).M(), weight);
                   invMassJet1VSGenTauHadGenTauHad->Fill(Jet1.M(), (GenTauHad1+GenTauHad2).M(), weight);
-                  invMassJet2VSGenTauHadGenTauHad->Fill(Jet2.M(), (GenTauHad1+GenTauHad2).M(), weight);
+                  invMassJet2VSGenTauHadGenTauHad->Fill((Jet2+Jet3).M(), (GenTauHad1+GenTauHad2).M(), weight);
               } // end if findMatchedRecJetGenTauHad == true
           } // end if isMC && doWhatSample == "ZTT"
 
@@ -197,9 +234,11 @@ void JetTauTauAnalyzer::Loop()
                   TLorentzVector GenTauHadCand1;
                   GenTauHadCand1.SetPtEtaPhiM(genTauHadPt->at(iGenTauHad), genTauHadEta->at(iGenTauHad), genTauHadPhi->at(iGenTauHad), genTauHadMass->at(iGenTauHad));
                   //bool genTau1matchWithJ1 = findDiTauCandJet1 && Jet1.DeltaR(GenTauHadCand1) < smallestDR && fabs(genTauHadMotherPDGId->at(iGenTauHad)) == 23;
-                  bool genTau1matchWithJ2 = findDiTauCandJet2 && Jet2.DeltaR(GenTauHadCand1) < smallestDR && fabs(genTauHadMotherPDGId->at(iGenTauHad)) == 23;
+                  bool genTau1matchWithJ2 = Jet2.DeltaR(GenTauHadCand1) < smallestDR && fabs(genTauHadMotherPDGId->at(iGenTauHad)) == 23;
+                  bool genTau1matchWithJ3 = findDiTauCandJet3 && Jet3.DeltaR(GenTauHadCand1) < smallestDR && fabs(genTauHadMotherPDGId->at(iGenTauHad)) == 23;
+                  bool genTau1matchWithJ23 = genTau1matchWithJ2 || genTau1matchWithJ3;
                   //if (!genTau1matchWithJ1 && !genTau1matchWithJ2) continue;
-                  if (!genTau1matchWithJ2) continue;
+                  if (!genTau1matchWithJ23) continue;
 
                   // --------- search for matched genTauHad2 for recJet --------------
                   for (unsigned int iGenTauHad2=iGenTauHad+1; iGenTauHad2<genTauHadPt->size(); iGenTauHad2++)
@@ -208,10 +247,12 @@ void JetTauTauAnalyzer::Loop()
                       GenTauHadCand2.SetPtEtaPhiM(genTauHadPt->at(iGenTauHad2), genTauHadEta->at(iGenTauHad2), genTauHadPhi->at(iGenTauHad2), genTauHadMass->at(iGenTauHad2));
 
                       //bool genTau2matchWithJ1 = findDiTauCandJet1 && Jet1.DeltaR(GenTauHadCand2) < smallestDR && fabs(genTauHadMotherPDGId->at(iGenTauHad2)) == 23;
-                      bool genTau2matchWithJ2 = findDiTauCandJet2 && Jet2.DeltaR(GenTauHadCand2) < smallestDR && fabs(genTauHadMotherPDGId->at(iGenTauHad2)) == 23;
+                      bool genTau2matchWithJ2 = Jet2.DeltaR(GenTauHadCand2) < smallestDR && fabs(genTauHadMotherPDGId->at(iGenTauHad2)) == 23;
+                      bool genTau2matchWithJ3 = findDiTauCandJet3 && Jet3.DeltaR(GenTauHadCand2) < smallestDR && fabs(genTauHadMotherPDGId->at(iGenTauHad2)) == 23;
+                      bool genTau2matchWithJ23 = genTau2matchWithJ2 || genTau2matchWithJ3;
                       //if (!genTau2matchWithJ1 && !genTau2matchWithJ2) continue;
                       //if ((genTau1matchWithJ1 && genTau2matchWithJ1) || (genTau1matchWithJ2 && genTau2matchWithJ2))
-                      if (genTau1matchWithJ2 && genTau2matchWithJ2)
+                      if (genTau1matchWithJ23 && genTau2matchWithJ23)
                       {
                           findMatchedRecJetGenTauHad = true;
                           break;
@@ -229,26 +270,28 @@ void JetTauTauAnalyzer::Loop()
                   Jet1Mass->Fill(Jet1.M(), weight);
                   Jet1Disc->Fill(Jet1DCM, weight);
 
-                  Jet2Pt->Fill(Jet2.Pt(), weight);
-                  Jet2Eta->Fill(Jet2.Eta(), weight);
-                  Jet2Phi->Fill(Jet2.Phi(), weight);
-                  Jet2Mass->Fill(Jet2.M(), weight);
+                  Jet2Pt->Fill((Jet2+Jet3).Pt(), weight);
+                  Jet2Eta->Fill((Jet2+Jet3).Eta(), weight);
+                  Jet2Phi->Fill((Jet2+Jet3).Phi(), weight);
+                  Jet2Mass->Fill((Jet2+Jet3).M(), weight);
                   Jet2Disc->Fill(Jet2DCM, weight);
+                  Jet2Disc->Fill(Jet3DCM, weight);
 
-                  dRJet1Jet2->Fill(Jet1.DeltaR(Jet2), weight);
+                  dRJet1Jet2->Fill(Jet1.DeltaR(Jet2+Jet3), weight);
 
                   metPt->Fill(MetPt, weight);
                   metPhi->Fill(MetPhi, weight);
 
                   Jet1MassDisc->Fill(Jet1.M(), Jet1DCM, weight);
-                  Jet2MassDisc->Fill(Jet2.M(), Jet2DCM, weight);
+                  Jet2MassDisc->Fill((Jet2+Jet3).M(), Jet2DCM, weight);
+                  Jet2MassDisc->Fill((Jet2+Jet3).M(), Jet3DCM, weight);
 
                   smallestDR = 0.4;
                   for (unsigned int iGenTauHad=0; iGenTauHad<genTauHadPt->size(); iGenTauHad++)
                   {
                       TLorentzVector GenTauHadCand1;
                       GenTauHadCand1.SetPtEtaPhiM(genTauHadPt->at(iGenTauHad), genTauHadEta->at(iGenTauHad), genTauHadPhi->at(iGenTauHad), genTauHadMass->at(iGenTauHad));
-                      if (Jet1.DeltaR(GenTauHadCand1) < smallestDR || Jet2.DeltaR(GenTauHadCand1) < smallestDR)
+                      if (Jet1.DeltaR(GenTauHadCand1) < smallestDR || (Jet2+Jet3).DeltaR(GenTauHadCand1) < smallestDR)
                       {
                           GenTauHad1 = GenTauHadCand1;
                       } // end if smallestDR for GenTauHad1
@@ -256,7 +299,7 @@ void JetTauTauAnalyzer::Loop()
                       {
                           TLorentzVector GenTauHadCand2;
                           GenTauHadCand2.SetPtEtaPhiM(genTauHadPt->at(iGenTauHad2), genTauHadEta->at(iGenTauHad2), genTauHadPhi->at(iGenTauHad2), genTauHadMass->at(iGenTauHad2));
-                          if (Jet1.DeltaR(GenTauHadCand2) < smallestDR || Jet2.DeltaR(GenTauHadCand2) < smallestDR)
+                          if (Jet1.DeltaR(GenTauHadCand2) < smallestDR || (Jet2+Jet3).DeltaR(GenTauHadCand2) < smallestDR)
                           {
                               GenTauHad2 = GenTauHadCand2;
                           } // end if smallestDR for GenTauHad2
@@ -265,7 +308,7 @@ void JetTauTauAnalyzer::Loop()
 
                   invMassGenTauHadGenTauHad->Fill((GenTauHad1+GenTauHad2).M(), weight);
                   invMassJet1VSGenTauHadGenTauHad->Fill(Jet1.M(), (GenTauHad1+GenTauHad2).M(), weight);
-                  invMassJet2VSGenTauHadGenTauHad->Fill(Jet2.M(), (GenTauHad1+GenTauHad2).M(), weight);
+                  invMassJet2VSGenTauHadGenTauHad->Fill((Jet2+Jet3).M(), (GenTauHad1+GenTauHad2).M(), weight);
               } // end if findMatchedRecJetGenTauHad == false
           } // end if isMC && doWhatSample == "DYJ"
 
@@ -280,19 +323,21 @@ void JetTauTauAnalyzer::Loop()
               Jet1Mass->Fill(Jet1.M(), weight);
               Jet1Disc->Fill(Jet1DCM, weight);
 
-              Jet2Pt->Fill(Jet2.Pt(), weight);
-              Jet2Eta->Fill(Jet2.Eta(), weight);
-              Jet2Phi->Fill(Jet2.Phi(), weight);
-              Jet2Mass->Fill(Jet2.M(), weight);
+              Jet2Pt->Fill((Jet2+Jet3).Pt(), weight);
+              Jet2Eta->Fill((Jet2+Jet3).Eta(), weight);
+              Jet2Phi->Fill((Jet2+Jet3).Phi(), weight);
+              Jet2Mass->Fill((Jet2+Jet3).M(), weight);
               Jet2Disc->Fill(Jet2DCM, weight);
+              Jet2Disc->Fill(Jet3DCM, weight);
 
-              dRJet1Jet2->Fill(Jet1.DeltaR(Jet2), weight);
+              dRJet1Jet2->Fill(Jet1.DeltaR(Jet2+Jet3), weight);
 
               metPt->Fill(MetPt, weight);
               metPhi->Fill(MetPhi, weight);
 
               Jet1MassDisc->Fill(Jet1.M(), Jet1DCM, weight);
-              Jet2MassDisc->Fill(Jet2.M(), Jet2DCM, weight);
+              Jet2MassDisc->Fill((Jet2+Jet3).M(), Jet2DCM, weight);
+              Jet2MassDisc->Fill((Jet2+Jet3).M(), Jet3DCM, weight);
 
               if (isMC)
               {
@@ -301,7 +346,7 @@ void JetTauTauAnalyzer::Loop()
                   {
                       TLorentzVector GenTauHadCand1;
                       GenTauHadCand1.SetPtEtaPhiM(genTauHadPt->at(iGenTauHad), genTauHadEta->at(iGenTauHad), genTauHadPhi->at(iGenTauHad), genTauHadMass->at(iGenTauHad));
-                      if (Jet1.DeltaR(GenTauHadCand1) < smallestDR || Jet2.DeltaR(GenTauHadCand1) < smallestDR)
+                      if (Jet1.DeltaR(GenTauHadCand1) < smallestDR || (Jet2+Jet3).DeltaR(GenTauHadCand1) < smallestDR)
                       {
                           GenTauHad1 = GenTauHadCand1;
                       } // end if smallestDR for GenTauHad1
@@ -309,7 +354,7 @@ void JetTauTauAnalyzer::Loop()
                       {
                           TLorentzVector GenTauHadCand2;
                           GenTauHadCand2.SetPtEtaPhiM(genTauHadPt->at(iGenTauHad2), genTauHadEta->at(iGenTauHad2), genTauHadPhi->at(iGenTauHad2), genTauHadMass->at(iGenTauHad2));
-                          if (Jet1.DeltaR(GenTauHadCand2) < smallestDR || Jet2.DeltaR(GenTauHadCand2) < smallestDR)
+                          if (Jet1.DeltaR(GenTauHadCand2) < smallestDR || (Jet2+Jet3).DeltaR(GenTauHadCand2) < smallestDR)
                           {
                               GenTauHad2 = GenTauHadCand2;
                           } // end if smallestDR for GenTauHad2
@@ -318,10 +363,10 @@ void JetTauTauAnalyzer::Loop()
 
                   invMassGenTauHadGenTauHad->Fill((GenTauHad1+GenTauHad2).M(), weight);
                   invMassJet1VSGenTauHadGenTauHad->Fill(Jet1.M(), (GenTauHad1+GenTauHad2).M(), weight);
-                  invMassJet2VSGenTauHadGenTauHad->Fill(Jet2.M(), (GenTauHad1+GenTauHad2).M(), weight);
+                  invMassJet2VSGenTauHadGenTauHad->Fill((Jet2+Jet3).M(), (GenTauHad1+GenTauHad2).M(), weight);
               } // end if isMC == true
           } // end if doWhatSample != "ZTT" && doWhatSample != "DYJ"
-      } // end if findDiTauCandJet1 || findDiTauCandJet2
+      } // end if findDiTauCandJet2
    } // end for loop on events
 
    outputFile->cd();
