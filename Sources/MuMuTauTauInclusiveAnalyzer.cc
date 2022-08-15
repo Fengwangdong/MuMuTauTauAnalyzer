@@ -71,6 +71,7 @@ void MuMuTauTauInclusiveAnalyzer::Loop()
 
       unsigned int indexMu1 = -1;
       unsigned int indexMu2 = -1;
+      unsigned int indexJ1 = -1;
       // =============================================================================
 
       // ---- start loop on muon candidates for mu1 ----
@@ -893,15 +894,48 @@ void MuMuTauTauInclusiveAnalyzer::Loop()
               TauIso = massDecorrelation ? recoJetDeepDiTauValueMDv1->at(iJet) : recoJetDeepDiTauValuev1->at(iJet);
               highestPt = Tau.Pt();
               findTauTauPair = true;
+              indexJ1 = iJet;
           } // end if highest pt
       } // end loop for jets containing tau candidates
+
+      bool findDiTauCandJet2 = false;
+      // ------- start loop on j2 candidate (complement the first jet on the di-tau_h coverage) -------
+      for (unsigned int iJet=0; iJet<recoJetPt->size(); iJet++)
+      {
+          if (boostDiTauOpt) break;
+          if (iJet == indexJ1) continue;
+          bool condJetIdLoose = JetId == "LOOSE" && recoJetIdLoose->at(iJet) > 0;
+          bool condJetIdTight = JetId == "TIGHT" && recoJetIdTight->at(iJet) > 0;
+          bool condJetIdTightLepVeto = JetId == "TIGHTLEPVETO" && recoJetIdTightLepVeto->at(iJet) > 0;
+          bool condJetIdNull = JetId != "LOOSE" && JetId != "TIGHT" && JetId != "TIGHTLEPVETO";
+          bool condJetIdPU = recoJetIdPileUp->at(iJet) > 0;
+          bool passCondJetId = ((condJetIdLoose || condJetIdTight || condJetIdTightLepVeto) && condJetIdPU) || condJetIdNull;
+
+          if (!passCondJetId) continue;
+
+          bool condDiTauDisc = (!massDecorrelation && recoJetDeepDiTauValuev1->at(iJet) > deepDiTauRawLowerBound) || (massDecorrelation && recoJetDeepDiTauValueMDv1->at(iJet) > deepDiTauRawLowerBound);
+          if (!condDiTauDisc || recoJetCSV->at(iJet) > 0.5426) continue;
+
+          // ------ estimate JEC systematics ------
+          table TableJESunc(jecSystFile);
+          double jetEnergyCorr = 1 + jetScaleSyst * (TableJESunc.getEfficiency(recoJetPt->at(iJet), recoJetEta->at(iJet)));
+
+          TLorentzVector Tau2Cand;
+          Tau2Cand.SetPtEtaPhiE(recoJetPt->at(iJet) * jetEnergyCorr, recoJetEta->at(iJet), recoJetPhi->at(iJet), recoJetEnergy->at(iJet) * jetEnergyCorr);
+
+          if (Tau2Cand.DeltaR(Mu1) < 0.8 || Tau2Cand.DeltaR(Mu2) < 0.8 || Tau2Cand.DeltaR(Tau) > 0.8 || Tau2Cand.Pt() < 20.0 || Tau2Cand.Pt() > Tau.Pt()) continue;
+          Tau2.SetPtEtaPhiE(recoJetPt->at(iJet) * jetEnergyCorr, recoJetEta->at(iJet), recoJetPhi->at(iJet), recoJetEnergy->at(iJet) * jetEnergyCorr);
+          Tau2Iso = massDecorrelation ? recoJetDeepDiTauValueMDv1->at(iJet) : recoJetDeepDiTauValuev1->at(iJet);
+          findDiTauCandJet2 = true;
+          break;
+      } // end loop for j2
 
       if (findTauTauPair)
       {
           // ----- fill flat trees -----
           invMassMu1Mu2_tt = (Mu1+Mu2).M();
-          visMassTauTau_tt = Tau.M();
-          visMass2Mu2Tau_tt = (Mu1+Mu2+Tau).M();
+          visMassTauTau_tt = (Tau+Tau2).M();
+          visMass2Mu2Tau_tt = (Mu1+Mu2+Tau+Tau2).M();
           
           deltaRMu1Mu2_tt = Mu1.DeltaR(Mu2);
 
@@ -915,11 +949,12 @@ void MuMuTauTauInclusiveAnalyzer::Loop()
           mu2Phi_tt = Mu2.Phi();
           mu2Mass_tt = Mu2.M();
 
-          tauPt_tt = Tau.Pt();
-          tauEta_tt = Tau.Eta();
-          tauPhi_tt = Tau.Phi();
-          tauMass_tt = Tau.M();
+          tauPt_tt = (Tau+Tau2).Pt();
+          tauEta_tt = (Tau+Tau2).Eta();
+          tauPhi_tt = (Tau+Tau2).Phi();
+          tauMass_tt = (Tau+Tau2).M();
           tauDisc_tt = TauIso;
+          if (findDiTauCandJet2) tau2Disc_tt = Tau2Iso;
 
           eventWeight_tt = weight/summedWeights;
           TreeTauTau->Fill();
