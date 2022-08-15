@@ -203,7 +203,7 @@ void MuMuTauHadTauHadAnalyzer::Loop()
           TLorentzVector TauCand;
           TauCand.SetPtEtaPhiE(recoJetPt->at(iJet) * jetEnergyCorr, recoJetEta->at(iJet), recoJetPhi->at(iJet), recoJetEnergy->at(iJet) * jetEnergyCorr);
 
-          if (TauCand.Pt() < 20.0 || TauCand.DeltaR(Mu1) < 0.8 || TauCand.DeltaR(Mu2) < 0.8) continue;
+          if (TauCand.Pt() < 30.0 || TauCand.DeltaR(Mu1) < 0.8 || TauCand.DeltaR(Mu2) < 0.8) continue;
           if (TauCand.Pt() > highestPt)
           {
               Tau.SetPtEtaPhiE(recoJetPt->at(iJet) * jetEnergyCorr, recoJetEta->at(iJet), recoJetPhi->at(iJet), recoJetEnergy->at(iJet) * jetEnergyCorr);
@@ -239,7 +239,7 @@ void MuMuTauHadTauHadAnalyzer::Loop()
           TLorentzVector Tau2Cand;
           Tau2Cand.SetPtEtaPhiE(recoJetPt->at(iJet) * jetEnergyCorr, recoJetEta->at(iJet), recoJetPhi->at(iJet), recoJetEnergy->at(iJet) * jetEnergyCorr);
 
-          if (Tau2Cand.DeltaR(Mu1) < 0.8 || Tau2Cand.DeltaR(Mu2) < 0.8 || Tau2Cand.DeltaR(Tau) > 0.8 || Tau2Cand.Pt() < 20.0 || Tau2Cand.Pt() > Tau.Pt()) continue;
+          if (Tau2Cand.DeltaR(Mu1) < 0.8 || Tau2Cand.DeltaR(Mu2) < 0.8 || Tau2Cand.DeltaR(Tau) > 0.8 || Tau2Cand.Pt() < 30.0 || Tau2Cand.Pt() > Tau.Pt()) continue;
           Tau2.SetPtEtaPhiE(recoJetPt->at(iJet) * jetEnergyCorr, recoJetEta->at(iJet), recoJetPhi->at(iJet), recoJetEnergy->at(iJet) * jetEnergyCorr);
           Tau2Iso = massDecorrelation ? recoJetDeepDiTauValueMDv1->at(iJet) : recoJetDeepDiTauValuev1->at(iJet);
           findDiTauCandJet2 = true;
