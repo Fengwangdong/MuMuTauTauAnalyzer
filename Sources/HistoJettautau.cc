@@ -76,7 +76,7 @@ TH2D* HistoJettautau::newTH2D(string name, string xTitle, string yTitle, int nBi
 // --------------- customize the binning of output histograms -----------------
 HistoJettautau::HistoJettautau(){
 
-    double jetPtBin [] = {20, 30, 50, 80, 120, 170, 230, 300, 380, 500, 640, 800, 980, 1180, 1400};
+    double jetPtBin [] = {30, 50, 80, 120, 170, 230, 300, 380, 500, 640, 800, 980, 1180, 1400};
     double metPtBin [] = {180, 230, 300, 380, 500, 640, 800, 980, 1180, 1400};
 
     int NBinsJetPt = sizeof(jetPtBin)/sizeof(jetPtBin[0])-1;

@@ -86,7 +86,7 @@ void JetTauTauAnalyzer::Loop()
           bool condJetIdPU = recoJetIdPileUp->at(iJet) > 0;
           bool passCondJetId = ((condJetIdLoose || condJetIdTight || condJetIdTightLepVeto) && condJetIdPU) || condJetIdNull;
 
-          if (!passCondJetId || recoJetPt->at(iJet) < 20.0) continue;
+          if (!passCondJetId || recoJetPt->at(iJet) < 30.0) continue;
 
           bool condDiTauDisc = (!massDecorrelation && recoJetDeepDiTauValuev1->at(iJet) > deepDiTauRawThreshold) || (massDecorrelation && recoJetDeepDiTauValueMDv1->at(iJet) > deepDiTauRawThreshold);
           bool condInvertDiTauDisc = (!massDecorrelation && recoJetDeepDiTauValuev1->at(iJet) < deepDiTauRawThreshold && recoJetDeepDiTauValuev1->at(iJet) > deepDiTauRawLowerBound) || (massDecorrelation && recoJetDeepDiTauValueMDv1->at(iJet) < deepDiTauRawThreshold && recoJetDeepDiTauValueMDv1->at(iJet) > deepDiTauRawLowerBound);
@@ -114,7 +114,7 @@ void JetTauTauAnalyzer::Loop()
           bool condJetIdPU = recoJetIdPileUp->at(iJet) > 0;
           bool passCondJetId = ((condJetIdLoose || condJetIdTight || condJetIdTightLepVeto) && condJetIdPU) || condJetIdNull;
 
-          if (!passCondJetId || recoJetPt->at(iJet) < 20.0 || recoJetPt->at(iJet) > Jet2.Pt()) continue;
+          if (!passCondJetId || recoJetPt->at(iJet) < 30.0 || recoJetPt->at(iJet) > Jet2.Pt()) continue;
 
           bool condDiTauDisc = (!massDecorrelation && recoJetDeepDiTauValuev1->at(iJet) > deepDiTauRawLowerBound) || (massDecorrelation && recoJetDeepDiTauValueMDv1->at(iJet) > deepDiTauRawLowerBound);
           if (!condDiTauDisc || recoJetCSV->at(iJet) > 0.5426) continue;
