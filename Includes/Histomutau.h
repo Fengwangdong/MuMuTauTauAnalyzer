@@ -111,6 +111,8 @@ class Histomutau{
         TH1D* tau2Mass;
         TH1D* tau2DecayMode;
 
+        TH1D* metPt;
+
         TH1D* dRMu1Mu3;
         TH1D* dRMu1Mu4;
         TH1D* dRMu1Ele1;
@@ -134,6 +136,9 @@ class Histomutau{
         TH2D* dRInvMassMu3Tau;
         TH2D* dRInvMassEleTau;
         TH2D* dRInvMassTauTau;
+
+        TH2D* invMassTauTauMet;
+        TH2D* invMassMuMuTauHadTauHadMet;
 
         // ----------- flat tree for fit -----------
         TTree* TreeMuMuTauTau;

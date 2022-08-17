@@ -520,6 +520,8 @@ void MuMuTauHadTauHadAnalyzer::Loop()
           mu2Eta->Fill(Mu2.Eta(), weight);
           mu2Phi->Fill(Mu2.Phi(), weight);
 
+          metPt->Fill(recoMET->at(0), weight);
+
           if (boostDiTauOpt)
           {
               ptTauTau->Fill((Tau+Tau2).Pt(), weight);
@@ -568,6 +570,8 @@ void MuMuTauHadTauHadAnalyzer::Loop()
               ptMuMuTauHadTauHad->Fill((Mu1+Mu2+Tau+Tau2).Pt(), weight);
               invMassMuMuTauHadTauHad->Fill((Mu1+Mu2+Tau+Tau2).M(), weight);
               dMMuMuTauTau->Fill(((Mu1+Mu2).M()-(Tau+Tau2).M())/(Mu1+Mu2).M(), weight);
+              invMassTauTauMet->Fill((Tau+Tau2).M(), recoMET->at(0), weight);
+              invMassMuMuTauHadTauHadMet->Fill((Mu1+Mu2+Tau+Tau2).M(), recoMET->at(0), weight);
           } // end if boostDiTauOpt == false
 
           // ----- fill flat trees -----
