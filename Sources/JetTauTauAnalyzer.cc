@@ -142,7 +142,7 @@ void JetTauTauAnalyzer::Loop()
       {
           float MetPt = recoMET->at(0);
           float MetPhi= recoMETPhi->at(0);
-          if (MetPt < 180.0) continue;
+          if (MetPt < 180.0 || (Jet2+Jet3).Mt() < 90.0) continue;
 
           // --------------- rec-gen matching for separating ZTT, DYJ, and other backgrounds and data -------------------
           if (isMC && doWhatSample == "ZTT")
