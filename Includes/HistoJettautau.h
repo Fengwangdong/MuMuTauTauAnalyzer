@@ -37,6 +37,7 @@ class HistoJettautau{
         TH1D* Jet2Eta;
         TH1D* Jet2Phi;
         TH1D* Jet2Mass;
+        TH1D* Jet2Mt;
         TH1D* Jet2Disc;
 
         TH1D* metPt;

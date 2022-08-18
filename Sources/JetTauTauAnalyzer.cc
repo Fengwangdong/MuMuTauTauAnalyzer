@@ -203,6 +203,7 @@ void JetTauTauAnalyzer::Loop()
                   Jet2Eta->Fill((Jet2+Jet3).Eta(), weight);
                   Jet2Phi->Fill((Jet2+Jet3).Phi(), weight);
                   Jet2Mass->Fill((Jet2+Jet3).M(), weight);
+                  Jet2Mt->Fill((Jet2+Jet3).Mt(), weight);
                   Jet2Disc->Fill(Jet2DCM, weight);
                   Jet2Disc->Fill(Jet3DCM, weight);
 
@@ -274,6 +275,7 @@ void JetTauTauAnalyzer::Loop()
                   Jet2Eta->Fill((Jet2+Jet3).Eta(), weight);
                   Jet2Phi->Fill((Jet2+Jet3).Phi(), weight);
                   Jet2Mass->Fill((Jet2+Jet3).M(), weight);
+                  Jet2Mt->Fill((Jet2+Jet3).Mt(), weight);
                   Jet2Disc->Fill(Jet2DCM, weight);
                   Jet2Disc->Fill(Jet3DCM, weight);
 
@@ -327,6 +329,7 @@ void JetTauTauAnalyzer::Loop()
               Jet2Eta->Fill((Jet2+Jet3).Eta(), weight);
               Jet2Phi->Fill((Jet2+Jet3).Phi(), weight);
               Jet2Mass->Fill((Jet2+Jet3).M(), weight);
+              Jet2Mt->Fill((Jet2+Jet3).Mt(), weight);
               Jet2Disc->Fill(Jet2DCM, weight);
               Jet2Disc->Fill(Jet3DCM, weight);
 
