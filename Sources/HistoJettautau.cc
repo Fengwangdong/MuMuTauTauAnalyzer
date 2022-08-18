@@ -94,7 +94,7 @@ HistoJettautau::HistoJettautau(){
     Jet2Eta = newTH1D("Jet2Eta", "#eta(j_{2})", 25, -2.5, 2.5);
     Jet2Phi = newTH1D("Jet2Phi", "#phi(j_{2})", 20, -2.5, 2.5);
     Jet2Mass = newTH1D("Jet2Mass", "M(j_{2}) [GeV]", 25, 5, 105);
-    Jet2Mt = newTH1D("Jet2Mt", "M_{T}(j_{2}) [GeV]", 25, 5, 105);
+    Jet2Mt = newTH1D("Jet2Mt", "M_{T}(j_{2}) [GeV]", 25, 30, 180);
     Jet2Disc = newTH1D("Jet2Disc", "Disc(j_{2})", 20, 0, 1);
 
     metPt = newTH1D("metPt", "#slash{E_{T}} [GeV]", NBinsMetPt, metPtBin);
