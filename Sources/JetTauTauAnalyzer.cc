@@ -74,6 +74,29 @@ void JetTauTauAnalyzer::Loop()
 
       if (!findJet1) continue;
 
+      // ------- veto muons and/or electrons ---------
+      bool findMuon = false;
+      for (unsigned int iMuon=0; iMuon<recoMuonPt->size(); iMuon++)
+      {
+          bool passMuonID = recoMuonIdLoose->at(iMuon) > 0;
+          if (!passMuonID) continue;
+          findMuon = true;
+          break;
+      } // end for loop on muon veto
+
+      if (findMuon) continue;
+
+      bool findElectron = false;
+      for (unsigned int iEle=0; iEle<recoElectronPt->size(); iEle++)
+      {
+          bool passCondEleId = recoElectronIdLooseNoIso->at(iEle) > 0;
+          if (!passCondEleId) continue;
+          findElectron = true;
+          break;
+      } // end for loop over electron veto
+      
+      if (findElectron) continue;
+
       bool findDiTauCandJet2 = false;
       // ------- start loop on j2 candidate -------
       for (unsigned int iJet=0; iJet<recoJetPt->size(); iJet++)
