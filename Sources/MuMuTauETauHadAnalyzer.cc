@@ -253,7 +253,7 @@ void MuMuTauETauHadAnalyzer::Loop()
           double recoTauElectronCleanedMass = TauCand.M();
           TauCand.SetPtEtaPhiM(recoTauElectronCleanedPt->at(iTau)*tauScaleCorr, recoTauElectronCleanedEta->at(iTau), recoTauElectronCleanedPhi->at(iTau), recoTauElectronCleanedMass);
 
-          if (TauCand.DeltaR(Mu1) < 0.8 || TauCand.DeltaR(Mu2) < 0.8) continue;
+          if (TauCand.DeltaR(Mu1) < 0.8 || TauCand.DeltaR(Mu2) < 0.8 || TauCand.Pt() < 10.0) continue;
 
           // ---- bjet veto for tau ---
           //bool bjetVeto = false;
