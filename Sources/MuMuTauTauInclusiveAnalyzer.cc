@@ -565,7 +565,7 @@ void MuMuTauTauInclusiveAnalyzer::Loop()
               bool overlapMuTau = recoMuonRefToTauMuonCleaned->at(iMuon) > 0 && recoTauMuonCleanedRefToMuon->at(iTau) > 0 && recoMuonRefToTauMuonCleaned->at(iMuon) == recoTauMuonCleanedRefToMuon->at(iTau);
 
               //if ((Tau.DeltaR(Mu3Cand) < smallestDR) && (recoTauMuonCleanedPDGId->at(iTau)/fabs(recoTauMuonCleanedPDGId->at(iTau)) == (-1) * recoMuonPDGId->at(iMuon)/fabs(recoMuonPDGId->at(iMuon))) && ((Tau+Mu3Cand).M() < 60.0) && (Mu3Cand.DeltaR(Mu1) > 0.4) && (Mu3Cand.DeltaR(Mu2) > 0.4) && !overlapMuTau)
-              if ((Tau.DeltaR(Mu3Cand) < smallestDR) && (recoTauMuonCleanedPDGId->at(iTau)/fabs(recoTauMuonCleanedPDGId->at(iTau)) == (-1) * recoMuonPDGId->at(iMuon)/fabs(recoMuonPDGId->at(iMuon))) && (Mu3Cand.DeltaR(Mu1) > 0.4) && (Mu3Cand.DeltaR(Mu2) > 0.4) && !overlapMuTau)
+              if ((Tau.DeltaR(Mu3Cand) < smallestDR) && (recoTauMuonCleanedPDGId->at(iTau)/fabs(recoTauMuonCleanedPDGId->at(iTau)) == (-1) * recoMuonPDGId->at(iMuon)/fabs(recoMuonPDGId->at(iMuon))) && (Mu3Cand.DeltaR(Mu1) > 0.4) && (Mu3Cand.DeltaR(Mu2) > 0.4) && !overlapMuTau && (((Mu1+Mu2).M()-(Mu3Cand+Tau).M())/(Mu1+Mu2).M() > 0))
               {
                   Mu3.SetPtEtaPhiM(recoMuonPt->at(iMuon)*rochesterSF, recoMuonEta->at(iMuon), recoMuonPhi->at(iMuon), recoMuonMass);
                   smallestDR = Tau.DeltaR(Mu3);
@@ -777,7 +777,7 @@ void MuMuTauTauInclusiveAnalyzer::Loop()
               bool overlapEleTau = recoElectronRefToTauElectronCleaned->at(iEle) > 0 && recoTauElectronCleanedRefToElectron->at(iTau) > 0 && recoElectronRefToTauElectronCleaned->at(iEle) == recoTauElectronCleanedRefToElectron->at(iTau);
 
               //if ((Tau.DeltaR(EleCand) < smallestDR) && (recoTauElectronCleanedPDGId->at(iTau)/fabs(recoTauElectronCleanedPDGId->at(iTau)) == (-1) * recoElectronPDGId->at(iEle)/fabs(recoElectronPDGId->at(iEle))) && ((Tau+EleCand).M() < 60.0) && (EleCand.DeltaR(Mu1) > 0.4) && (EleCand.DeltaR(Mu2) > 0.4) && !overlapEleTau)
-              if ((Tau.DeltaR(EleCand) < smallestDR) && (recoTauElectronCleanedPDGId->at(iTau)/fabs(recoTauElectronCleanedPDGId->at(iTau)) == (-1) * recoElectronPDGId->at(iEle)/fabs(recoElectronPDGId->at(iEle))) && (EleCand.DeltaR(Mu1) > 0.4) && (EleCand.DeltaR(Mu2) > 0.4) && !overlapEleTau)
+              if ((Tau.DeltaR(EleCand) < smallestDR) && (recoTauElectronCleanedPDGId->at(iTau)/fabs(recoTauElectronCleanedPDGId->at(iTau)) == (-1) * recoElectronPDGId->at(iEle)/fabs(recoElectronPDGId->at(iEle))) && (EleCand.DeltaR(Mu1) > 0.4) && (EleCand.DeltaR(Mu2) > 0.4) && !overlapEleTau && (((Mu1+Mu2).M()-(EleCand+Tau).M())/(Mu1+Mu2).M() > 0))
               {
                   Ele.SetPtEtaPhiM(recoElectronPtCorr, recoElectronEta->at(iEle), recoElectronPhi->at(iEle), recoElectronMass);
                   smallestDR = Tau.DeltaR(Ele);
