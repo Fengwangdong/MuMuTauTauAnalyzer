@@ -61,6 +61,7 @@ void MuMuTauTauInclusiveAnalyzer::Loop()
       TLorentzVector Mu3;
       TLorentzVector Mu4;
       TLorentzVector Ele;
+      TLorentzVector Ele2;
       TLorentzVector Tau;
       TLorentzVector Tau2;
 
@@ -615,6 +616,134 @@ void MuMuTauTauInclusiveAnalyzer::Loop()
 
       if (findMuTauPair) continue;
       
+      // ---- ee channel ---
+      bool findEleElePair = false;
+
+      // ------- start loop on electron candidates -------
+      for (unsigned int iEle=0; iEle<recoElectronPt->size(); iEle++)
+      {
+          bool condEleLoose = EleRelId == "LOOSE" && recoElectronIdLoose->at(iEle) > 0;
+          bool condEleMedium = EleRelId == "MEDIUM" && recoElectronIdMedium->at(iEle) > 0;
+          bool condEleTight = EleRelId == "TIGHT" && recoElectronIdTight->at(iEle) > 0;
+          bool condEleNull = EleRelId != "LOOSE" && EleRelId != "MEDIUM" && EleRelId != "TIGHT" && recoElectronIsolation->at(iEle) < EleIsoUpperBound;
+          bool passCondEleId = condEleLoose || condEleMedium || condEleTight || condEleNull;
+
+          // -------------------- inverted electron ID -----------------------------
+          bool condInvertEleLoose = EleRelId == "LOOSE" && recoElectronIdLoose->at(iEle) <= 0;
+          bool condInvertEleMedium = EleRelId == "MEDIUM" && recoElectronIdMedium->at(iEle) <= 0;
+          bool condInvertEleTight = EleRelId == "TIGHT" && recoElectronIdTight->at(iEle) <= 0;
+          bool condInvertEleIso = recoElectronIsolation->at(iEle) < EleIsoUpperBound;
+          bool passCondInvertEleId = (condInvertEleLoose || condInvertEleMedium || condInvertEleTight) && condInvertEleIso;
+
+          if ((!invertedEle1Iso && !passCondEleId) || (invertedEle1Iso && !passCondInvertEleId)) continue;
+          TLorentzVector EleCand;
+          EleCand.SetPtEtaPhiE(recoElectronPt->at(iEle), recoElectronEta->at(iEle), recoElectronPhi->at(iEle), recoElectronEnergy->at(iEle));
+
+          if (EleCand.DeltaR(Mu1) < 0.4 || EleCand.DeltaR(Mu2) < 0.4) continue;
+
+          // ---- bjet veto for electron ---
+          //bool bjetVeto = false;
+          //for (unsigned int iJet=0; iJet<recoJetPt->size(); iJet++)
+          //{
+          //    TLorentzVector Jet;
+          //    Jet.SetPtEtaPhiE(recoJetPt->at(iJet), recoJetEta->at(iJet), recoJetPhi->at(iJet), recoJetEnergy->at(iJet));
+          //    if (EleCand.DeltaR(Jet) < 0.4 && recoJetCSV->at(iJet) > 0.5426)
+          //    {
+          //        bjetVeto = true;
+          //        break;
+          //    } // end if bjet veto
+          //} // end for loop over the reco-jets
+          //if (bjetVeto) continue;
+
+          Ele.SetPtEtaPhiE(recoElectronPt->at(iEle), recoElectronEta->at(iEle), recoElectronPhi->at(iEle), recoElectronEnergy->at(iEle));
+
+          float smallestDR = 1.0; // dR cut between electron and electron
+          bool findEle2 = false;
+
+          for (unsigned int iEle2=iEle+1; iEle2<recoElectronPt->size(); iEle2++)
+          {
+              if (iEle2 == iEle) continue;
+              bool condEleLoose = EleRelId == "LOOSE" && recoElectronIdLoose->at(iEle2) > 0;
+              bool condEleMedium = EleRelId == "MEDIUM" && recoElectronIdMedium->at(iEle2) > 0;
+              bool condEleTight = EleRelId == "TIGHT" && recoElectronIdTight->at(iEle2) > 0;
+              bool condEleNull = EleRelId != "LOOSE" && EleRelId != "MEDIUM" && EleRelId != "TIGHT" && recoElectronIsolation->at(iEle2) < EleIsoUpperBound;
+              bool passCondEleId = condEleLoose || condEleMedium || condEleTight || condEleNull;
+
+              // -------------------- inverted electron ID -----------------------------
+              bool condInvertEleLoose = EleRelId == "LOOSE" && recoElectronIdLoose->at(iEle2) <= 0;
+              bool condInvertEleMedium = EleRelId == "MEDIUM" && recoElectronIdMedium->at(iEle2) <= 0;
+              bool condInvertEleTight = EleRelId == "TIGHT" && recoElectronIdTight->at(iEle2) <= 0;
+              bool condInvertEleIso = recoElectronIsolation->at(iEle2) < EleIsoUpperBound;
+              bool passCondInvertEleId = (condInvertEleLoose || condInvertEleMedium || condInvertEleTight) && condInvertEleIso;
+
+              if ((!invertedEle2Iso && !passCondEleId) || (invertedEle2Iso && !passCondInvertEleId)) continue;
+
+              TLorentzVector Ele2Cand; // prepare this variable for dR(Ele1, Ele2) implementation
+              Ele2Cand.SetPtEtaPhiE(recoElectronPt->at(iEle2), recoElectronEta->at(iEle2), recoElectronPhi->at(iEle2), recoElectronEnergy->at(iEle2));
+
+              // ---- bjet veto for Ele2 ---
+              //bool bjetVeto = false;
+              //for (unsigned int iJet=0; iJet<recoJetPt->size(); iJet++)
+              //{
+              //    TLorentzVector Jet;
+              //    Jet.SetPtEtaPhiE(recoJetPt->at(iJet), recoJetEta->at(iJet), recoJetPhi->at(iJet), recoJetEnergy->at(iJet));
+              //    if (Ele2Cand.DeltaR(Jet) < 0.4 && recoJetCSV->at(iJet) > 0.5426)
+              //    {
+              //        bjetVeto = true;
+              //        break;
+              //    } // end if bjet veto
+              //} // end for loop over the reco-jets
+              //if (bjetVeto) continue;
+
+              if ((Ele.DeltaR(Ele2Cand) < smallestDR) && (recoElectronPDGId->at(iEle) == (-1) * recoElectronPDGId->at(iEle2)) && (Ele2Cand.DeltaR(Mu1) > 0.4) && (Ele2Cand.DeltaR(Mu2) > 0.4))
+              {
+                  Ele2.SetPtEtaPhiE(recoElectronPt->at(iEle2), recoElectronEta->at(iEle2), recoElectronPhi->at(iEle2), recoElectronEnergy->at(iEle2));
+                  smallestDR = Ele.DeltaR(Ele2);
+                  findEle2 = true;
+              } // end if find ele2 with electron matched
+          } // end loop for ele2
+
+          if (!findEle2) continue;
+          else{
+              findEleElePair = true;
+
+              // ----- fill flat trees -----
+              invMassMu1Mu2_ee = (Mu1+Mu2).M();
+              visMassEleEle_ee = (Ele+Ele2).M();
+              visMass2Mu2Ele_ee = (Mu1+Mu2+Ele+Ele2).M();
+
+              deltaRMu1Mu2_ee = Mu1.DeltaR(Mu2);
+              deltaREleEle_ee = Ele.DeltaR(Ele2);
+
+              mu1Pt_ee = Mu1.Pt();
+              mu1Eta_ee = Mu1.Eta();
+              mu1Phi_ee = Mu1.Phi();
+              mu1Mass_ee = Mu1.M();
+
+              mu2Pt_ee = Mu2.Pt();
+              mu2Eta_ee = Mu2.Eta();
+              mu2Phi_ee = Mu2.Phi();
+              mu2Mass_ee = Mu2.M();
+
+              elePt_ee = Ele.Pt();
+              eleEta_ee = Ele.Eta();
+              elePhi_ee = Ele.Phi();
+              eleMass_ee = Ele.M();
+
+              ele2Pt_ee = Ele2.Pt();
+              ele2Eta_ee = Ele2.Eta();
+              ele2Phi_ee = Ele2.Phi();
+              ele2Mass_ee = Ele2.M();
+
+              eventWeight_ee = weight/summedWeights; 
+              TreeEleEle->Fill();
+              break;
+          } // end if findEle2
+      } // end loop for electron
+
+      if (findEleElePair) continue;
+
+
       // ---- etau channel ---
       bool findEleTauPair = false;
 
@@ -1167,6 +1296,7 @@ void MuMuTauTauInclusiveAnalyzer::Loop()
    Tree2Mu->Write("Tree2Mu", TObject::kOverwrite);
    TreeMuEle->Write("TreeMuEle", TObject::kOverwrite);
    TreeMuTau->Write("TreeMuTau", TObject::kOverwrite);
+   TreeEleEle->Write("TreeEleEle", TObject::kOverwrite);
    TreeEleTau->Write("TreeEleTau", TObject::kOverwrite);
    TreeTauTau->Write("TreeTauTau", TObject::kOverwrite);
    outputFile->Close();

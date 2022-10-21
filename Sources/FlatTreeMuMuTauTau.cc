@@ -100,6 +100,38 @@ FlatTreeMuMuTauTau::FlatTreeMuMuTauTau(){
 
     TreeMuTau->Branch("eventWeight_mt", &eventWeight_mt, "eventWeight_mt/D");
 
+    // ----------- flat tree for ee channel -----------
+    TreeEleEle = new TTree("TreeEleEle","TreeEleEle");
+
+    TreeEleEle->Branch("invMassMu1Mu2_ee", &invMassMu1Mu2_ee, "invMassMu1Mu2_ee/D");
+    TreeEleEle->Branch("visMassEleEle_ee", &visMassEleEle_ee, "visMassEleEle_ee/D");
+    TreeEleEle->Branch("visMass2Mu2Ele_ee", &visMass2Mu2Ele_ee, "visMass2Mu2Ele_ee/D");
+
+    TreeEleEle->Branch("deltaRMu1Mu2_ee", &deltaRMu1Mu2_ee, "deltaRMu1Mu2_ee/D");
+    TreeEleEle->Branch("deltaREleEle_ee", &deltaREleEle_ee, "deltaREleEle_ee/D");
+
+    TreeEleEle->Branch("mu1Pt_ee", &mu1Pt_ee, "mu1Pt_ee/D");
+    TreeEleEle->Branch("mu1Eta_ee", &mu1Eta_ee, "mu1Eta_ee/D");
+    TreeEleEle->Branch("mu1Phi_ee", &mu1Phi_ee, "mu1Phi_ee/D");
+    TreeEleEle->Branch("mu1Mass_ee", &mu1Mass_ee, "mu1Mass_ee/D");
+
+    TreeEleEle->Branch("mu2Pt_ee", &mu2Pt_ee, "mu2Pt_ee/D");
+    TreeEleEle->Branch("mu2Eta_ee", &mu2Eta_ee, "mu2Eta_ee/D");
+    TreeEleEle->Branch("mu2Phi_ee", &mu2Phi_ee, "mu2Phi_ee/D");
+    TreeEleEle->Branch("mu2Mass_ee", &mu2Mass_ee, "mu2Mass_ee/D");
+
+    TreeEleEle->Branch("elePt_ee", &elePt_ee, "elePt_ee/D");
+    TreeEleEle->Branch("eleEta_ee", &eleEta_ee, "eleEta_ee/D");
+    TreeEleEle->Branch("elePhi_ee", &elePhi_ee, "elePhi_ee/D");
+    TreeEleEle->Branch("eleMass_ee", &eleMass_ee, "eleMass_ee/D");
+
+    TreeEleEle->Branch("ele2Pt_ee", &ele2Pt_ee, "ele2Pt_ee/D");
+    TreeEleEle->Branch("ele2Eta_ee", &ele2Eta_ee, "ele2Eta_ee/D");
+    TreeEleEle->Branch("ele2Phi_ee", &ele2Phi_ee, "ele2Phi_ee/D");
+    TreeEleEle->Branch("ele2Mass_ee", &ele2Mass_ee, "ele2Mass_ee/D");
+
+    TreeEleEle->Branch("eventWeight_ee", &eventWeight_ee, "eventWeight_ee/D");
+
     // ----------- flat tree for etau channel -----------
     TreeEleTau = new TTree("TreeEleTau","TreeEleTau");
 
