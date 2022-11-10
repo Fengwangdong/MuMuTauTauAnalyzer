@@ -135,7 +135,7 @@ void FakeMuMuTauHadTauHadAnalyzer::Loop()
 
       if (!findMu2) continue;
       bool findTauTauPair = false;
-      highestPt = 0;
+      highestPt = 30.0;
 
       // ---- search for an additional jet containing two taus for fake rate study ----
       for (unsigned int iJet=0; iJet<recoJetPt->size(); iJet++)

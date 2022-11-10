@@ -207,7 +207,7 @@ void FakeMuMuTauMuTauHadAnalyzer::Loop()
           TLorentzVector TauCand;
           TauCand.SetPtEtaPhiE(recoTauMuonCleanedPt->at(iTau), recoTauMuonCleanedEta->at(iTau), recoTauMuonCleanedPhi->at(iTau), recoTauMuonCleanedEnergy->at(iTau));
 
-          if (TauCand.DeltaR(Mu1) < 0.8 || TauCand.DeltaR(Mu2) < 0.8) continue;
+          if (TauCand.DeltaR(Mu1) < 0.8 || TauCand.DeltaR(Mu2) < 0.8 || TauCand.Pt() < 10.0) continue;
 
           // ---- bjet veto for tau ---
           //bool bjetVeto = false;
