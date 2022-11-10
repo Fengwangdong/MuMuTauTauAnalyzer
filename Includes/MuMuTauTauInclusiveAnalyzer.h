@@ -553,6 +553,7 @@ public :
    bool invertedMu3Iso;
    bool invertedMu4Iso;
    bool invertedEle1Iso;
+   bool invertedEle2Iso;
    bool invertedTauIso;
    double Mu1IsoThreshold;
    double Mu2IsoThreshold;
@@ -586,7 +587,7 @@ public :
    int jetScaleSyst;
    TString jecSystFile;
 
-   MuMuTauTauInclusiveAnalyzer(TString fileName_, TString outputDir_, float lumiScale_, float summedWeights_ = 1.0, Long_t nMaxEvents_ = 0, bool isMC_ = false, bool invertedMu2Iso_ = false, bool invertedMu3Iso_ = false, bool invertedMu4Iso_ = false, bool invertedEle1Iso_ = false, bool invertedTauIso_ = false, double Mu1IsoThreshold_ = 0.25, double Mu2IsoThreshold_ = 0.25, double Mu3IsoThreshold_ = 0.25, double Mu4IsoThreshold_ = 0.25, double MuIsoUpperBound_ = 0.5, TString MuonId_ = "LOOSE", TString EleRelId_ = "LOOSE", double EleIsoUpperBound_ = 0.6, double diMuonMassLowThreshold_ = 0, double diMuonMassHighThreshold_ = 25.0, bool boostDiTauOpt_ = false, bool tauMVAIsoRawORWP_ = false, double tauMVAIsoRawThreshold_ = -0.5, TString tauMVAIsoWP_ = "MEDIUM", TString tauAntiMuDisc_ = "NULL", TString tauAntiEleDisc_ = "NULL", bool deepTauID_ = false, TString deepTauVSele_ = "LOOSE", TString deepTauVSmu_ = "LOOSE", TString deepTauVSjet_ = "MEDIUM", double tauDecayModeThreshold_ = -1, TString JetId_ = "LOOSE", bool massDecorrelation_ = false, double deepDiTauRawThreshold_ = 0.5, double deepDiTauRawLowerBound_ = 0.2, int muonScaleSyst_ = 0, int electronScaleSyst_ = 0, double tauScaleCorr_ = 1.0, TString rochesterFile_ = "", int jetScaleSyst_ = 0, TString jecSystFile_ = "");
+   MuMuTauTauInclusiveAnalyzer(TString fileName_, TString outputDir_, float lumiScale_, float summedWeights_ = 1.0, Long_t nMaxEvents_ = 0, bool isMC_ = false, bool invertedMu2Iso_ = false, bool invertedMu3Iso_ = false, bool invertedMu4Iso_ = false, bool invertedEle1Iso_ = false, bool invertedEle2Iso_ = false, bool invertedTauIso_ = false, double Mu1IsoThreshold_ = 0.25, double Mu2IsoThreshold_ = 0.25, double Mu3IsoThreshold_ = 0.25, double Mu4IsoThreshold_ = 0.25, double MuIsoUpperBound_ = 0.5, TString MuonId_ = "LOOSE", TString EleRelId_ = "LOOSE", double EleIsoUpperBound_ = 0.6, double diMuonMassLowThreshold_ = 0, double diMuonMassHighThreshold_ = 25.0, bool boostDiTauOpt_ = false, bool tauMVAIsoRawORWP_ = false, double tauMVAIsoRawThreshold_ = -0.5, TString tauMVAIsoWP_ = "MEDIUM", TString tauAntiMuDisc_ = "NULL", TString tauAntiEleDisc_ = "NULL", bool deepTauID_ = false, TString deepTauVSele_ = "LOOSE", TString deepTauVSmu_ = "LOOSE", TString deepTauVSjet_ = "MEDIUM", double tauDecayModeThreshold_ = -1, TString JetId_ = "LOOSE", bool massDecorrelation_ = false, double deepDiTauRawThreshold_ = 0.5, double deepDiTauRawLowerBound_ = 0.2, int muonScaleSyst_ = 0, int electronScaleSyst_ = 0, double tauScaleCorr_ = 1.0, TString rochesterFile_ = "", int jetScaleSyst_ = 0, TString jecSystFile_ = "");
    string createOutputFileName();
    virtual ~MuMuTauTauInclusiveAnalyzer();
    virtual Int_t    Cut(Long64_t entry);
@@ -601,7 +602,7 @@ public :
 #endif
 
 #ifdef MuMuTauTauInclusiveAnalyzer_cxx
-MuMuTauTauInclusiveAnalyzer::MuMuTauTauInclusiveAnalyzer(TString fileName_, TString outputDir_, float lumiScale_, float summedWeights_, Long_t nMaxEvents_, bool isMC_, bool invertedMu2Iso_, bool invertedMu3Iso_, bool invertedMu4Iso_, bool invertedEle1Iso_, bool invertedTauIso_, double Mu1IsoThreshold_, double Mu2IsoThreshold_, double Mu3IsoThreshold_, double Mu4IsoThreshold_, double MuIsoUpperBound_, TString MuonId_, TString EleRelId_, double EleIsoUpperBound_, double diMuonMassLowThreshold_, double diMuonMassHighThreshold_, bool boostDiTauOpt_, bool tauMVAIsoRawORWP_, double tauMVAIsoRawThreshold_, TString tauMVAIsoWP_, TString tauAntiMuDisc_, TString tauAntiEleDisc_, bool deepTauID_, TString deepTauVSele_, TString deepTauVSmu_, TString deepTauVSjet_, double tauDecayModeThreshold_, TString JetId_, bool massDecorrelation_, double deepDiTauRawThreshold_, double deepDiTauRawLowerBound_, int muonScaleSyst_, int electronScaleSyst_, double tauScaleCorr_, TString rochesterFile_, int jetScaleSyst_, TString jecSystFile_) : FlatTreeMuMuTauTau() 
+MuMuTauTauInclusiveAnalyzer::MuMuTauTauInclusiveAnalyzer(TString fileName_, TString outputDir_, float lumiScale_, float summedWeights_, Long_t nMaxEvents_, bool isMC_, bool invertedMu2Iso_, bool invertedMu3Iso_, bool invertedMu4Iso_, bool invertedEle1Iso_, bool invertedEle2Iso_, bool invertedTauIso_, double Mu1IsoThreshold_, double Mu2IsoThreshold_, double Mu3IsoThreshold_, double Mu4IsoThreshold_, double MuIsoUpperBound_, TString MuonId_, TString EleRelId_, double EleIsoUpperBound_, double diMuonMassLowThreshold_, double diMuonMassHighThreshold_, bool boostDiTauOpt_, bool tauMVAIsoRawORWP_, double tauMVAIsoRawThreshold_, TString tauMVAIsoWP_, TString tauAntiMuDisc_, TString tauAntiEleDisc_, bool deepTauID_, TString deepTauVSele_, TString deepTauVSmu_, TString deepTauVSjet_, double tauDecayModeThreshold_, TString JetId_, bool massDecorrelation_, double deepDiTauRawThreshold_, double deepDiTauRawLowerBound_, int muonScaleSyst_, int electronScaleSyst_, double tauScaleCorr_, TString rochesterFile_, int jetScaleSyst_, TString jecSystFile_) : FlatTreeMuMuTauTau() 
 {
     fileName = fileName_;
     outputDir = outputDir_;
@@ -613,6 +614,7 @@ MuMuTauTauInclusiveAnalyzer::MuMuTauTauInclusiveAnalyzer(TString fileName_, TStr
     invertedMu3Iso = invertedMu3Iso_;
     invertedMu4Iso = invertedMu4Iso_;
     invertedEle1Iso = invertedEle1Iso_;
+    invertedEle2Iso = invertedEle2Iso_;
     invertedTauIso = invertedTauIso_;
     Mu1IsoThreshold = Mu1IsoThreshold_;
     Mu2IsoThreshold = Mu2IsoThreshold_;

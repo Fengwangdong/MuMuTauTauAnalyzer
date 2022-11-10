@@ -113,6 +113,38 @@ class FlatTreeMuMuTauTau{
         
         double eventWeight_mt;
 
+        // ----------- flat tree for ee channel -----------
+        TTree* TreeEleEle;
+        
+        double invMassMu1Mu2_ee;
+        double visMassEleEle_ee;
+        double visMass2Mu2Ele_ee;
+
+        double deltaRMu1Mu2_ee;
+        double deltaREleEle_ee;
+
+        double mu1Pt_ee;
+        double mu1Eta_ee;
+        double mu1Phi_ee;
+        double mu1Mass_ee;
+
+        double mu2Pt_ee;
+        double mu2Eta_ee;
+        double mu2Phi_ee;
+        double mu2Mass_ee;
+
+        double elePt_ee;
+        double eleEta_ee;
+        double elePhi_ee;
+        double eleMass_ee;
+        
+        double ele2Pt_ee;
+        double ele2Eta_ee;
+        double ele2Phi_ee;
+        double ele2Mass_ee;
+
+        double eventWeight_ee;
+
         // ----------- flat tree for etau channel -----------
         TTree* TreeEleTau;
         

@@ -29,4 +29,5 @@ runFakeMuMuTauETauHadAnalyzer
 runFakeMuMuTauHadTauHadAnalyzer
 runZTauMuTauHadAnalyzer
 runZMuMuAnalyzer
+runJetTauTauAnalyzer
 mumutautau.cfg
