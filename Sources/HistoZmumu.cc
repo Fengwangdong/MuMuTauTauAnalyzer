@@ -97,7 +97,7 @@ HistoZmumu::HistoZmumu(){
     dREleTau = newTH1D("dREleTau", "#Delta R(e#tau)", 10, 0, 1.0);
     dRTauTau = newTH1D("dRTauTau", "#Delta R(#tau#tau)", 25, 0, 1.0);
 
-    invMassMu1Mu2 = newTH1D("invMassMu1Mu2", "M(#mu_{1}#mu_{2})[GeV]", 20, 80, 100);
+    invMassMu1Mu2 = newTH1D("invMassMu1Mu2", "M(#mu_{1}#mu_{2})[GeV]", 12, 30, 150);
     invMassMu1Mu3 = newTH1D("invMassMu1Mu3", "M(#mu_{1}#mu_{3})[GeV]", 20, 10, 120);
     invMassMu2Mu3 = newTH1D("invMassMu2Mu3", "M(#mu_{2}#mu_{3})[GeV]", 20, 10, 120);
     invMassMu1Ele = newTH1D("invMassMu1Ele", "M(#mu_{1}e)[GeV]", 20, 10, 120);
@@ -153,7 +153,7 @@ HistoZmumu::HistoZmumu(){
     dRMu2Tau = newTH1D("dRMu2Tau", "#Delta R(#mu_{2}#tau)", 25, 0, 5);
     dRMu2Tau2 = newTH1D("dRMu2Tau2", "#Delta R(#mu_{2},#tau#tau)", 25, 0, 5);
 
-    dRInvMassMu1Mu2 = newTH2D("dRInvMassMu1Mu2", "#Delta R(#mu_{1}#mu_{2})", "M(#mu_{1}#mu_{2})[GeV]", 25, 0, 5, 20, 80, 100);
+    dRInvMassMu1Mu2 = newTH2D("dRInvMassMu1Mu2", "#Delta R(#mu_{1}#mu_{2})", "M(#mu_{1}#mu_{2})[GeV]", 25, 0, 5, 12, 30, 150);
     dRInvMassMu3Tau = newTH2D("dRInvMassMu3Tau", "#Delta R(#mu_{3}#tau)", "M(#mu_{3}#tau)[GeV]", 10, 0, 1, 20, 0, 100);
     dRInvMassEleTau = newTH2D("dRInvMassEleTau", "#Delta R(e#tau)", "M(e#tau)[GeV]", 10, 0, 1, 20, 0, 100);
     dRInvMassTauTau = newTH2D("dRInvMassTauTau", "#Delta R(#tau#tau)", "M(#tau#tau)[GeV]", 25, 0, 1, 20, 0, 60);
@@ -165,7 +165,7 @@ HistoZmumu::HistoZmumu(){
     dREleTauVSGenEleGenTauHad = newTH2D("dREleTauVSGenEleGenTauHad", "#DeltaR(e^{rec}#tau_{h}^{rec})", "#DeltaR(e^{gen}#tau_{h}^{gen})", 10, 0, 1, 10, 0, 1);
     dREleTauVSGenTauEleGenTauHad = newTH2D("dREleTauVSGenTauEleGenTauHad", "#DeltaR(e^{rec}#tau_{h}^{rec})", "#DeltaR(#tau_{e}^{gen}#tau_{h}^{gen})", 10, 0, 1, 10, 0, 1);
 
-    invMassMu1Mu2VSGenMu1GenMu2 = newTH2D("invMassMu1Mu2VSGenMu1GenMu2", "M(#mu_{1}^{rec}#mu_{2}^{rec})[GeV]", "M(#mu_{1}^{gen}#mu_{2}^{gen})[GeV]", 20, 80, 100, 20, 80, 100);
+    invMassMu1Mu2VSGenMu1GenMu2 = newTH2D("invMassMu1Mu2VSGenMu1GenMu2", "M(#mu_{1}^{rec}#mu_{2}^{rec})[GeV]", "M(#mu_{1}^{gen}#mu_{2}^{gen})[GeV]", 12, 30, 150, 12, 30, 150);
     invMassMu3TauVSGenMu3GenTauHad = newTH2D("invMassMu3TauVSGenMu3GenTauHad", "M(#mu_{3}^{rec}#tau_{h}^{rec})[GeV]", "M(#mu_{3}^{gen}#tau_{h}^{gen})[GeV]", 20, 0, 100, 20, 0, 100);
     invMassMu3TauVSGenTauMuGenTauHad = newTH2D("invMassMu3TauVSGenTauMuGenTauHad", "M(#mu_{3}^{rec}#tau_{h}^{rec})[GeV]", "M(#tau_{#mu}^{gen}#tau_{h}^{gen})[GeV]", 20, 0, 100, 20, 0, 100);
     invMassEleTauVSGenEleGenTauHad = newTH2D("invMassEleTauVSGenEleGenTauHad", "M(e^{rec}#tau_{h}^{rec})[GeV]", "M(e^{gen}#tau_{h}^{gen})[GeV]", 20, 0, 100, 20, 0, 100);
