@@ -76,8 +76,8 @@ TH2D* HistoZmutau::newTH2D(string name, string xTitle, string yTitle, int nBinsX
 // --------------- customize the binning of output histograms -----------------
 HistoZmutau::HistoZmutau(){
 
-    double MuPtBin [] = {3, 18, 25, 29, 33, 37, 41, 45, 49, 53, 57, 61, 65, 69, 73, 77, 81, 85, 89, 93, 97, 101, 105, 110, 115, 120, 126, 133, 141, 150, 160, 171, 183, 196, 210, 225, 241, 258, 276, 300};
-    double tauPtBin [] = {8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 66, 74, 84, 96, 110, 126, 144, 164, 186, 210};
+    double MuPtBin [] = {25, 33, 41, 49, 57, 65, 73, 81, 89, 97, 105, 115, 126, 141, 160, 183, 210, 241, 276, 300};
+    double tauPtBin [] = {10, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 66, 74, 84, 96, 110, 126, 144, 164, 186, 210};
     double MuTauPtBin [] = {0, 5, 10, 14, 18, 22, 26, 30, 34, 38, 42, 46, 50, 54, 58, 62, 66, 70, 75, 80, 86, 92, 99, 107, 116, 126, 137, 149, 162, 176, 200};
     double metPtBin [] = {4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 66, 74, 84, 96, 110, 126, 144, 164, 186, 210};
 
@@ -90,7 +90,7 @@ HistoZmutau::HistoZmutau(){
     dRMuTau = newTH1D("dRMuTau", "#Delta R(#mu#tau)", 25, 0, 5.0);
 
     invMassMuMu = newTH1D("invMassMuMu", "M(#mu_{1}#mu_{2})[GeV]", 20, 60, 120);
-    invMassMuTau = newTH1D("invMassMuTau", "M(#mu#tau)[GeV]", 20, 30, 150);
+    invMassMuTau = newTH1D("invMassMuTau", "M(#mu#tau)[GeV]", 12, 30, 150);
 
     ptMuMu = newTH1D("ptMuMu", "p_{T}(#mu_{1}#mu_{2})[GeV]", NBinsMuTauPt, MuTauPtBin);
     ptMuTau = newTH1D("ptMuTau", "p_{T}(#mu#tau)[GeV]", NBinsMuTauPt, MuTauPtBin);
@@ -117,7 +117,7 @@ HistoZmutau::HistoZmutau(){
     metPhi = newTH1D("metPhi", "#phi(#slash{E_{T}})", 20, -2.5, 2.5);
 
     dRInvMassMuMu = newTH2D("dRInvMassMuMu", "#Delta R(#mu_{1}#mu_{2})", "M(#mu_{1}#mu_{2})[GeV]", 25, 0, 5, 20, 60, 120);
-    dRInvMassMuTau = newTH2D("dRInvMassMuTau", "#Delta R(#mu#tau)", "M(#mu#tau)[GeV]", 25, 0, 5, 50, 10, 160);
+    dRInvMassMuTau = newTH2D("dRInvMassMuTau", "#Delta R(#mu#tau)", "M(#mu#tau)[GeV]", 25, 0, 5, 12, 30, 150);
 
     // -------------- reco-gen response histograms ------------------
     dRMuMuVSGenMuGenMu = newTH2D("dRMuMuVSGenMuGenMu", "#DeltaR(#mu_{1}^{rec}#mu_{2}^{rec})", "#DeltaR(#mu_{1}^{gen}#mu_{2}^{gen})", 25, 0, 5, 25, 0, 5);
@@ -125,8 +125,8 @@ HistoZmutau::HistoZmutau(){
     dRMuTauVSGenTauMuGenTauHad = newTH2D("dRMuTauVSGenTauMuGenTauHad", "#DeltaR(#mu^{rec}#tau_{h}^{rec})", "#DeltaR(#tau_{#mu}^{gen}#tau_{h}^{gen})", 25, 0, 5, 25, 0, 5);
 
     invMassMuMuVSGenMuGenMu = newTH2D("invMassMuMuVSGenMuGenMu", "M(#mu_{1}^{rec}#mu_{2}^{rec})[GeV]", "M(#mu_{1}^{gen}#mu_{2}^{gen})[GeV]", 20, 60, 120, 20, 60, 120);
-    invMassMuTauVSGenMuGenTauHad = newTH2D("invMassMuTauVSGenMuGenTauHad", "M(#mu_^{rec}#tau_{h}^{rec})[GeV]", "M(#mu^{gen}#tau_{h}^{gen})[GeV]", 20, 30, 150, 20, 30, 150);
-    invMassMuTauVSGenTauMuGenTauHad = newTH2D("invMassMuTauVSGenTauMuGenTauHad", "M(#mu_^{rec}#tau_{h}^{rec})[GeV]", "M(#tau_{#mu}^{gen}#tau_{h}^{gen})[GeV]", 20, 30, 150, 20, 30, 150);
+    invMassMuTauVSGenMuGenTauHad = newTH2D("invMassMuTauVSGenMuGenTauHad", "M(#mu_^{rec}#tau_{h}^{rec})[GeV]", "M(#mu^{gen}#tau_{h}^{gen})[GeV]", 12, 30, 150, 12, 30, 150);
+    invMassMuTauVSGenTauMuGenTauHad = newTH2D("invMassMuTauVSGenTauMuGenTauHad", "M(#mu_^{rec}#tau_{h}^{rec})[GeV]", "M(#tau_{#mu}^{gen}#tau_{h}^{gen})[GeV]", 12, 30, 150, 12, 30, 150);
 
     muPtVSGenMuPt = newTH2D("muPtVSGenMuPt", "p_{T}^{rec}(#mu)[GeV]", "p_{T}^{gen}(#mu)[GeV]", NBinsMuPt, MuPtBin, NBinsMuPt, MuPtBin);
     muEtaVSGenMuEta = newTH2D("muEtaVSGenMuEta", "#eta^{rec}(#mu)", "#eta^{gen}(#mu)", 20, -2.1, 2.1, 20, -2.1, 2.1);
