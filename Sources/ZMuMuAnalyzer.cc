@@ -82,7 +82,7 @@ void ZMuMuAnalyzer::Loop()
       } // end loop for mu1
 
       if (!findMu1) continue;
-      float highestPt = 0;
+      float highestPt = 25.0;
       float invMassLowThre = diMuonMassLowThreshold;
       float invMassHighThre = diMuonMassHighThreshold;
       bool findMu2 = false;
