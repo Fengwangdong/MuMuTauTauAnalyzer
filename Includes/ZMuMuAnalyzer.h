@@ -96,9 +96,11 @@ public :
    double Mu1IsoThreshold;
    double Mu2IsoThreshold;
    TString MuonId;
+   double diMuonMassLowThreshold;
+   double diMuonMassHighThreshold;
    TString rochesterFile;
 
-   ZMuMuAnalyzer(TString fileName_, TString outputDir_, float lumiScale_, float summedWeights_ = 1.0, Long_t nMaxEvents_ = 0, bool isMC_ = false, double Mu1IsoThreshold_ = 0.25, double Mu2IsoThreshold_ = 0.25, TString MuonId_ = "LOOSE", TString rochesterFile_ = "");
+   ZMuMuAnalyzer(TString fileName_, TString outputDir_, float lumiScale_, float summedWeights_ = 1.0, Long_t nMaxEvents_ = 0, bool isMC_ = false, double Mu1IsoThreshold_ = 0.25, double Mu2IsoThreshold_ = 0.25, TString MuonId_ = "LOOSE", double diMuonMassLowThreshold_ = 80, double diMuonMassHighThreshold_ = 100, TString rochesterFile_ = "");
    string createOutputFileName();
    virtual ~ZMuMuAnalyzer();
    virtual Int_t    Cut(Long64_t entry);
@@ -113,7 +115,7 @@ public :
 #endif
 
 #ifdef ZMuMuAnalyzer_cxx
-ZMuMuAnalyzer::ZMuMuAnalyzer(TString fileName_, TString outputDir_, float lumiScale_, float summedWeights_, Long_t nMaxEvents_, bool isMC_, double Mu1IsoThreshold_, double Mu2IsoThreshold_, TString MuonId_, TString rochesterFile_) : HistoZmumu() 
+ZMuMuAnalyzer::ZMuMuAnalyzer(TString fileName_, TString outputDir_, float lumiScale_, float summedWeights_, Long_t nMaxEvents_, bool isMC_, double Mu1IsoThreshold_, double Mu2IsoThreshold_, TString MuonId_, double diMuonMassLowThreshold_, double diMuonMassHighThreshold_, TString rochesterFile_) : HistoZmumu() 
 {
     fileName = fileName_;
     outputDir = outputDir_;
@@ -124,6 +126,8 @@ ZMuMuAnalyzer::ZMuMuAnalyzer(TString fileName_, TString outputDir_, float lumiSc
     Mu1IsoThreshold = Mu1IsoThreshold_;
     Mu2IsoThreshold = Mu2IsoThreshold_;
     MuonId = MuonId_;
+    diMuonMassLowThreshold = diMuonMassLowThreshold_;
+    diMuonMassHighThreshold = diMuonMassHighThreshold_;
     rochesterFile = rochesterFile_;
 
     //--- Create output directory if necessary ---

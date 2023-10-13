@@ -67,12 +67,12 @@ void ZTauMuTauHadAnalyzer::Loop()
       for (unsigned int iMuon=0; iMuon<recoMuonPt->size(); iMuon++)
       {
           if (iMuon == indexMu) continue;
-          if (recoMuonIsolation->at(iMuon) > 0.25) continue;
+          if (recoMuonIsolation->at(iMuon) > 0.4) continue;
           if (recoMuonPt->at(iMuon) > 10) {findMu2 = true;}
       } // end loop for muon candidates
 
       if (findMu2) continue; // veto events with dimuon
-      float highestPt = 0;
+      float highestPt = 10.0;
       bool findTau = false;
 
       for (unsigned int iTau=0; iTau<recoTauPt->size(); iTau++)
