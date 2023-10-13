@@ -175,6 +175,7 @@ void MuMuTauMuTauEAnalyzer::Loop()
 
           if (EleCand.DeltaR(Mu1) < 0.4 || EleCand.DeltaR(Mu2) < 0.4) continue;
 
+          if (EleCand.Pt() < 10.0) continue;
           // ---- bjet veto for electron ---
           //bool bjetVeto = false;
           //for (unsigned int iJet=0; iJet<recoJetPt->size(); iJet++)
