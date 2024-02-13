@@ -574,6 +574,142 @@ void MuMuTauHadTauHadAnalyzer::Loop()
               invMassMuMuTauHadTauHadMet->Fill((Mu1+Mu2+Tau+Tau2).M(), recoMET->at(0), weight);
           } // end if boostDiTauOpt == false
 
+          // --------- implement the matching between gen particles and reco objects (MC only) -------------
+          if (isMC)
+          {
+              TLorentzVector GenMu1;
+              TLorentzVector GenMu2;
+              TLorentzVector GenTauHad1;
+              TLorentzVector GenTauHad2;
+
+              bool findMatchedRecGenMu1 = false;
+              bool findMatchedRecGenMu2 = false;
+              bool findMatchedRecGenTauHad1 = false;
+              bool findMatchedRecGenTauHad2 = false;
+
+              unsigned int indexGenMu1 = -1;
+              unsigned int indexGenTau1 = -1;
+
+              if (genMuonPt->size()>0)
+              {
+                  // --------- search for matched genMu1 for Mu1 --------------
+                  double smallestDR = 0.15;
+                  for (unsigned int iGenMu=0; iGenMu<genMuonPt->size(); iGenMu++)
+                  {
+                      TLorentzVector GenMuCand;
+                      GenMuCand.SetPtEtaPhiM(genMuonPt->at(iGenMu), genMuonEta->at(iGenMu), genMuonPhi->at(iGenMu), genMuonMass->at(iGenMu));
+                      if (Mu1.DeltaR(GenMuCand) <= smallestDR)
+                      {
+                          smallestDR = Mu1.DeltaR(GenMuCand);
+                          findMatchedRecGenMu1 = true;
+                          GenMu1 = GenMuCand;
+                          indexGenMu1 = iGenMu;
+                      } // end if Mu1.DeltaR(GenMuCand) <= smallestDR
+                  } // end for loop on GenMu1
+
+                  if (findMatchedRecGenMu1)
+                  {
+                      mu1PtVSGenMu1Pt->Fill(Mu1.Pt(), GenMu1.Pt(), weight);
+                      mu1EtaVSGenMu1Eta->Fill(Mu1.Eta(), GenMu1.Eta(), weight);
+                      mu1PhiVSGenMu1Phi->Fill(Mu1.Phi(), GenMu1.Phi(), weight);
+                  } // end if findMatchedRecGenMu1 == true
+
+                  // --------- search for matched genMu2 for Mu2 --------------
+                  smallestDR = 0.15;
+                  for (unsigned int iGenMu=0; iGenMu<genMuonPt->size(); iGenMu++)
+                  {
+                      TLorentzVector GenMuCand;
+                      GenMuCand.SetPtEtaPhiM(genMuonPt->at(iGenMu), genMuonEta->at(iGenMu), genMuonPhi->at(iGenMu), genMuonMass->at(iGenMu));
+                      if (Mu2.DeltaR(GenMuCand) <= smallestDR && iGenMu != indexGenMu1)
+                      {
+                          smallestDR = Mu2.DeltaR(GenMuCand);
+                          findMatchedRecGenMu2 = true;
+                          GenMu2 = GenMuCand;
+                      } // end if Mu2.DeltaR(GenMuCand) <= smallestDR && iGenMu != indexGenMu1
+                  } // end for loop on GenMu2
+
+                  if (findMatchedRecGenMu2)
+                  {
+                      mu2PtVSGenMu2Pt->Fill(Mu2.Pt(), GenMu2.Pt(), weight);
+                      mu2EtaVSGenMu2Eta->Fill(Mu2.Eta(), GenMu2.Eta(), weight);
+                      mu2PhiVSGenMu2Phi->Fill(Mu2.Phi(), GenMu2.Phi(), weight);
+                  } // end if findMatchedRecGenMu2 == true
+              } // end if genMuonPt->size()>0
+
+              double GenTauHadVisiblePt = 0;
+              double GenTauHad2VisiblePt = 0;
+
+              if (genTauHadPt->size()>0)
+              {
+                  // --------- search for matched genTauHad1 for reco di-Tau --------------
+                  double smallestDR = 0.2;
+                  for (unsigned int iGenTauHad=0; iGenTauHad<genTauHadPt->size(); iGenTauHad++)
+                  {
+                      TLorentzVector GenTauHadCand;
+                      GenTauHadCand.SetPtEtaPhiM(genTauHadPt->at(iGenTauHad), genTauHadEta->at(iGenTauHad), genTauHadPhi->at(iGenTauHad), genTauHadMass->at(iGenTauHad));
+                      if (Tau.DeltaR(GenTauHadCand) <= smallestDR)
+                      {
+                          smallestDR = Tau.DeltaR(GenTauHadCand);
+                          findMatchedRecGenTauHad1 = true;
+                          GenTauHad1 = GenTauHadCand;
+                          if (boostDiTauOpt) GenTauHadVisiblePt = genTauHadVisPt->at(iGenTauHad);
+                          indexGenTau1 = iGenTauHad;
+                      } // end if Tau.DeltaR(GenTauHad) <= smallestDR
+                  } // end for loop on GenTauHad1
+
+                  // --------- search for matched genTauHad2 for reco di-Tau --------------
+                  smallestDR = 0.2;
+                  for (unsigned int iGenTauHad=0; iGenTauHad<genTauHadPt->size(); iGenTauHad++)
+                  {
+                      TLorentzVector GenTauHadCand;
+                      GenTauHadCand.SetPtEtaPhiM(genTauHadPt->at(iGenTauHad), genTauHadEta->at(iGenTauHad), genTauHadPhi->at(iGenTauHad), genTauHadMass->at(iGenTauHad));
+                      if (((boostDiTauOpt && Tau2.DeltaR(GenTauHadCand) <= smallestDR) || (!boostDiTauOpt && Tau.DeltaR(GenTauHadCand) <= smallestDR)) && iGenTauHad != indexGenTau1)
+                      {
+                          smallestDR = boostDiTauOpt ? Tau2.DeltaR(GenTauHadCand) : Tau.DeltaR(GenTauHadCand);
+                          findMatchedRecGenTauHad2 = true;
+                          GenTauHad2 = GenTauHadCand;
+                          if (boostDiTauOpt) GenTauHad2VisiblePt = genTauHadVisPt->at(iGenTauHad);
+                      } // end if Tau.DeltaR(GenTauHadCand) <= smallestDR && iGenTauHad != indexGenTau1
+                  } // end for loop on GenTauHad2
+              } // end if genTauHadPt->size()>0
+
+              if (findMatchedRecGenMu1 && findMatchedRecGenMu2)
+              {
+                  dRMu1Mu2VSGenMu1GenMu2->Fill(Mu1.DeltaR(Mu2), GenMu1.DeltaR(GenMu2), weight);
+                  TLorentzVector Mu1Mu2 = Mu1 + Mu2;
+                  TLorentzVector GenMu1Mu2 = GenMu1 + GenMu2;
+                  invMassMu1Mu2VSGenMu1GenMu2->Fill(Mu1Mu2.M(), GenMu1Mu2.M(), weight);
+              } // end if findMatchedRecGenMu1 && findMatchedRecGenMu2
+
+              if (findMatchedRecGenTauHad1 && findMatchedRecGenTauHad2)
+              {
+                  if (boostDiTauOpt)
+                  {
+                      tauPtVSGenTauHadPt->Fill(Tau.Pt(), GenTauHad1.Pt(), weight);
+                      tauEtaVSGenTauHadEta->Fill(Tau.Eta(), GenTauHad1.Eta(), weight);
+                      tauPhiVSGenTauHadPhi->Fill(Tau.Phi(), GenTauHad1.Phi(), weight);
+                      tauPtVSGenTauHadVisPt->Fill(Tau.Pt(), GenTauHadVisiblePt, weight);
+
+                      tau2PtVSGenTauHad2Pt->Fill(Tau2.Pt(), GenTauHad2.Pt(), weight);
+                      tau2EtaVSGenTauHad2Eta->Fill(Tau2.Eta(), GenTauHad2.Eta(), weight);
+                      tau2PhiVSGenTauHad2Phi->Fill(Tau2.Phi(), GenTauHad2.Phi(), weight);
+                      tau2PtVSGenTauHad2VisPt->Fill(Tau2.Pt(), GenTauHad2VisiblePt, weight);
+
+                      TLorentzVector TauTau = Tau + Tau2;
+                      TLorentzVector GenTauHadTauHad = GenTauHad1 + GenTauHad2;
+                      invMassTauTauVSGenTauHadGenTauHad->Fill(TauTau.M(), GenTauHadTauHad.M(), weight);
+                  } // end if boostDiTauOpt == true
+
+                  else{
+                      TLorentzVector GenDiTau = GenTauHad1 + GenTauHad2;
+                      tau2PtVSGenTauHad2Pt->Fill(Tau.Pt(), GenDiTau.Pt(), weight);
+                      tau2EtaVSGenTauHad2Eta->Fill(Tau.Eta(), GenDiTau.Eta(), weight);
+                      tau2PhiVSGenTauHad2Phi->Fill(Tau.Phi(), GenDiTau.Phi(), weight);
+                      invMassTauTauVSGenTauHadGenTauHad->Fill(Tau.M(), GenDiTau.M(), weight);
+                  } // end if boostDiTauOpt == false
+              } // end if findMatchedRecGenTauHad1 && findMatchedRecGenTauHad2
+          } // end if isMC && matchRecGen
+
           // ----- fill flat trees -----
           invMassMuMu = (Mu1+Mu2).M();
           deltaRMuMu = Mu1.DeltaR(Mu2);

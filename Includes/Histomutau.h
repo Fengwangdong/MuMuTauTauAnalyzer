@@ -140,6 +140,49 @@ class Histomutau{
         TH2D* invMassTauTauMet;
         TH2D* invMassMuMuTauHadTauHadMet;
 
+        // ------ reco-gen response histograms ------
+        TH2D* dRMu1Mu2VSGenMu1GenMu2;
+        TH2D* dRMu3TauVSGenMu3GenTauHad;
+        TH2D* dRMu3TauVSGenTauMuGenTauHad;
+        TH2D* dREleTauVSGenEleGenTauHad;
+        TH2D* dREleTauVSGenTauEleGenTauHad;
+
+        TH2D* invMassMu1Mu2VSGenMu1GenMu2;
+        TH2D* invMassMu3TauVSGenMu3GenTauHad;
+        TH2D* invMassMu3TauVSGenTauMuGenTauHad;
+        TH2D* invMassEleTauVSGenEleGenTauHad;
+        TH2D* invMassEleTauVSGenTauEleGenTauHad;
+        TH2D* invMassTauTauVSGenTauHadGenTauHad;
+
+        TH2D* mu1PtVSGenMu1Pt;
+        TH2D* mu1EtaVSGenMu1Eta;
+        TH2D* mu1PhiVSGenMu1Phi;
+
+        TH2D* mu2PtVSGenMu2Pt;
+        TH2D* mu2EtaVSGenMu2Eta;
+        TH2D* mu2PhiVSGenMu2Phi;
+
+        TH2D* mu3PtVSGenMu3Pt;
+        TH2D* mu3EtaVSGenMu3Eta;
+        TH2D* mu3PhiVSGenMu3Phi;
+        TH2D* mu3PtVSGenTauMuPt;
+
+        TH2D* elePtVSGenElePt;
+        TH2D* eleEtaVSGenEleEta;
+        TH2D* elePhiVSGenElePhi;
+        TH2D* elePtVSGenTauElePt;
+        TH2D* elePtVSGenTauEleVisPt;
+
+        TH2D* tauPtVSGenTauHadPt;
+        TH2D* tauEtaVSGenTauHadEta;
+        TH2D* tauPhiVSGenTauHadPhi;
+        TH2D* tauPtVSGenTauHadVisPt;
+
+        TH2D* tau2PtVSGenTauHad2Pt;
+        TH2D* tau2EtaVSGenTauHad2Eta;
+        TH2D* tau2PhiVSGenTauHad2Phi;
+        TH2D* tau2PtVSGenTauHad2VisPt;
+
         // ----------- flat tree for fit -----------
         TTree* TreeMuMuTauTau;
         
