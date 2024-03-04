@@ -81,6 +81,9 @@ $ ./runZTauMuTauHadAnalyzer doWhat=DYJets maxEvents=2000 inputFile=inputFile.roo
 
 # Run the diMuon + ditau inclusive Analyzer:
 $ ./runMuMuTauTauInclusiveAnalyzer doWhat=H125AA5 maxEvents=2000 inputFile=inputFile.root ###### for producing flat trees of all channels
+
+# Run the tau efficiency Analyzer:
+$ ./runTauEffAnalyzer doWhat=H125AA5 maxEvents=2000 inputFile=inputFile.root ####### for producing histograms for tau efficiency study
 ###############################################################
 
 NOTE: If the parameters are customized in the command line, their default values in "mumutautau.cfg" will be ignored. 
