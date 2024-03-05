@@ -142,7 +142,7 @@ HistoTauEff::HistoTauEff(){
     tau2PtVSGenTauHadPt = newTH2D("tau2PtVSGenTauHadPt", "p_{T}^{rec}(#tau)[GeV]", "p_{T}^{gen}(#tau_{h})[GeV]", NBinsTauPt, tauPtBin, NBinsTauPt, tauPtBin);
     tauMuonCleanedPtVSGenTauHadPt = newTH2D("tauMuonCleanedPtVSGenTauHadPt", "p_{T}^{rec}(#tau)[GeV]", "p_{T}^{gen}(#tau_{h})[GeV]", NBinsTauPt, tauPtBin, NBinsTauPt, tauPtBin);
     tauElectronCleanedPtVSGenTauHadPt = newTH2D("tauElectronCleanedPtVSGenTauHadPt", "p_{T}^{rec}(#tau)[GeV]", "p_{T}^{gen}(#tau_{h})[GeV]", NBinsTauPt, tauPtBin, NBinsTauPt, tauPtBin);
-    jetPtVSGenTauHad2Pt = newTH2D("tau2PtVSGenTauHad2Pt", "p_{T}^{rec}(j)[GeV]", "p_{T}^{gen}(#tau_{h}#tau_{h})[GeV]", NBinsTau2Pt, tau2PtBin, NBinsTau2Pt, tau2PtBin);
+    jetPtVSGenTauHad2Pt = newTH2D("jetPtVSGenTauHad2Pt", "p_{T}^{rec}(j)[GeV]", "p_{T}^{gen}(#tau_{h}#tau_{h})[GeV]", NBinsTau2Pt, tau2PtBin, NBinsTau2Pt, tau2PtBin);
 }
 
 HistoTauEff::~HistoTauEff()
