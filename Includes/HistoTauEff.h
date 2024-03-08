@@ -40,6 +40,8 @@ class HistoTauEff{
         TH1D* invMassEleTauElectronCleaned;
         TH1D* invMassJet;
 
+        TH1D* mu3Pt; // NOTE: this histogram is filled with AND without a requirement of tau_h
+        TH1D* elePt; // NOTE: this histogram is filled with AND without a requirement of tau_h
         TH1D* tauPt;  // NOTE: tau here and below is for standard reconstructed tau in tau_mu + tau_h channel
         TH1D* tau2Pt; // NOTE: tau2 here and below is for standard reconstructed tau in tau_e + tau_h channel
         TH1D* tauMuonCleanedPt;
@@ -84,6 +86,8 @@ class HistoTauEff{
         TH2D* invMassEleTauElectronCleanedVSGenTauEleGenTauHad;
         TH2D* invMassJetVSGenTauHadGenTauHad;
 
+        TH2D* mu3PtVSGenTauMuPt;
+        TH2D* elePtVSGenTauElePt;
         TH2D* tauPtVSGenTauHadPt; // NOTE: tau here is for standard reconstructed tau in tau_mu + tau_h channel
         TH2D* tau2PtVSGenTauHadPt; // NOTE: tau2 here is for standard reconstructed tau in tau_e + tau_h channel
         TH2D* tauMuonCleanedPtVSGenTauHadPt;

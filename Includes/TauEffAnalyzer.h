@@ -536,9 +536,8 @@ public :
    double tauDecayModeThreshold;
    TString JetId;
    double deepDiTauRawThreshold;
-   bool ditau;
 
-   TauEffAnalyzer(TString fileName_, TString outputDir_, float lumiScale_, float summedWeights_ = 1.0, Long_t nMaxEvents_ = 0, TString MuonId_ = "LOOSE", TString EleRelId_ = "LOOSE", bool tauMVAIsoRawORWP_ = false, double tauMVAIsoRawThreshold_ = -0.5, TString tauMVAIsoWP_ = "MEDIUM", TString tauAntiMuDisc_ = "NULL", TString tauAntiEleDisc_ = "NULL", bool deepTauID_ = false, TString deepTauVSele_ = "LOOSE", TString deepTauVSmu_ = "LOOSE", TString deepTauVSjet_ = "MEDIUM", double tauDecayModeThreshold_ = -1, TString JetId_ = "LOOSE", double deepDiTauRawThreshold_ = 0.5, bool ditau_ = true);
+   TauEffAnalyzer(TString fileName_, TString outputDir_, float lumiScale_, float summedWeights_ = 1.0, Long_t nMaxEvents_ = 0, TString MuonId_ = "LOOSE", TString EleRelId_ = "LOOSE", bool tauMVAIsoRawORWP_ = false, double tauMVAIsoRawThreshold_ = -0.5, TString tauMVAIsoWP_ = "MEDIUM", TString tauAntiMuDisc_ = "NULL", TString tauAntiEleDisc_ = "NULL", bool deepTauID_ = false, TString deepTauVSele_ = "LOOSE", TString deepTauVSmu_ = "LOOSE", TString deepTauVSjet_ = "MEDIUM", double tauDecayModeThreshold_ = -1, TString JetId_ = "LOOSE", double deepDiTauRawThreshold_ = 0.5);
    string createOutputFileName();
    virtual ~TauEffAnalyzer();
    virtual Int_t    Cut(Long64_t entry);
@@ -553,7 +552,7 @@ public :
 #endif
 
 #ifdef TauEffAnalyzer_cxx
-TauEffAnalyzer::TauEffAnalyzer(TString fileName_, TString outputDir_, float lumiScale_, float summedWeights_, Long_t nMaxEvents_, TString MuonId_, TString EleRelId_, bool tauMVAIsoRawORWP_, double tauMVAIsoRawThreshold_, TString tauMVAIsoWP_, TString tauAntiMuDisc_, TString tauAntiEleDisc_, bool deepTauID_, TString deepTauVSele_, TString deepTauVSmu_, TString deepTauVSjet_, double tauDecayModeThreshold_, TString JetId_, double deepDiTauRawThreshold_, bool ditau_) : HistoTauEff() 
+TauEffAnalyzer::TauEffAnalyzer(TString fileName_, TString outputDir_, float lumiScale_, float summedWeights_, Long_t nMaxEvents_, TString MuonId_, TString EleRelId_, bool tauMVAIsoRawORWP_, double tauMVAIsoRawThreshold_, TString tauMVAIsoWP_, TString tauAntiMuDisc_, TString tauAntiEleDisc_, bool deepTauID_, TString deepTauVSele_, TString deepTauVSmu_, TString deepTauVSjet_, double tauDecayModeThreshold_, TString JetId_, double deepDiTauRawThreshold_) : HistoTauEff() 
 {
     fileName = fileName_;
     outputDir = outputDir_;
@@ -574,7 +573,6 @@ TauEffAnalyzer::TauEffAnalyzer(TString fileName_, TString outputDir_, float lumi
     tauDecayModeThreshold = tauDecayModeThreshold_;
     JetId = JetId_;
     deepDiTauRawThreshold = deepDiTauRawThreshold_;
-    ditau = ditau_;
 
     //--- Create output directory if necessary ---
     if (nMaxEvents > 0) {

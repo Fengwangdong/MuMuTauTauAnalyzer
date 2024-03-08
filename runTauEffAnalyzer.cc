@@ -31,7 +31,6 @@ int main(int argc, char **argv)
     double tauDecayModeThreshold   = cfg.getD("tauDecayModeThreshold", -1);
     TString JetId                  = cfg.getS("JetId", "TIGHT");
     double deepDiTauRawThreshold   = cfg.getD("deepDiTauRawThreshold", 0.688);
-    bool ditau                     = cfg.getB("ditau", true);
 
     //--- Parse the arguments -----------------------------------------------------
     if (argc > 1)
@@ -135,11 +134,6 @@ int main(int argc, char **argv)
             {
                 getArg(currentArg, deepDiTauRawThreshold);
             }
-
-            else if (currentArg.BeginsWith("ditau="))
-            {
-                getArg(currentArg, ditau);
-            }
         } // end for loop in argc
     } // end if argc > 1
     
@@ -164,7 +158,7 @@ int main(int argc, char **argv)
         {
             lumiana H125AA5Lumi(inputFile);
             summedWeights = H125AA5Lumi.Loop();
-            TauEffAnalyzer H125AA5Hist(inputFile, outputDir, lumi*48.58, summedWeights, maxEvents, MuonId, EleRelId, tauMVAIsoRawORWP, tauMVAIsoRawThreshold, tauMVAIsoWP, tauAntiMuDisc, tauAntiEleDisc, deepTauID, deepTauVSele, deepTauVSmu, deepTauVSjet, tauDecayModeThreshold, JetId, deepDiTauRawThreshold, ditau);
+            TauEffAnalyzer H125AA5Hist(inputFile, outputDir, lumi*48.58, summedWeights, maxEvents, MuonId, EleRelId, tauMVAIsoRawORWP, tauMVAIsoRawThreshold, tauMVAIsoWP, tauAntiMuDisc, tauAntiEleDisc, deepTauID, deepTauVSele, deepTauVSmu, deepTauVSjet, tauDecayModeThreshold, JetId, deepDiTauRawThreshold);
             H125AA5Hist.Loop();
         } // end if inputFile.EndsWith(".root")
         
@@ -182,7 +176,7 @@ int main(int argc, char **argv)
             finTree.open(inputFile);
             while (getline(finTree, fileName))
             {
-                TauEffAnalyzer H125AA5Hist(fileName, outputDir, lumi*48.58, summedWeights, maxEvents, MuonId, EleRelId, tauMVAIsoRawORWP, tauMVAIsoRawThreshold, tauMVAIsoWP, tauAntiMuDisc, tauAntiEleDisc, deepTauID, deepTauVSele, deepTauVSmu, deepTauVSjet, tauDecayModeThreshold, JetId, deepDiTauRawThreshold, ditau);
+                TauEffAnalyzer H125AA5Hist(fileName, outputDir, lumi*48.58, summedWeights, maxEvents, MuonId, EleRelId, tauMVAIsoRawORWP, tauMVAIsoRawThreshold, tauMVAIsoWP, tauAntiMuDisc, tauAntiEleDisc, deepTauID, deepTauVSele, deepTauVSmu, deepTauVSjet, tauDecayModeThreshold, JetId, deepDiTauRawThreshold);
                 H125AA5Hist.Loop();
             } // end while loop on input file list
         } // end else 

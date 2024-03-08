@@ -76,9 +76,13 @@ TH2D* HistoTauEff::newTH2D(string name, string xTitle, string yTitle, int nBinsX
 // --------------- customize the binning of output histograms -----------------
 HistoTauEff::HistoTauEff(){
 
+    double mu3PtBin [] = {3, 10, 20, 30, 50, 100, 200, 400}; 
+    double elePtBin [] = {3, 10, 20, 30, 50, 100, 200, 400}; 
     double tauPtBin [] = {10, 20, 30, 50, 100, 200};
     double tau2PtBin [] = {10, 20, 30, 50, 80, 120, 170, 230, 300, 380, 500, 640, 800, 980, 1180, 1400};
 
+    int NBinsMu3Pt = sizeof(mu3PtBin)/sizeof(mu3PtBin[0])-1;
+    int NBinsElePt = sizeof(elePtBin)/sizeof(elePtBin[0])-1;
     int NBinsTauPt = sizeof(tauPtBin)/sizeof(tauPtBin[0])-1;
     int NBinsTau2Pt = sizeof(tau2PtBin)/sizeof(tau2PtBin[0])-1;
 
@@ -94,6 +98,8 @@ HistoTauEff::HistoTauEff(){
     invMassEleTauElectronCleaned = newTH1D("invMassEleTauElectronCleaned", "M(e#tau)[GeV]", 25, 0, 50);
     invMassJet = newTH1D("invMassJet", "M(j)[GeV]", 25, 0, 50);
 
+    mu3Pt = newTH1D("mu3Pt", "p_{T}(#mu) [GeV]", NBinsMu3Pt, mu3PtBin);
+    elePt = newTH1D("elePt", "p_{T}(e) [GeV]", NBinsElePt, elePtBin);
     tauPt = newTH1D("tauPt", "p_{T}(#tau) [GeV]", NBinsTauPt, tauPtBin);
     tau2Pt = newTH1D("tau2Pt", "p_{T}(#tau) [GeV]", NBinsTauPt, tauPtBin);
     tauMuonCleanedPt = newTH1D("tauMuonCleanedPt", "p_{T}(#tau) [GeV]", NBinsTauPt, tauPtBin);
@@ -138,6 +144,8 @@ HistoTauEff::HistoTauEff(){
     invMassEleTauElectronCleanedVSGenTauEleGenTauHad = newTH2D("invMassEleTauElectronCleanedVSGenTauEleGenTauHad", "M(e^{rec}#tau_{h}^{rec})[GeV]", "M(#tau_{e}^{gen}#tau_{h}^{gen})[GeV]", 25, 0, 50, 25, 0, 50);
     invMassJetVSGenTauHadGenTauHad = newTH2D("invMassJetVSGenTauHadGenTauHad", "M(j^{rec})[GeV]", "M(#tau_{h}^{gen}#tau_{h}^{gen})[GeV]", 25, 0, 50, 25, 0, 50);
 
+    mu3PtVSGenTauMuPt = newTH2D("mu3PtVSGenTauMuPt", "p_{T}^{rec}(#mu)[GeV]", "p_{T}^{gen}(#tau_{#mu})[GeV]", NBinsMu3Pt, mu3PtBin, NBinsMu3Pt, mu3PtBin);
+    elePtVSGenTauElePt = newTH2D("elePtVSGenTauElePt", "p_{T}^{rec}(e)[GeV]", "p_{T}^{gen}(#tau_{e})[GeV]", NBinsElePt, elePtBin, NBinsElePt, elePtBin);
     tauPtVSGenTauHadPt = newTH2D("tauPtVSGenTauHadPt", "p_{T}^{rec}(#tau)[GeV]", "p_{T}^{gen}(#tau_{h})[GeV]", NBinsTauPt, tauPtBin, NBinsTauPt, tauPtBin);
     tau2PtVSGenTauHadPt = newTH2D("tau2PtVSGenTauHadPt", "p_{T}^{rec}(#tau)[GeV]", "p_{T}^{gen}(#tau_{h})[GeV]", NBinsTauPt, tauPtBin, NBinsTauPt, tauPtBin);
     tauMuonCleanedPtVSGenTauHadPt = newTH2D("tauMuonCleanedPtVSGenTauHadPt", "p_{T}^{rec}(#tau)[GeV]", "p_{T}^{gen}(#tau_{h})[GeV]", NBinsTauPt, tauPtBin, NBinsTauPt, tauPtBin);
